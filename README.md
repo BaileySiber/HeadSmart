@@ -1,7 +1,7 @@
 # HeadSmart-Frontend
 App aimed for users to track and improve daily mental health
 
-
+~~~~~
 
 The process:
 
@@ -24,7 +24,7 @@ The process:
 4. The complete log (overall mood, specific emotions, reasons for emotions, journal entry, exercise selected (if applicable), re-ranked emotions (if applicable)) is saved. 
  
  
- 
+ ~~~~~
   
 
 Other useful features:
