@@ -13,29 +13,31 @@ import {  StyleSheet,
 import { LinearGradient } from 'expo';
 import Swipeout from 'react-native-swipeout'
 import * as Animatable from 'react-native-animatable';
-import Swiper from 'react-native-swiper'
+import Swiper from 'react-native-swiper';
 
 export default class SurveyScreen extends React.Component {
   constructor(props) {
     super(props);
+    const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => (r1 !== r2)});
     this.state = {
       suggestionName: '',
       suggestionDescription: '',
       userInfo: this.props.navigation.getParam('userInfo'),  //this.props = this.props.navigation.getParam
-      suggestionsArr: [
-        {
-          name: "",
-          description: "",
-          tags: []
-        }
-      ],
+      suggestionsArr: ds.cloneWithRows([]),
       openAdd: false
     }
     let userid = this.state.userInfo.userid;
+    fetch(url + '/' + userid + '/showSuggestions')
+    .then(resp => resp.json())
+    .then(json => {
+      this.setState({
+        suggestionsArr: ds.cloneWithRows(json)
+      })
+    })
   }
 
 
-
+//finish removeSuggestion and addSuggestion
 
   removeSuggestion(suggest) {
     //update state, splice out this suggestion
@@ -81,26 +83,35 @@ export default class SurveyScreen extends React.Component {
   }
 
   render() {
-    data = new ListView.DataSource({rowHasChanged: (r1, r2) => (r1 !== r2)})
-
-    console.log(this.state.suggestionsArr)
-
     return (
       <Swiper showsButton={false} loop={false}>
         <Intro />
         <View>
           <LinearGradient style={{height:"100%"}} colors={["#7fd64d", "#4dd6ba"]} >
-              {/* <Text>{this.state.userInfo.name}</Text>
+              <Text>{this.state.userInfo.name}</Text>
                <ListView
-                renderRow={(suggest) => (
-                  <TouchableOpacity
-                    style={styles.suggestBox}
-                    //add an onSwipe to removeSuggestion
-                    >
-                    <View><Text>{suggest.name}</Text></View>
-                </TouchableOpacity>)}
-                dataSource={data.cloneWithRows(this.state.suggestionsArr)}
-              /> */}
+                 dataSource={this.state.suggestionsArr}
+                 renderRow={(suggest) => {
+                   let swipeBtns = [{
+                      text: 'Delete',
+                      backgroundColor: 'red',
+                      underlayColor: 'rgba(0, 0, 0, 1, 0.6)',
+                      onPress: () => { this.removeSuggestion(rowData) }
+                      }];
+                   return (
+                     <Swipeout right={swipeBtns}
+                       autoClose='true'
+                       backgroundColor= 'transparent'>
+                      <TouchableOpacity
+                        style={styles.suggestBox}
+                        //add an onSwipe to removeSuggestion
+                        >
+                        <View><Text>{suggest.name}</Text></View>
+                        <View><Text>{suggest.description}</Text></View>
+                    </TouchableOpacity>
+                </Swipeout>
+              )}}
+              />
                 <View style={{paddingBottom: 20, alignItems: 'center',
                 justifyContent: 'center'}}>
                 <TouchableOpacity onPress={this.showAddSuggestion.bind(this)} style={styles.button}>

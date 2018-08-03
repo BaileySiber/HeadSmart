@@ -50,7 +50,6 @@ import {  StyleSheet,
       })
       .then(response => response.json())
       .then(json => {
-            console.log('json is -----------'+ JSON.stringify(json))
             this.setState({
               userid: json._id
             })
