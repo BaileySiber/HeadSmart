@@ -11,6 +11,7 @@ import {  StyleSheet,
   RefreshControl,
   AsyncStorage,
  } from 'react-native';
+import { ButtonGroup } from 'react-native-elements';
 import { LinearGradient } from 'expo';
 import Swipeout from 'react-native-swipeout'
 import * as Animatable from 'react-native-animatable';
@@ -26,7 +27,9 @@ export default class SurveyScreen extends React.Component {
       userInfo: this.props.navigation.getParam('userInfo'),  //this.props = this.props.navigation.getParam
       suggestionsArr: ds.cloneWithRows([]),
       openAdd: false,
-      emotions: ''
+      emotions: [],
+      selectedIndex: 0,
+      buttons: ['anger', 'sadness', 'anxiety', 'guilt', 'shame']
     }
     let userid = this.state.userInfo.userid;
     fetch(url + '/' + userid + '/showSuggestions')
@@ -91,13 +94,15 @@ export default class SurveyScreen extends React.Component {
           suggestionName: '',
           suggestionDescription: '',
           openAdd: false,
-          emotions: ''
+          emotions: [],
+          suggestionsArr: ds.cloneWithRows(json.suggestions)
         })
         Alert.alert(
            'This suggestion has been Added!'
         )
       }
     })
+    .catch(err => console.log(err))
   }
 
   cancelSuggestion(){
@@ -112,13 +117,23 @@ export default class SurveyScreen extends React.Component {
     })
   }
 
+  updateIndex (selectedIndex) {
+    this.setState({
+      selectedIndex,
+      emotions: [...this.state.emotions, this.state.buttons[selectedIndex]]
+    })
+  }
+
   render() {
+    let emotionTags = this.state.emotions.slice()
+    console.log("emotionTags are", emotionTags)
+    emotionTags = emotionTags.join(' ')
     return (
       <Swiper showsButton={false} loop={false}>
         <Intro />
         <View>
-          <LinearGradient style={{height:"100%"}} colors={["#7fd64d", "#4dd6ba"]} >
-              <Text>{this.state.userInfo.name}</Text>
+          <LinearGradient style={{height:"100%"}} colors={["#b3e0ff", "#00a3cc"]} >
+              <Text style={styles.welcomeText}>{this.state.userInfo.name}</Text>
                <ListView
                  dataSource={this.state.suggestionsArr}
                  renderRow={(suggest) => {
@@ -135,7 +150,7 @@ export default class SurveyScreen extends React.Component {
                         style={styles.suggestBox}
                         //add an onSwipe to removeSuggestion
                         >
-                        <View><Text>{suggest.name}</Text></View>
+                        <View style={styles.suggestBox}><Text>{suggest.name}</Text></View>
                         <View><Text>{suggest.description}</Text></View>
                     </TouchableOpacity>
                 </Swipeout>
@@ -151,9 +166,13 @@ export default class SurveyScreen extends React.Component {
                   <View style={styles.suggestBox}>
                     <TextInput placeholder="Title" style={styles.textInp} value={this.state.suggestionName} onChangeText={(text) => this.setState({suggestionName: text})} />
                     <TextInput placeholder="Description" style={styles.textInp} value={this.state.suggestionDescription} onChangeText={(text) => this.setState({suggestionDescription: text})} />
-                    <TextInput placeholder="Emotion Tags" style={styles.textInp} value={this.state.emotions} onChangeText={(text) => this.setState({emotions: text})}>
-
-                    </TextInput>
+                    <ButtonGroup
+                      onPress={this.updateIndex.bind(this)}
+                      selectedIndex={this.state.selectedIndex}
+                      buttons={this.state.buttons}
+                      containerStyle={{height: 50}}
+                    />
+                    <TextInput placeholder="Emotion Tags" style={styles.textInp} value={emotionTags} onChangeText={(text) => this.setState({emotions: text})} />
                     <View style={{ flexDirection: "row", justifyContent: "space-between"}}>
                     <TouchableOpacity onPress={this.addSuggestion.bind(this)} style={styles.addButton}>
                       <Text style={styles.buttonText}>Add</Text>
@@ -180,28 +199,22 @@ export default class SurveyScreen extends React.Component {
 class Intro extends React.Component {
   render() {
     return (
-      <View>
-        <Animatable.Text animation="fadeOutUp" delay="1500">
-            Welcome To Head Smart!
-        </Animatable.Text>
-        <Animatable.Text animation="fadeInUp" delay="1700">
-            This app will offer you suggestions/exercises to improve your mood in the moment. We have some already...add/delete as you wish....
-        </Animatable.Text>
+      <View style={styles.container}>
+        <LinearGradient style={{height:"100%"}} colors={["#b3e0ff", "#00a3cc"]} >
+          <Animatable.Text animation="fadeOutUp" delay="1500" style={styles.welcomeText}>
+              Welcome To Head Smart!
+          </Animatable.Text>
+          <Animatable.Text animation="fadeInUp" delay="1700" style={styles.welcomeText}>
+              This app will offer you suggestions/exercises to improve your mood in the moment
+          </Animatable.Text>
+          <Animatable.Text animation="fadeInUp" delay="3500" style={styles.welcomeText}>
+              We have some already and add/delete as you wish!
+          </Animatable.Text>
+        </LinearGradient>
       </View>
     )
   }
 }
-
-// export default class SurveyScreen extends React.Component {
-//   render() {
-//     return (
-//       <Swiper>
-//         <Intro />
-//         <Suggestions />
-//       </Swiper>
-//     )
-//   }
-// }
 
 
 const styles = StyleSheet.create({
@@ -211,7 +224,7 @@ const styles = StyleSheet.create({
   },
   suggestBox: {
     justifyContent: 'center',
-    backgroundColor: '#f7ffa0',
+    backgroundColor: '#e6ffff',
     alignItems: 'center',
     borderRadius: 10
   },
@@ -219,7 +232,7 @@ const styles = StyleSheet.create({
     margin: 10,
     width: 280,
     height: 30,
-    borderColor: "#97ad8a",
+    borderColor: "#8aa5ad",
     borderWidth: 1.5,
     backgroundColor: 'white'
   },
@@ -270,5 +283,14 @@ const styles = StyleSheet.create({
     height: 35,
     width: 80,
     alignSelf: "flex-end"
+  },
+  welcomeText:{
+    fontSize: 32,
+    fontFamily: 'Georgia',
+    textAlign: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+    color: 'white',
+    margin: 10
   }
 })
