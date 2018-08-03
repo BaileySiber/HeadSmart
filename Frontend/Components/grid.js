@@ -10,8 +10,8 @@ import {  StyleSheet,
   Button,
   RefreshControl,
   AsyncStorage } from 'react-native';
-import { Icon } from 'react-native-elements';
-import { LinearGradient } from 'expo';
+  import { Icon } from 'react-native-elements';
+  import { LinearGradient } from 'expo';
 
   export default class GridScreen extends React.Component {
 
@@ -37,6 +37,7 @@ import { LinearGradient } from 'expo';
     select(caption) {
       let arr = this.state.reasons.slice()
       arr.push(caption)
+      console.log('arr is ---------------' + arr)
       this.setState({
         reasons: arr
       });
@@ -55,38 +56,41 @@ import { LinearGradient } from 'expo';
 
     render(){
       return(
-        <View>
-          <LinearGradient colors={["#b3e0ff", "#00a3cc"]} >
+        <LinearGradient colors={["#b3e0ff", "#00a3cc"]} >
+          <View>
+
             <View style={{justifyContent:"center",}}>
-          <Text style={styles.titleText}>What affected you today?</Text>
-        </View>
-          <View style={{flexDirection: "row", justifyContent: "space-between", height: "18%"}}>
-            <FullIcon iconName="md-bookmarks" caption="Education" select={this.select.bind(this)}/>
-            <FullIcon iconName="ios-briefcase" caption="Work" select={this.select.bind(this)}/>
-            <FullIcon iconName="ios-home" caption="Family" select={this.select.bind(this)}/>
-          </View>
-          <View style={{flexDirection: "row", justifyContent: "space-between", height: "18%"}}>
-            <FullIcon iconName="md-heart" caption="Relationship" select={this.select.bind(this)}/>
-            <FullIcon iconName="ios-restaurant" caption="Food" select={this.select.bind(this)}/>
-            <FullIcon iconName="md-car" caption="Travel" select={this.select.bind(this)}/>
-          </View>
-          <View style={{flexDirection: "row", justifyContent: "space-between", height: "18%"}}>
-            <FullIcon iconName="ios-contacts" caption="Friends" select={this.select.bind(this)}/>
-            <FullIcon iconName="md-bicycle" caption="Exercise" select={this.select.bind(this)}/>
-            <FullIcon iconName="ios-partly-sunny" caption="Weather" select={this.select.bind(this)}/>
-          </View>
-
-          <View style={{justifyContent: "center", alignItems: 'center',}}>
-            <TouchableOpacity style={styles.nextButton} onPress={() => this.next()}>
-
-              <Text style={styles.nextText}>
-                Next
-              </Text>
-
-            </TouchableOpacity>
+              <Text style={styles.titleText}>What affected you today?</Text>
             </View>
+
+            <View>
+              <View style={{flexDirection: "row", justifyContent: "space-between", height: "18%"}}>
+                <FullIcon iconName="md-bookmarks" caption="Education" select={this.select.bind(this)}/>
+                <FullIcon iconName="ios-briefcase" caption="Work" select={this.select.bind(this)}/>
+                <FullIcon iconName="ios-home" caption="Family" select={this.select.bind(this)}/>
+              </View>
+              <View style={{flexDirection: "row", justifyContent: "space-between", height: "18%"}}>
+                <FullIcon iconName="md-heart" caption="Relationship" select={this.select.bind(this)}/>
+                <FullIcon iconName="ios-restaurant" caption="Food" select={this.select.bind(this)}/>
+                <FullIcon iconName="md-car" caption="Travel" select={this.select.bind(this)}/>
+              </View>
+              <View style={{flexDirection: "row", justifyContent: "space-between", height: "18%"}}>
+                <FullIcon iconName="ios-contacts" caption="Friends" select={this.select.bind(this)}/>
+                <FullIcon iconName="md-bicycle" caption="Exercise" select={this.select.bind(this)}/>
+                <FullIcon iconName="ios-partly-sunny" caption="Weather" select={this.select.bind(this)}/>
+              </View>
+            </View>
+
+            <View style={{justifyContent: "center", alignItems: 'center',}}>
+              <TouchableOpacity style={styles.nextButton} onPress={() => this.next()}>
+                <Text style={styles.nextText}>
+                  Next
+                </Text>
+              </TouchableOpacity>
+            </View>
+
+          </View>
         </LinearGradient>
-        </View>
       )
     }
 
@@ -101,7 +105,7 @@ import { LinearGradient } from 'expo';
     render(){
       return(
         <TouchableOpacity onPress={() => this.props.select(this.props.caption)} style={styles.iconStyle}>
-          <Icon color='white' type='ionicon' name={this.props.iconName} size="50" />
+          <Icon color='white' type='ionicon' name={this.props.iconName} size={50} />
           <Text style={{fontSize: 15, color: 'white'}}>{this.props.caption}</Text>
         </TouchableOpacity>
       )
@@ -137,13 +141,13 @@ import { LinearGradient } from 'expo';
       color:"white",
       fontFamily:"Cochin"
     },
-      nextText:{
-        fontSize: 20,
-        fontFamily: 'Cochin',
-        textAlign:"center",
-        justifyContent: 'center',
-        fontSize: 25,
-        color:"white",
-        fontFamily:"Cochin"
-      }
+    nextText:{
+      fontSize: 20,
+      fontFamily: 'Cochin',
+      textAlign:"center",
+      justifyContent: 'center',
+      fontSize: 25,
+      color:"white",
+      fontFamily:"Cochin"
+    }
   })
