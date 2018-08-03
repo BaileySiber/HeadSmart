@@ -3,12 +3,12 @@ import { StyleSheet, Text, View } from 'react-native';
 import LoginScreen from "./Components/login";
 import RegisterScreen from "./Components/register";
 import SurveyScreen from "./Components/initialSurvey";
-import HomeScreen from "./Components/howareyou";
-import GridScreen from "./Components/grid";
+import MoodScreen from "./Components/mood";
+// import GridScreen from "./Components/grid";
 import EmotionsScreen from "./Components/emotions";
-import JournalScreen from "./Components/Journal";
-import SuggestionsScreen from "./Components/suggestions";
-import HomePageScreen from "./Components/homePageScreen";
+// import JournalScreen from "./Components/Journal";
+// import SuggestionsScreen from "./Components/suggestions";
+import HomePageScreen from "./Components/homepage";
 
 import { StackNavigator } from 'react-navigation';
 
@@ -44,21 +44,21 @@ export default StackNavigator({
   Survey: {
     screen: SurveyScreen
   },
-  Home: {
-    screen: HomeScreen
+  Mood: {
+    screen: MoodScreen
   },
-  Grid: {
-    screen: GridScreen
-  },
+  // Grid: {
+  //   screen: GridScreen
+  // },
   Emotions: {
     screen: EmotionsScreen
   },
-  Journal: {
-    screen: JournalScreen
-  },
-  Suggestions: {
-    screen: SuggestionsScreen
-  },
+  // Journal: {
+  //   screen: JournalScreen
+  // },
+  // Suggestions: {
+  //   screen: SuggestionsScreen
+  // },
   HomePage: {
     screen: HomePageScreen
   }

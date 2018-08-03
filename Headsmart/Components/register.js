@@ -50,27 +50,23 @@ import {  StyleSheet,
       })
       .then(response => response.json())
       .then(json => {
-        if (json.status === 200){
-          return fetch(url + '/login')
-          .then(response=> response.json())
-          .then(json => {
+            console.log('json is -----------'+ JSON.stringify(json))
             this.setState({
-              userid: json.userid
+              userid: json._id
             })
             this.props.navigation.navigate('Survey', {userInfo: this.state});
           })
-        }
-      })
+      .catch(err => console.log('error:' + err))
     }
 
     render() {
       return (
         <View>
-          <LinearGradient style={{height:"100%"}} colors={["#7fd64d", "#4dd6ba"]} >
+          <LinearGradient style={{height:"100%"}} colors={["#b3e0ff", "#00a3cc"]} >
             <View style={{height: "20%", alignItems: "center", justifyContent: "center"}}>
               <Text style={styles.textBig}>Register</Text>
             </View>
-            <View style={{height: "50%", alignItems: "center"}}>
+            <View style={{height: "45%", alignItems: "center"}}>
               <TextInput
                 style={styles.textInp}
                 placeholder=" Name"
@@ -97,12 +93,11 @@ import {  StyleSheet,
                 onChangeText={text => this.setState({ password: text })}
               />
             </View>
-            <View style={{alignItems: 'center', height: "30%"}}>
+            <View style={{alignItems: 'center', marginTop: 80}}>
               <TouchableOpacity
                 style={styles.button}
                 onPress={this.onPress.bind(this)}
                 >
-
                   <Text style={styles.buttonLabel}>Register</Text>
                 </TouchableOpacity>
 
@@ -122,29 +117,31 @@ import {  StyleSheet,
         // justifyContent: 'center',
       },
       textBig: {
-        fontSize: 36,
+        fontSize: 40,
         textAlign: 'center',
         margin: 10,
-        fontFamily: 'Cochin'
+        color: "white",
+        fontFamily: 'Georgia'
       },
       button: {
         paddingTop: 10,
         paddingBottom: 10,
         marginTop: 10,
         borderRadius: 5,
+        borderColor: "white",
         borderWidth: 1,
-        backgroundColor: 'white',
         width: 200
       },
       buttonLabel: {
         textAlign: 'center',
-        fontSize: 20
+        fontSize: 20,
+        color: "white"
       },
       textInp: {
         margin: 15,
         width: 300,
         height: 40,
-        borderColor: "#97ad8a",
+        borderColor: "white",
         borderWidth: 2,
         backgroundColor: 'white'
       }

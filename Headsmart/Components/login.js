@@ -5,6 +5,7 @@ View,
 Text,
 TouchableOpacity,
 TextInput,
+Image,
 ListView,
 Alert,
 Button,
@@ -53,15 +54,15 @@ export default class LoginScreen extends React.Component {
   render() {
     return (
       <View >
-        <LinearGradient style={{height: "100%"}} colors={["#80d64d", "#f5f558"]} > {/*caea54 */}
-        <Text style={styles.textBig}>You Good?</Text>
+        <LinearGradient style={{height: "100%"}} colors={["#b3e0ff", "#00a3cc"]} >
+        <Text style={styles.textBig}>Head Smart</Text>
         <View style={{alignItems:"center", justifyContent:"center"}}>
           <TextInput
             style={{
               margin: 15,
               width: 300,
               height: 40,
-              borderColor: "#97ad8a",
+              borderColor: "white",
               borderWidth: 2
             }}
             placeholder=" Username"
@@ -76,6 +77,7 @@ export default class LoginScreen extends React.Component {
               borderWidth: 2
             }}
             placeholder=" Password"
+            secureTextEntry={true}
             onChangeText={text => this.setState({ password: text })}
           />
         </View>
@@ -86,7 +88,7 @@ export default class LoginScreen extends React.Component {
             }}
             style={styles.button}
             >
-              <Text style={styles.buttonLabel}>Tap to Login</Text>
+              <Text style={styles.buttonLabel}>Login</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={styles.button}
@@ -94,7 +96,7 @@ export default class LoginScreen extends React.Component {
                 this.register();
               }}
               >
-                <Text style={styles.buttonLabel}>Tap to Register</Text>
+                <Text style={styles.buttonLabel}>Register</Text>
               </TouchableOpacity>
             </View>
           </LinearGradient>
@@ -112,18 +114,19 @@ export default class LoginScreen extends React.Component {
     },
     textBig: {
       color:"white",
-      fontSize: 36,
+      fontSize: 50,
       textAlign: 'center',
       margin: 10,
-      fontFamily: 'Cochin'
+      marginTop: 100,
+      fontFamily: "Georgia"
     },
     button: {
       alignItems: 'center',
       padding: 10,
       margin: 10,
+      borderColor: "white",
       borderRadius: 5,
       borderWidth: 1,
-      backgroundColor: 'white',
       width: 200
     },
     buttonLabel: {
