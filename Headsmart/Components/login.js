@@ -56,11 +56,17 @@ export default class LoginScreen extends React.Component {
       <View >
         <LinearGradient style={{height: "100%"}} colors={["#b3e0ff", "#00a3cc"]} >
         <Text style={styles.textBig}>Head Smart</Text>
+
+        <View style={{alignItems: 'center'}}>
+        <Image style={{height:80, width: 80}} source={require('./bulb.png')}/>
+      </View>
+
+
         <View style={{alignItems:"center", justifyContent:"center"}}>
           <TextInput
             style={{
               margin: 15,
-              width: 300,
+              width: 200,
               height: 40,
               borderColor: "white",
               borderWidth: 2
@@ -71,7 +77,7 @@ export default class LoginScreen extends React.Component {
           <TextInput
             style={{
               margin: 15,
-              width: 300,
+              width: 200,
               height: 40,
               borderColor: "white",
               borderWidth: 2
@@ -117,7 +123,7 @@ export default class LoginScreen extends React.Component {
       fontSize: 50,
       textAlign: 'center',
       margin: 10,
-      marginTop: 100,
+      marginTop: 30,
       fontFamily: "Georgia"
     },
     button: {
@@ -127,7 +133,7 @@ export default class LoginScreen extends React.Component {
       borderColor: "white",
       borderRadius: 5,
       borderWidth: 1,
-      width: 200
+      width: 150
     },
     buttonLabel: {
       fontFamily:"Cochin",

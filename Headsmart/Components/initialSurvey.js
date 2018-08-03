@@ -104,7 +104,6 @@ export default class SurveyScreen extends React.Component {
                        backgroundColor= 'transparent'>
                       <TouchableOpacity
                         style={styles.suggestBox}
-                        //add an onSwipe to removeSuggestion
                         >
                         <View><Text>{suggest.name}</Text></View>
                         <View><Text>{suggest.description}</Text></View>
