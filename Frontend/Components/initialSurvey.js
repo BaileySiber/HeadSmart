@@ -81,6 +81,7 @@ export default class SurveyScreen extends React.Component {
       openAdd: true
     })
   }
+  
 
   render() {
     return (
