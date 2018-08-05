@@ -37,7 +37,6 @@ import {  StyleSheet,
     select(caption) {
       let arr = this.state.reasons.slice()
       arr.push(caption)
-      console.log('arr is ---------------' + arr)
       this.setState({
         reasons: arr
       });
@@ -56,32 +55,32 @@ import {  StyleSheet,
 
     render(){
       return(
+
         <LinearGradient colors={["#b3e0ff", "#00a3cc"]} >
           <View>
-
-            <View style={{justifyContent:"center",}}>
+            <View style={{height:'33%'}}>
               <Text style={styles.titleText}>What affected you today?</Text>
             </View>
 
-            <View>
-              <View style={{flexDirection: "row", justifyContent: "space-between", height: "18%"}}>
+            <View style={{height:'34%'}}>
+              <View style={{flexDirection: "row", justifyContent: "space-between"}}>
                 <FullIcon iconName="md-bookmarks" caption="Education" select={this.select.bind(this)}/>
                 <FullIcon iconName="ios-briefcase" caption="Work" select={this.select.bind(this)}/>
                 <FullIcon iconName="ios-home" caption="Family" select={this.select.bind(this)}/>
               </View>
-              <View style={{flexDirection: "row", justifyContent: "space-between", height: "18%"}}>
+              <View style={{flexDirection: "row", justifyContent: "space-between"}}>
                 <FullIcon iconName="md-heart" caption="Relationship" select={this.select.bind(this)}/>
                 <FullIcon iconName="ios-restaurant" caption="Food" select={this.select.bind(this)}/>
                 <FullIcon iconName="md-car" caption="Travel" select={this.select.bind(this)}/>
               </View>
-              <View style={{flexDirection: "row", justifyContent: "space-between", height: "18%"}}>
+              <View style={{flexDirection: "row", justifyContent: "space-between"}}>
                 <FullIcon iconName="ios-contacts" caption="Friends" select={this.select.bind(this)}/>
                 <FullIcon iconName="md-bicycle" caption="Exercise" select={this.select.bind(this)}/>
                 <FullIcon iconName="ios-partly-sunny" caption="Weather" select={this.select.bind(this)}/>
               </View>
             </View>
 
-            <View style={{justifyContent: "center", alignItems: 'center',}}>
+            <View style={{height:'33%'}}>
               <TouchableOpacity style={styles.nextButton} onPress={() => this.next()}>
                 <Text style={styles.nextText}>
                   Next
@@ -113,28 +112,18 @@ import {  StyleSheet,
   }
 
   const styles = StyleSheet.create({
-    container: {
-      flex: 1,
-      backgroundColor: '#d6f2c6',
-      alignItems: 'center',
-    },
     iconStyle: {
       justifyContent: "center",
       alignItems: 'center',
       borderWidth: 2,
       borderColor: 'white',
-      height: "100%",
       width: "33.33%"
     },
     nextButton: {
       alignItems: "center",
       justifyContent: 'center',
-      height: "20%",
-      width: "100%",
-
     },
     titleText:{
-      height: "26%",
       textAlign:"center",
       justifyContent: 'center',
       fontSize: 30,

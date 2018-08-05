@@ -60,12 +60,17 @@ import {  StyleSheet,
 
     render() {
       return (
-        <View>
-          <LinearGradient style={{height:"100%"}} colors={["#b3e0ff", "#00a3cc"]} >
-            <View style={{height: "20%", alignItems: "center", justifyContent: "center"}}>
+
+          <LinearGradient colors={["#b3e0ff", "#00a3cc"]} >
+            <View style={{display: 'flex'}}>
+
+
+            <View style={{alignItems: "center", justifyContent: "center"}}>
               <Text style={styles.textBig}>Register</Text>
             </View>
-            <View style={{height: "45%", alignItems: "center"}}>
+
+
+            <View style={{alignItems: "center"}}>
               <TextInput
                 style={styles.textInp}
                 placeholder=" Name"
@@ -92,29 +97,26 @@ import {  StyleSheet,
                 onChangeText={text => this.setState({ password: text })}
               />
             </View>
-            <View style={{alignItems: 'center', marginTop: 80}}>
+
+
+            <View style={{alignItems: 'center'}}>
               <TouchableOpacity
                 style={styles.button}
                 onPress={this.onPress.bind(this)}
                 >
                   <Text style={styles.buttonLabel}>Register</Text>
                 </TouchableOpacity>
-
               </View>
+
+
+            </View>
             </LinearGradient>
-          </View>
+
         );
       }
     }
 
     const styles = StyleSheet.create({
-      container: {
-        //paddingTop:100,
-        //flex: 1,
-        // backgroundColor: '#d6f2c6',
-        alignItems: 'center',
-        // justifyContent: 'center',
-      },
       textBig: {
         fontSize: 40,
         textAlign: 'center',
@@ -138,10 +140,9 @@ import {  StyleSheet,
       },
       textInp: {
         margin: 15,
-        width: 300,
+        width: 200,
         height: 40,
         borderColor: "white",
         borderWidth: 2,
-        backgroundColor: 'white'
       }
     });
