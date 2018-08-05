@@ -24,7 +24,8 @@ export default class Journal extends React.Component{
       value: '',
       emotions: [],
       reasons: [],
-      wantJournal: false
+      wantJournal: false,
+      suggestions: {}
     }
 
   }
@@ -39,13 +40,40 @@ export default class Journal extends React.Component{
   }
 
   skipSection(){
-    Alert.alert(
-      "Skipping journal",
-      "Let's get to suggestions! " ,
-      [{ text: "Done" }] // Button
-    );
-    this.props.navigation.navigate('Suggestions', {userInfo: this.state});
 
+    const queryUrl = url + '/' + this.state.userid + '/newLog';
+    return fetch(queryUrl, {
+      method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        userid: this.state.userid,
+        value: this.state.value,
+        emotions: this.state.emotions,
+        reasons: this.state.reasons,
+        journalBody: this.state.journalBody
+      })
+    })
+    .then(result => rseult.json())
+    .then(jsonResult => {
+      if(jsonResult){
+        console.log('suggestions are ----------------' + jsonResult)
+        this.setState({
+          suggestions: jsonResult
+        })
+        Alert.alert(
+          "Skipping journal",
+          "Let's get to suggestions! " ,
+          [{ text: "Done" }] // Button
+        );
+        let userInfo = {
+          userid: this.state.userid,
+          suggestions: this.state.suggestions
+        }
+      this.props.navigation.navigate('Suggestions', {userInfo: userInfo});
+      }
+    })
   }
 
   yesJournal(){
@@ -55,25 +83,42 @@ export default class Journal extends React.Component{
   }
 
   postJournal(){
-    const queryUrl = url + '/' + this.state.userid + '/newJournal';
+
+    const queryUrl = url + '/' + this.state.userid + '/newLog';
     return fetch(queryUrl, {
       method: 'POST',
+      headers: {
+        "Content-Type": "application/json"
+      },
       body: JSON.stringify({
         userid: this.state.userid,
+        value: this.state.value,
+        emotions: this.state.emotions,
+        reasons: this.state.reasons,
         journalBody: this.state.journalBody
       })
-    }).then(response=> response.json())
-    .then(json => {
-      if (json.status === 200){
+    })
+    .then(result => rseult.json())
+    .then(jsonResult => {
+      if(jsonResult){
+        console.log('suggestions are ----------------' + jsonResult)
+        this.setState({
+          suggestions: jsonResult
+        })
         Alert.alert(
-          "Your journal has been logged",
+          "Journal saved",
           "Let's get to suggestions! " ,
           [{ text: "Done" }] // Button
         );
-        this.props.navigation.navigate('ShowNewLog', {userInfo: this.state});
+        let userInfo = {
+          userid: this.state.userid,
+          suggestions: this.state.suggestions
+        }
+      this.props.navigation.navigate('Suggestions', {userInfo: userInfo});
       }
     })
   }
+
 
   render(){
     return (
