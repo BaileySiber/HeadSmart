@@ -1,0 +1,144 @@
+import React from 'react';
+import url from './url';
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableOpacity,
+  TextInput,
+  ListView,
+  Alert,
+  Button,
+  RefreshControl,
+  AsyncStorage
+} from "react-native"
+import { LinearGradient } from "expo";
+
+export default class Journal extends React.Component{
+  constructor(props){
+    super(props);
+
+    this.state= {
+      journalBody: '',
+      userid: '',
+      value: '',
+      emotions: [],
+      reasons: [],
+      wantJournal: false
+    }
+
+  }
+  componentDidMount(){
+    let userInfo = this.props.navigation.getParam('userInfo');
+    this.setState({
+      userid: userInfo.userid,
+      value: userInfo.value,
+      reasons: userInfo.reasons,
+      emotions: userInfo.emotions
+    });
+  }
+
+  skipSection(){
+    Alert.alert(
+      "Skipping journal",
+      "Let's get to suggestions! " ,
+      [{ text: "Done" }] // Button
+    );
+    this.props.navigation.navigate('Suggestions', {userInfo: this.state});
+
+  }
+
+  yesJournal(){
+    this.setState({
+      wantJournal: true
+    })
+  }
+
+  postJournal(){
+    const queryUrl = url + '/' + this.state.userid + '/newJournal';
+    return fetch(queryUrl, {
+      method: 'POST',
+      body: JSON.stringify({
+        userid: this.state.userid,
+        journalBody: this.state.journalBody
+      })
+    }).then(response=> response.json())
+    .then(json => {
+      if (json.status === 200){
+        Alert.alert(
+          "Your journal has been logged",
+          "Let's get to suggestions! " ,
+          [{ text: "Done" }] // Button
+        );
+        this.props.navigation.navigate('ShowNewLog', {userInfo: this.state});
+      }
+    })
+  }
+
+  render(){
+    return (
+
+      <LinearGradient style={{height:"100%"}} colors={["#b3e0ff", "#00a3cc"]} >
+
+        {this.state.wantJournal ?
+
+          <View>
+            <View>
+              <Text style={{textAlign: 'center', color:"white", fontFamily: "Cochin", fontSize: 40}}>Daily Journal</Text>
+            </View>
+
+            <TouchableOpacity>
+              <Button
+                onPress={()=> this.postJournal()}
+                title="Save"
+              />
+            </TouchableOpacity>
+
+            <View style={{alignItems: "center"}}>
+              <TextInput
+                placeholder="Write your journal here"
+                onChange={(journal)=> this.setState({
+                  journalBody: journal
+                })
+              }/>
+            </View>
+
+          </View>
+
+          :
+
+          <View style={{display: 'flex', justifyContent: 'center'}}>
+
+            <Text style={{textAlign: 'center', color:"white", fontFamily: "Cochin", fontSize: 40}}>Do you want to make a journal entry?</Text>
+            <View style={{alignItems: 'center'}}>
+              <TouchableOpacity style={styles.buttonStyle} onPress={() => this.skipSection()}>
+                <Text style={{fontSize: 30, textAlign: 'center', color:"white", fontFamily:"Cochin"}}>Skip</Text>
+              </TouchableOpacity>
+
+              <TouchableOpacity style={styles.buttonStyle} onPress={() => this.yesJournal()}>
+                <Text style={{fontSize: 30, textAlign: 'center', color:"white", fontFamily:"Cochin"}}>Journal</Text>
+              </TouchableOpacity>
+            </View>
+
+          </View>
+        }
+
+      </LinearGradient>
+
+    );
+  }
+}
+
+
+
+const styles = StyleSheet.create({
+  buttonStyle: {
+    borderColor: 'white',
+    width: 120,
+    height: 35,
+    borderRadius: 15,
+    borderWidth: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+});

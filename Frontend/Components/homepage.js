@@ -50,7 +50,7 @@ export default class HomePage extends React.Component{
   render(){
     return(
       <View>
-        <LinearGradient style={{height:"100%"}} colors={["#00a3cc", "white"]} >
+        <LinearGradient style={{height:"100%"}} colors={["#00a3cc", "#00a3cc"]} >
           <View style={{alignItems:"center", justifyContent:"center"}}>
             <Text style={{fontFamily:"Georgia", color:"white", fontSize:40, marginTop: 30, marginBottom: 80}}>Home</Text>
           </View>

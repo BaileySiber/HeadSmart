@@ -138,14 +138,18 @@ import {  StyleSheet,
                   } />
                 }
 
-                {this.state.positiveBool ?                                                                    //positive or negative at top
-                  <TouchableOpacity style={{height:"13%", alignItems:"center", justifyContent:"center"}} onPress={() => this.toNegatives()}>
-                    <Text style={{fontSize: 20, textAlign: 'center', color:"white", fontFamily:"Cochin"}}>Next</Text>
+                {this.state.positiveBool ?
+                  <View style={{alignItems: 'center'}}>                                                                   //positive or negative at top
+                  <TouchableOpacity style={styles.buttonStyle} onPress={() => this.toNegatives()}>
+                    <Text style={{fontSize: 16, color: "white", fontFamily:"Cochin"}}>Next</Text>
                   </TouchableOpacity>
+                </View>
                   :
-                  <TouchableOpacity style={{height:"13%", alignItems:"center", justifyContent:"center"}} onPress={() => this.toGrid()}>
-                    <Text style={{fontSize: 20, textAlign: 'center', color:"white", fontFamily:"Cochin"}}>Done</Text>
+                  <View style={{alignItems: 'center'}}>
+                  <TouchableOpacity style={styles.buttonStyle} onPress={() => this.toGrid()}>
+                    <Text style={{fontSize: 16, color: "white", fontFamily:"Cochin"}}>Done</Text>
                   </TouchableOpacity>
+                </View>
                 }
 
               </LinearGradient>
@@ -164,5 +168,14 @@ import {  StyleSheet,
         Title: {
           textAlign: 'center',
           fontSize: 20
+        },
+        buttonStyle: {
+          borderColor: 'white',
+          width: 120,
+          height: 35,
+          borderRadius: 15,
+          borderWidth: 1,
+          justifyContent: 'center',
+          alignItems: 'center'
         }
       })

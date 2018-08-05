@@ -6,7 +6,7 @@ import SurveyScreen from "./Components/initialSurvey";
 import MoodScreen from "./Components/mood";
 import GridScreen from "./Components/grid";
 import EmotionsScreen from "./Components/emotions";
-// import JournalScreen from "./Components/Journal";
+import JournalScreen from "./Components/journal";
 // import SuggestionsScreen from "./Components/suggestions";
 import HomePageScreen from "./Components/homepage";
 
@@ -53,9 +53,9 @@ export default StackNavigator({
   Emotions: {
     screen: EmotionsScreen
   },
-  // Journal: {
-  //   screen: JournalScreen
-  // },
+  Journal: {
+    screen: JournalScreen
+  },
   // Suggestions: {
   //   screen: SuggestionsScreen
   // },
