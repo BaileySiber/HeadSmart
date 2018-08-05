@@ -72,7 +72,10 @@ export default class LoginScreen extends React.Component {
               borderWidth: 2
             }}
             placeholder=" Username"
-            onChangeText={text => this.setState({ username: text })}
+            onChangeText={text => {
+              console.log('adding login ---------' + text)
+              this.setState({ username: text })}
+            }
           />
           <TextInput
             style={{
@@ -84,7 +87,10 @@ export default class LoginScreen extends React.Component {
             }}
             placeholder=" Password"
             secureTextEntry={true}
-            onChangeText={text => this.setState({ password: text })}
+            onChangeText={text => {
+              console.log('adding password ---------' + text)
+              this.setState({ password: text })}
+            }
           />
         </View>
         <View style={{alignItems: "center", justifyContent:"center"}}>

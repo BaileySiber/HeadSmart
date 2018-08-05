@@ -19,7 +19,7 @@ export default class Journal extends React.Component{
     super(props);
 
     this.state= {
-      journalBody: '',
+      journal: "",
       userid: '',
       value: '',
       emotions: [],
@@ -43,7 +43,7 @@ export default class Journal extends React.Component{
 
     const queryUrl = url + '/' + this.state.userid + '/newLog';
     return fetch(queryUrl, {
-      method: 'POST',
+      method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
@@ -52,10 +52,10 @@ export default class Journal extends React.Component{
         value: this.state.value,
         emotions: this.state.emotions,
         reasons: this.state.reasons,
-        journalBody: this.state.journalBody
+        journalBody: this.state.journal
       })
     })
-    .then(result => rseult.json())
+    .then(result => result.json())
     .then(jsonResult => {
       if(jsonResult){
         console.log('suggestions are ----------------' + jsonResult)
@@ -83,10 +83,10 @@ export default class Journal extends React.Component{
   }
 
   postJournal(){
-
+    console.log('journal body is ----------' + this.state.journal)
     const queryUrl = url + '/' + this.state.userid + '/newLog';
     return fetch(queryUrl, {
-      method: 'POST',
+      method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
@@ -95,15 +95,15 @@ export default class Journal extends React.Component{
         value: this.state.value,
         emotions: this.state.emotions,
         reasons: this.state.reasons,
-        journalBody: this.state.journalBody
+        journalBody: this.state.journal
       })
     })
-    .then(result => rseult.json())
-    .then(jsonResult => {
-      if(jsonResult){
-        console.log('suggestions are ----------------' + jsonResult)
+    .then(result => result.text())
+    .then(textResult => {
+      if(textResult){
+        console.log('suggestions are ----------------' + textResult)
         this.setState({
-          suggestions: jsonResult
+          suggestions: textResult
         })
         Alert.alert(
           "Journal saved",
@@ -117,6 +117,7 @@ export default class Journal extends React.Component{
       this.props.navigation.navigate('Suggestions', {userInfo: userInfo});
       }
     })
+    .catch(err => console.log('error saving post' + err))
   }
 
 
@@ -139,13 +140,21 @@ export default class Journal extends React.Component{
               />
             </TouchableOpacity>
 
-            <View style={{alignItems: "center"}}>
+            <View style={{alignItems:"center", justifyContent:"center"}}>
               <TextInput
+                style={{
+                  margin: 15,
+                  width: 200,
+                  height: 200,
+                  borderColor: "white",
+                  borderWidth: 2
+                }}
                 placeholder="Write your journal here"
-                onChange={(journal)=> this.setState({
-                  journalBody: journal
-                })
-              }/>
+                onChangeText={text => {
+                  console.log('adding journal ---------' + text)
+                  this.setState({ journal: text })}
+                }
+              />
             </View>
 
           </View>
