@@ -1,6 +1,5 @@
 import React from 'react';
 import url from './url';
-import paths from './exercisePath'
 import {
   StyleSheet,
   View,
@@ -15,29 +14,27 @@ import {
 } from "react-native"
 import { LinearGradient } from "expo";
 
-const ds = new ListView.DataSouce({
-  rowHasChanged: (r1, r2) => r1 !== r2
-});
+
+const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => (r1 !== r2)})
 export default class SuggestionsScreen extends React.Component {
   constructor(props){
     super(props);
     this.state={
-      renderList: ds.cloneWithRows([]),,
+      renderList: ds.cloneWithRows([]),
     }
   }
 
   componentDidMount(){
     let userInfo = this.props.navigation.getParam('userInfo');
-    let suggestions = userInfo.suggestions.suggestions
-
+    let suggestions = userInfo.suggestions.suggestion
+    console.log('suggestions in sug.js is -----------------------' + suggestions)
     this.setState({
       renderList: ds.cloneWithRows(suggestions),
     });
   }
 
   callExercise(name){
-    let path = paths[name]
-    this.props.navigation.navigate(path);
+    //do stuff
   }
 
   render(){
