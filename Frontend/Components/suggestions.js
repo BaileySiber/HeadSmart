@@ -39,36 +39,49 @@ export default class SuggestionsScreen extends React.Component {
     let userInfo = {
       userid: this.state.userid
     }
-
-    switch(name) : {
+    switch(name) {
       case 'Physical activity':
         this.props.navigation.navigate("PhysicalActivity", {userInfo: userInfo})
+        break;
       case 'Watch something funny':
         this.props.navigation.navigate("Funny", {userInfo: userInfo})
+        break;
       case 'Gratitude list':
         this.props.navigation.navigate("Gratitude", {userInfo: userInfo})
+        break;
       case 'Apology letter to self':
         this.props.navigation.navigate("letterSelf", {userInfo: userInfo})
+        break;
       case 'Apology letter to someone else':
         this.props.navigation.navigate("letterOther", {userInfo: userInfo})
+        break;
       case 'Check your magnification':
         this.props.navigation.navigate("Magnify", {userInfo: userInfo})
+        break;
       case 'Call someone!':
         this.props.navigation.navigate("Call", {userInfo: userInfo})
+        break;
       case 'Listen to music':
         this.props.navigation.navigate("Music", {userInfo: userInfo})
+        break;
       case 'Take a shower':
         this.props.navigation.navigate("Shower", {userInfo: userInfo})
+        break;
       case 'Write angry letter':
         this.props.navigation.navigate("letterAngry", {userInfo: userInfo})
+        break;
       case 'Breathing exercise':
         this.props.navigation.navigate("Breathing", {userInfo: userInfo})
+        break;
       case 'Drink something warm':
         this.props.navigation.navigate("Drink", {userInfo: userInfo})
+        break;
       case 'Grounding exercise':
         this.props.navigation.navigate("Grounding", {userInfo: userInfo})
+        break;
       case 'Eat!':
         this.props.navigation.navigate("Eat", {userInfo: userInfo})
+        break;
     }
 
   }
