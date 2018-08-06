@@ -108,7 +108,7 @@ export default class Journal extends React.Component{
         Alert.alert(
           "Journal saved",
           "Let's get to suggestions! " ,
-          [{ text: "Done" }] // Button
+          [{ text: "Done" }] 
         );
         let userInfo = {
           userid: this.state.userid,
