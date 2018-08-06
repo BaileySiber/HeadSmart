@@ -7,8 +7,23 @@ import MoodScreen from "./Components/mood";
 import GridScreen from "./Components/grid";
 import EmotionsScreen from "./Components/emotions";
 import JournalScreen from "./Components/journal";
-// import SuggestionsScreen from "./Components/suggestions";
+import SuggestionsScreen from "./Components/suggestions";
 import HomePageScreen from "./Components/homepage";
+import PhysicalActivity from ".././Exercises/timer";
+import Funny from ".././Exercises/gifs";
+import Gratitude from ".././Exercises/gratList";
+import letterSelf from ".././Exercises/letterSelf";
+import letterOther from ".././Exercises/letterOther";
+import Magnify from ".././Exercises/magnify";
+import Call from ".././Exercises/call";
+import Music from ".././Exercises/music";
+import Shower from ".././Exercises/shower";
+import letterAngry from ".././Exercises/letterAngry";
+import Breathing from ".././Exercises/bubble";
+import Drink from ".././Exercises/drink";
+import Grounding from ".././Exercises/grounding";
+import Eat from ".././Exercises/eat";
+
 
 import { StackNavigator } from 'react-navigation';
 
@@ -56,13 +71,56 @@ export default StackNavigator({
   Journal: {
     screen: JournalScreen
   },
-  // Suggestions: {
-  //   screen: SuggestionsScreen
-  // },
+  Suggestions: {
+    screen: SuggestionsScreen
+  },
   HomePage: {
     screen: HomePageScreen
-  }
+  },
+  PhysicalActivity: {
+    screen: PhysicalActivity
+  },
+  Funny: {
+    screen: Funny
+  },
+  Gratitude: {
+    screen: Gratitude
+  },
+  letterSelf: {
+    screen: letterSelf
+  },
+  letterOther: {
+    screen: letterOther
+  },
+  Magnify: {
+    screen: Magnify
+  },
+  Call: {
+    screen: Call
+  },
+  Music: {
+    screen: Music
+  },
+  Shower: {
+    screen: Shower
+  },
+  letterAngry: {
+    screen: letterAngry
+  },
+  Breathing: {
+    screen: Breathing
+  },
+  Drink: {
+    screen: Drink
+  },
+  Grounding: {
+    screen: Grounding
+  },
+  Eat: {
+    screen: Eat
+  },
 }, {initialRouteName: 'Login'});
+
 
 
 const styles = StyleSheet.create({

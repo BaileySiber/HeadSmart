@@ -126,7 +126,7 @@ import {  StyleSheet,
     nextButton: {
       alignItems: "center",
       justifyContent: 'center',
-      borderWidth: 2,
+      borderWidth: 1,
       borderColor: 'white',
       width: 120,
       height: 35,
