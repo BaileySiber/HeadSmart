@@ -69,7 +69,7 @@ export default class SurveyScreen extends React.Component {
   }
 
   registerFinal() {
-    this.props.navigation.navigate('HomePage', {userInfo: this.state});
+    this.props.navigation.navigate('HomePage', {userInfo: this.state.userInfo});
     //fetch post a new user
     //with userInfo from state, and suggestions arr
   }

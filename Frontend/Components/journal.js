@@ -84,6 +84,7 @@ export default class Journal extends React.Component{
 
   postJournal(){
     console.log('journal body is ----------' + this.state.journal)
+    console.log('userid is -------------' + this.state.userid)
     const queryUrl = url + '/' + this.state.userid + '/newLog';
     return fetch(queryUrl, {
       method: "POST",
@@ -108,7 +109,7 @@ export default class Journal extends React.Component{
         Alert.alert(
           "Journal saved",
           "Let's get to suggestions! " ,
-          [{ text: "Done" }] 
+          [{ text: "Done" }]
         );
         let userInfo = {
           userid: this.state.userid,

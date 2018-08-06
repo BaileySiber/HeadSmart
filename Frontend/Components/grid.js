@@ -43,6 +43,7 @@ import {  StyleSheet,
     }
 
     next(){
+      console.log('userid in grid.js is ---------' + this.state.userid)
       let userInfo = {
         userid: this.state.userid,
         reasons: this.state.reasons,

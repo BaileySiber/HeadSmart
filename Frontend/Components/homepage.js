@@ -44,7 +44,9 @@ export default class HomePage extends React.Component{
         username: json.username,
         userid: userInfo.userid
       });
+      console.log('userid in homepage is -----------' + this.state.userid)
     })
+
   }
 
   render(){
