@@ -64,7 +64,6 @@ import {  StyleSheet,
       let posArr = Object.keys(this.state.positiveObj).map((emotion) => ({'name': emotion, 'intensity': this.state.positiveObj[emotion]}))
       let negArr = Object.keys(this.state.negativeObj).map((emotion) => ({'name': emotion, 'intensity': this.state.negativeObj[emotion]}))
       let finalArr = posArr.concat(negArr)
-      console.log('finalArr is -------------' + finalArr[0].intensity)
       let userInfo = {
         userid: this.state.userid,
         emotions: finalArr,

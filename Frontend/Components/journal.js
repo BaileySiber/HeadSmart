@@ -58,20 +58,21 @@ export default class Journal extends React.Component{
     .then(result => result.json())
     .then(jsonResult => {
       if(jsonResult){
-        console.log('suggestions are ----------------' + jsonResult)
         this.setState({
           suggestions: jsonResult
         })
         Alert.alert(
-          "Skipping journal",
-          "Let's get to suggestions! " ,
-          [{ text: "Sounds good" }] // Button
-        );
+          'Journal skipped',
+          "Let's get to suggestions!",
+          [
+            { text: 'OK', onPress: () =>  this.props.navigation.navigate('Suggestions', {userInfo: userInfo})}
+          ]
+        )
         let userInfo = {
           userid: this.state.userid,
           suggestions: this.state.suggestions
         }
-      this.props.navigation.navigate('Suggestions', {userInfo: userInfo});
+        this.props.navigation.navigate('Suggestions', {userInfo: userInfo});
       }
     })
   }
@@ -83,8 +84,6 @@ export default class Journal extends React.Component{
   }
 
   postJournal(){
-    console.log('journal body is ----------' + this.state.journal)
-    console.log('userid is -------------' + this.state.userid)
     const queryUrl = url + '/' + this.state.userid + '/newLog';
     return fetch(queryUrl, {
       method: "POST",
@@ -99,23 +98,23 @@ export default class Journal extends React.Component{
         journalBody: this.state.journal
       })
     })
-    .then(result => result.text())
+    .then(result => result.json())
     .then(textResult => {
       if(textResult){
-        console.log('suggestions are ----------------' + textResult)
         this.setState({
           suggestions: textResult
         })
-        Alert.alert(
-          "Journal saved",
-          "Let's get to suggestions! " ,
-          [{ text: "Sounds good" }]
-        );
         let userInfo = {
           userid: this.state.userid,
           suggestions: this.state.suggestions
         }
-      this.props.navigation.navigate('Suggestions', {userInfo: userInfo});
+        Alert.alert(
+          'Journal saved',
+          "Let's get to suggestions!",
+          [
+            { text: 'OK', onPress: () =>  this.props.navigation.navigate('Suggestions', {userInfo: userInfo})}
+          ]
+        )
       }
     })
     .catch(err => console.log('error saving post' + err))
@@ -153,7 +152,6 @@ export default class Journal extends React.Component{
                 multiline = {true}
                 placeholder="Write your journal here"
                 onChangeText={text => {
-                  console.log('adding journal ---------' + text)
                   this.setState({ journal: text })}
                 }
               />
@@ -163,13 +161,16 @@ export default class Journal extends React.Component{
 
           :
 
-          <View style={{display: 'flex', justifyContent: 'center'}}>
+          <View style={{display: 'flex', flex: 1, justifyContent: 'center'}}>
 
-            <Text style={{textAlign: 'center', color:"white", fontFamily: "Cochin", fontSize: 40}}>Do you want to make a journal entry?</Text>
-            <View style={{alignItems: 'center'}}>
+            <Text style={{textAlign: 'center', color:"white", fontFamily: "Cochin", fontSize: 40, paddingTop: "5%"}}>Do you want to make a journal entry?</Text>
+            <View style={{alignItems: 'center', paddingTop: "10%"}}>
+
+              <View style={{marginBottom: "5%"}}>
               <TouchableOpacity style={styles.buttonStyle} onPress={() => this.skipSection()}>
                 <Text style={{fontSize: 30, textAlign: 'center', color:"white", fontFamily:"Cochin"}}>Skip</Text>
               </TouchableOpacity>
+              </View>
 
               <TouchableOpacity style={styles.buttonStyle} onPress={() => this.yesJournal()}>
                 <Text style={{fontSize: 30, textAlign: 'center', color:"white", fontFamily:"Cochin"}}>Journal</Text>
@@ -191,7 +192,7 @@ const styles = StyleSheet.create({
   buttonStyle: {
     borderColor: 'white',
     width: 120,
-    height: 35,
+    height: 50,
     borderRadius: 15,
     borderWidth: 1,
     justifyContent: 'center',

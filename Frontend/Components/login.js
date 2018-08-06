@@ -38,7 +38,6 @@ export default class LoginScreen extends React.Component {
     .then(response => response.json())
     .then(json => {
       if (json.userid){
-        console.log('userInfo', json.userid);
         this.setState({
           userid: json.userid
         });
@@ -73,7 +72,6 @@ export default class LoginScreen extends React.Component {
             }}
             placeholder=" Username"
             onChangeText={text => {
-              console.log('adding login ---------' + text)
               this.setState({ username: text })}
             }
           />
@@ -88,7 +86,6 @@ export default class LoginScreen extends React.Component {
             placeholder=" Password"
             secureTextEntry={true}
             onChangeText={text => {
-              console.log('adding password ---------' + text)
               this.setState({ password: text })}
             }
           />

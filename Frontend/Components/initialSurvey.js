@@ -126,7 +126,6 @@ export default class SurveyScreen extends React.Component {
 
   render() {
     let emotionTags = this.state.emotions.slice()
-    console.log("emotionTags are", emotionTags)
     emotionTags = emotionTags.join(' ')
     return (
       <Swiper showsButton={false} loop={false}>
