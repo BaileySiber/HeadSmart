@@ -139,13 +139,13 @@ import {  StyleSheet,
                 }
 
                 {this.state.positiveBool ?
-                  <View style={{alignItems: 'center'}}>                                                                   //positive or negative at top
+                  <View style={{alignItems: 'center', marginBottom: "5%"}}>                                                                   //positive or negative at top
                   <TouchableOpacity style={styles.buttonStyle} onPress={() => this.toNegatives()}>
                     <Text style={{fontSize: 16, color: "white", fontFamily:"Cochin"}}>Next</Text>
                   </TouchableOpacity>
                 </View>
                   :
-                  <View style={{alignItems: 'center'}}>
+                  <View style={{alignItems: 'center', marginBottom: "5%"}}>
                   <TouchableOpacity style={styles.buttonStyle} onPress={() => this.toGrid()}>
                     <Text style={{fontSize: 16, color: "white", fontFamily:"Cochin"}}>Done</Text>
                   </TouchableOpacity>

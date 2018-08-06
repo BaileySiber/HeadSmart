@@ -60,7 +60,7 @@ import {  StyleSheet,
         <LinearGradient style={{display: 'flex', flex:1}} colors={["#b3e0ff", "#00a3cc"]} >
 
 
-            <View style={{flex:1}}>
+            <View style={{flex:1, marginTop: "10%"}}>
               <Text style={styles.titleText}>What affected you today?</Text>
             </View>
 
@@ -84,7 +84,7 @@ import {  StyleSheet,
             </View>
 
 
-            <View style={{flex:1}}>
+            <View style={{flex:1, alignItems: 'center'}}>
               <TouchableOpacity style={styles.nextButton} onPress={() => this.next()}>
                 <Text style={styles.nextText}>
                   Next
@@ -121,11 +121,17 @@ import {  StyleSheet,
       borderWidth: 2,
       borderColor: 'white',
       width: "33.33%",
-      padding: "2%"
+      paddingBottom: "2%"
     },
     nextButton: {
       alignItems: "center",
       justifyContent: 'center',
+      borderWidth: 2,
+      borderColor: 'white',
+      width: 120,
+      height: 35,
+      borderRadius: 15
+
     },
     titleText:{
       textAlign:"center",

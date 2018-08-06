@@ -61,16 +61,14 @@ import {  StyleSheet,
     render() {
       return (
 
-          <LinearGradient colors={["#b3e0ff", "#00a3cc"]} >
-            <View style={{display: 'flex'}}>
+          <LinearGradient style={{display: 'flex', flex: 1}} colors={["#b3e0ff", "#00a3cc"]} >
 
-
-            <View style={{alignItems: "center", justifyContent: "center"}}>
+            <View style={{alignItems: "center", justifyContent: "center", flex: 1}}>
               <Text style={styles.textBig}>Register</Text>
             </View>
 
 
-            <View style={{alignItems: "center"}}>
+            <View style={{alignItems: "center", flex: 5}}>
               <TextInput
                 style={styles.textInp}
                 placeholder=" Name"
@@ -99,7 +97,7 @@ import {  StyleSheet,
             </View>
 
 
-            <View style={{alignItems: 'center'}}>
+            <View style={{alignItems: 'center', flex: 1}}>
               <TouchableOpacity
                 style={styles.button}
                 onPress={this.onPress.bind(this)}
@@ -109,7 +107,6 @@ import {  StyleSheet,
               </View>
 
 
-            </View>
             </LinearGradient>
 
         );
