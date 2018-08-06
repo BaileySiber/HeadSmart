@@ -57,13 +57,15 @@ import {  StyleSheet,
     render(){
       return(
 
-        <LinearGradient colors={["#b3e0ff", "#00a3cc"]} >
-          <View>
-            <View style={{height:'33%'}}>
+        <LinearGradient style={{display: 'flex', flex:1}} colors={["#b3e0ff", "#00a3cc"]} >
+
+
+            <View style={{flex:1}}>
               <Text style={styles.titleText}>What affected you today?</Text>
             </View>
 
-            <View style={{height:'34%'}}>
+
+            <View style={{flex:3}}>
               <View style={{flexDirection: "row", justifyContent: "space-between"}}>
                 <FullIcon iconName="md-bookmarks" caption="Education" select={this.select.bind(this)}/>
                 <FullIcon iconName="ios-briefcase" caption="Work" select={this.select.bind(this)}/>
@@ -81,7 +83,8 @@ import {  StyleSheet,
               </View>
             </View>
 
-            <View style={{height:'33%'}}>
+
+            <View style={{flex:1}}>
               <TouchableOpacity style={styles.nextButton} onPress={() => this.next()}>
                 <Text style={styles.nextText}>
                   Next
@@ -89,7 +92,6 @@ import {  StyleSheet,
               </TouchableOpacity>
             </View>
 
-          </View>
         </LinearGradient>
       )
     }
@@ -118,7 +120,8 @@ import {  StyleSheet,
       alignItems: 'center',
       borderWidth: 2,
       borderColor: 'white',
-      width: "33.33%"
+      width: "33.33%",
+      padding: "2%"
     },
     nextButton: {
       alignItems: "center",

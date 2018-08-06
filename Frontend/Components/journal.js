@@ -65,7 +65,7 @@ export default class Journal extends React.Component{
         Alert.alert(
           "Skipping journal",
           "Let's get to suggestions! " ,
-          [{ text: "Done" }] // Button
+          [{ text: "Sounds good" }] // Button
         );
         let userInfo = {
           userid: this.state.userid,
@@ -109,7 +109,7 @@ export default class Journal extends React.Component{
         Alert.alert(
           "Journal saved",
           "Let's get to suggestions! " ,
-          [{ text: "Done" }]
+          [{ text: "Sounds good" }]
         );
         let userInfo = {
           userid: this.state.userid,
@@ -145,11 +145,12 @@ export default class Journal extends React.Component{
               <TextInput
                 style={{
                   margin: 15,
-                  width: 200,
-                  height: 200,
+                  width: '80%',
+                  height: '80%',
                   borderColor: "white",
                   borderWidth: 2
                 }}
+                multiline = {true}
                 placeholder="Write your journal here"
                 onChangeText={text => {
                   console.log('adding journal ---------' + text)
