@@ -124,6 +124,7 @@ import {  StyleSheet,
                   <Text style={{color:"white", fontFamily: "Cochin", fontSize: 50}}>Negative</Text>
                 </View>
               }
+              
 
 
               {this.state.positiveBool ?
