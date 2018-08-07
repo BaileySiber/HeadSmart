@@ -37,7 +37,8 @@ export default class SuggestionsScreen extends React.Component {
 
   callExercise(name){
     let userInfo = {
-      userid: this.state.userid
+      userid: this.state.userid,
+      name: name
     }
     switch(name) {
       case 'Physical activity':

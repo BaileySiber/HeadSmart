@@ -10,6 +10,7 @@ import JournalScreen from "./Components/journal";
 import SuggestionsScreen from "./Components/suggestions";
 import HomePageScreen from "./Components/homepage";
 import StatsScreen from "./Components/stats";
+import ReevaluateScreen from "./Components/reevaluate"
 // import PhysicalActivity from "./Exercises/timer";
 // import Funny from "./Exercises/gifs";
 // import Gratitude from "./Exercises/gratList";
@@ -80,6 +81,9 @@ export default StackNavigator({
   },
   Stats: {
     screen: StatsScreen
+  },
+  Reevaluate: {
+    screen: ReevaluateScreen
   }
   // PhysicalActivity: {
   //   screen: PhysicalActivity
@@ -123,7 +127,7 @@ export default StackNavigator({
   // Eat: {
   //   screen: Eat
   // },
-}, {initialRouteName: 'Login'});
+}, {initialRouteName: 'Reevaluate'});
 
 
 
