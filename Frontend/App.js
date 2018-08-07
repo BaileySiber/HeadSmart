@@ -11,6 +11,7 @@ import SuggestionsScreen from "./Components/suggestions";
 import HomePageScreen from "./Components/homepage";
 import StatsScreen from "./Components/stats";
 import ReevaluateScreen from "./Components/reevaluate"
+import ShowLogScreen from "./Components/showLog"
 import PhysicalActivity from "./Exercises/timer";
 import Funny from "./Exercises/gifs";
 // import Gratitude from "./Exercises/gratList";
@@ -84,6 +85,9 @@ export default StackNavigator({
   },
   Reevaluate: {
     screen: ReevaluateScreen
+  },
+  ShowLog: {
+    screen: ShowLogScreen
   },
   PhysicalActivity: {
     screen: PhysicalActivity

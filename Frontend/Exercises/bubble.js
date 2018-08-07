@@ -1,5 +1,4 @@
 import React from 'react';
-import url from './url';
 import {  StyleSheet,
   View,
   Text,
@@ -26,6 +25,16 @@ export default class BubbleScreen extends React.Component{
       userid: userInfo.userid,
       name: userInfo.name
     })
+  }
+
+
+  toreEvaluate(){
+    let userInfo = {
+      userid: this.state.userid,
+      name: this.state.suggestions
+    }
+    this.props.navigation.navigate('Reevaluate', {userInfo: userInfo});
+  }
 
 
   render(){
@@ -42,7 +51,26 @@ export default class BubbleScreen extends React.Component{
           source={{uri: 'http://www.pngmart.com/files/7/Soap-Bubbles-PNG-Image.png'}}
           style={{margin: 10, width: 300, height: 300}}
           />
+
+          <View style={{alignItems:'center'}}>
+            <TouchableOpacity onPress={() => this.toreEvaluate()} style={styles.doneButton}>
+              <Text style={{fontSize: 40, color: "black", fontFamily:"Cochin"}}>Done</Text>
+            </TouchableOpacity>
+          </View>
       </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  doneButton: {
+    marginTop: "50%",
+    borderColor: 'white',
+    width: 200,
+    height: 100,
+    borderRadius: 15,
+    borderWidth: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+})

@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Animated, TextInput, Button } from 'react-native';
+import { StyleSheet, Text, View, Animated, TextInput, Button, TouchableOpacity } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import TimerCountdown from 'react-native-timer-countdown';
 
@@ -11,8 +11,8 @@ export default class TimerScreen extends React.Component {
       userid: "",
       name: "",
       start: false,
+      end: false,
       duration: 0,
-      exercise: 'run'
     };
   }
 
@@ -29,26 +29,89 @@ export default class TimerScreen extends React.Component {
     return min * 60000
   }
 
+  toreEvaluate(){
+    let userInfo = {
+      userid: this.state.userid,
+      name: this.state.suggestions
+    }
+    this.props.navigation.navigate('Reevaluate', {userInfo: userInfo});
+  }
+
   render() {
     return (
-      <View style={styles.container}>
-        <TextInput
-          style={{height: 100, borderWidth: 2, borderColor: "grey", width: 300, fontSize: 25}}
-          placeholder=" How long do you want to go?"
-          onChangeText={(text) => this.setState({duration: text})}
-        />
-        <Text style={{fontSize: 20, opacity: .5}}>(please enter in minutes!)</Text>
-        <Button onPress={()=> this.setState({start: true})} title="Start your thingy"/>
-        {this.state.start ?
-          <TimerCountdown
-              initialSecondsRemaining={this.minToMili(this.state.duration)}
-              // onTick={secondsRemaining => console.log('tick', secondsRemaining)} It returns the remaining seconds.
-              // onTimeElapsed={() => console.log('complete')} A function to call when the countdown completes
-              allowFontScaling={true}
-              style={{ fontSize: 20 }}
-          />
-        : null}
+
+      <View style={{display:'flex', flex:1, backgroundColor: "#b3e0ff"}}>
+
+        {this.state.end ?
+
+          <View style={{alignItems:'center'}}>
+            <TouchableOpacity onPress={() => this.toreEvaluate()} style={styles.doneButton}>
+              <Text style={{fontSize: 40, color: "black", fontFamily:"Cochin"}}>Done</Text>
+            </TouchableOpacity>
+          </View>
+
+          :
+
+          <View>
+
+            {this.state.start ?
+
+              <View style={{alignItems:'center', marginTop:"50%"}}>
+              <TimerCountdown
+                initialSecondsRemaining={this.minToMili(this.state.duration)}
+                allowFontScaling={true}
+                style={{fontSize: 50}}
+                onTimeElapsed={() => this.setState({end: true})}
+              />
+
+              <Text style={{fontSize: 20, margin:"5%", marginTop: "10%"}}>
+                Here are some ideas for exercises:
+                - Jumping jacks
+                - Push ups
+                - Run in place
+                - Burpees
+                - Run up stairs
+
+              </Text>
+
+              </View>
+
+
+              :
+
+              <View style={{alignItems:'center'}}>
+
+                <Text style={{fontSize: 20, margin:"5%", marginTop: "10%"}}>Enter number of minutes you would like to exercise</Text>
+
+                <TextInput
+                  style={{height: "34%", borderWidth: 2, borderColor: "grey", width: "80%"}}
+                  placeholder="Enter time here"
+                  onChangeText={(text) => this.setState({duration: text})}
+                />
+
+                <Button onPress={()=> this.setState({start: true})} title="Start"/>
+              </View>
+
+            }
+
+          </View>
+        }
+
       </View>
     );
   }
 }
+
+
+const styles = StyleSheet.create({
+  doneButton: {
+    marginTop: "50%",
+    borderColor: 'white',
+    width: 200,
+    height: 100,
+    borderRadius: 15,
+    borderWidth: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+})

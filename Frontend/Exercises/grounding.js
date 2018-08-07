@@ -22,6 +22,16 @@ export default class GroundingScreen extends React.Component {
       userid: userInfo.userid,
       name: userInfo.name
     })
+  }
+
+  toreEvaluate(){
+    console.log('userid in grounding -----' + this.state.userid)
+    let userInfo = {
+      userid: this.state.userid,
+      name: this.state.name
+    }
+    this.props.navigation.navigate('Reevaluate', {userInfo: userInfo});
+  }
 
   static navigationOptions = {
     title: 'Swiper'
@@ -34,7 +44,7 @@ export default class GroundingScreen extends React.Component {
         <SayItOnce/>
         <SayItTwice/>
         <Inputs/>
-        <Done/>
+        <Done Reevaluate={this.toreEvaluate.bind(this)}/>
       </Swiper>
     );
   }
@@ -241,9 +251,9 @@ class SayItOnce extends React.Component {
                     <Animatable.Text animation="fadeIn" style={styles.instructions}>
                       If you need more, swipe left!
                     </Animatable.Text>
-                    <TouchableOpacity onPress={()=> console.log('done')}>
+                    <TouchableOpacity onPress={this.props.Reevaluate}>
                       <Animatable.Text animation="fadeIn" style={styles.instructions}>
-                        Return to log
+                        Done
                       </Animatable.Text>
                     </TouchableOpacity>
                   </View>
@@ -264,5 +274,15 @@ class SayItOnce extends React.Component {
                 fontSize: 30,
                 fontWeight: "bold",
                 color: "grey",
+              },
+              doneButton: {
+                marginTop: "50%",
+                borderColor: 'white',
+                width: 200,
+                height: 100,
+                borderRadius: 15,
+                borderWidth: 1,
+                justifyContent: 'center',
+                alignItems: 'center'
               }
             });

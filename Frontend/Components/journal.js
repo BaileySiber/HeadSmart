@@ -99,10 +99,10 @@ export default class Journal extends React.Component{
       })
     })
     .then(result => result.json())
-    .then(textResult => {
-      if(textResult){
+    .then(jsonResult => {
+      if(jsonResult){
         this.setState({
-          suggestions: textResult
+          suggestions: jsonResult
         })
         let userInfo = {
           userid: this.state.userid,

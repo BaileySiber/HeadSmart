@@ -19,17 +19,20 @@ export default class Journal extends React.Component{
     super(props);
 
     this.state= {
-      userid: '5b68c69eed8b8ee77f55167d',
+      userid: '',
     }
 
   }
   componentDidMount(){
     let userInfo = this.props.navigation.getParam('userInfo');
-    // this.setState({
-    //   userid: userInfo.userid
-    // });
+    console.log('userid is -----------' + userInfo.userid)
+    this.setState({
+      userid: userInfo.userid
+    });
 
-    fetch(url + '/' + this.state.userid + '/showLog')
+    console.log(url+'/'+ userInfo.userid + '/showLog')
+
+    fetch(url + '/' + userInfo.userid + '/showLog')
     .then(resp => resp.json())
     .then(json => {
       this.setState({
@@ -37,27 +40,44 @@ export default class Journal extends React.Component{
         emotionColor: json.emotionColor,
         reasons: json.reasons,
         newDetailedEmotions: json.newDetailedEmotions,
-        oldDetailedEmotions: json.oldDetailedEmotions.
+        oldDetailedEmotions: json.oldDetailedEmotions,
         completedSuggestion: json.completedSuggestion,
         creationTime: json.creationTime
       })
+      console.log("reasons is ----------" + this.state.reasons)
     })
     .catch(err => console.log('error getting most recent log' + err))
   }
 
 
+
+
   render(){
+
     return (
 
-      <LinearGradient style={{height:"100%"}} colors={["#b3e0ff", "#00a3cc"]} >
+      <LinearGradient style={{height:"100%"}} colors={["#00a3cc", "#00a3cc"]} >
 
 
-            <View>
-              <Text style={{textAlign: 'center', color:"white", fontFamily: "Cochin", fontSize: 40}}>Your Log</Text>
-            </View>
+        <View>
+          <Text style={{textAlign: 'center', color:"white", fontFamily: "Cochin", margin:"5%", fontSize: 30}}>Your Log from: {this.state.creationTime}</Text>
+        </View>
 
+        <View>
+          <Text style={{textAlign: 'center', color:"white", fontFamily: "Cochin", margin:"5%", fontSize: 20}}>Overall mood: {this.state.emotionColor}</Text>
+        </View>
 
-        
+        <View>
+          <Text style={{textAlign: 'center', color:"white", fontFamily: "Cochin", margin:"5%", fontSize: 20}}>Reasons: {this.state.reasons} </Text>
+        </View>
+
+        <View>
+          <Text style={{textAlign: 'center', color:"white", fontFamily: "Cochin", margin:"5%", fontSize: 20}}>Journal: {this.state.journalBody}</Text>
+        </View>
+
+        <View>
+          <Text style={{textAlign: 'center', color:"white", fontFamily: "Cochin", margin:"5%", fontSize: 20}}>Suggestion: {this.state.completedSuggestion}</Text>
+        </View>
 
 
       </LinearGradient>

@@ -26,17 +26,19 @@ import {  StyleSheet,
         positiveBool: true,
         effective: false,
         score: 0,
-        userid: '5b68c69eed8b8ee77f55167d',
-        suggestionName: 'Physical activity'
+        userid: '',
+        suggestionName: ''
       }
     }
 
     componentDidMount() {
-      let userInfo = this.props.navigation.getParam('userInfo');            //userinfo = userid and mood value
-      // userInfo && this.setState({
-      //   userid: userInfo.userid,
-      //   suggestionName: userInfo.name
-      // });
+      let userInfo = this.props.navigation.getParam('userInfo');
+      console.log('userinfo name is --------------' + userInfo.name)       //userinfo = userid and mood value
+      userInfo && this.setState({
+        userid: userInfo.userid,
+        suggestionName: userInfo.name
+      });
+      console.log('state suggestion name is ---------' + this.state.suggestionName)
       Alert.alert(
         'Time to re-evaluate!',
         "Rerank your emotions",
@@ -76,6 +78,8 @@ import {  StyleSheet,
     }
 
     toFinal(){
+      console.log('suggestion name in reeval is --------------' + this.state.suggestionName)
+
       let posArr = Object.keys(this.state.positiveObj).map((emotion) => ({'name': emotion, 'intensity': this.state.positiveObj[emotion]}))
       let negArr = Object.keys(this.state.negativeObj).map((emotion) => ({'name': emotion, 'intensity': this.state.negativeObj[emotion]}))
       let finalArr = posArr.concat(negArr)
@@ -97,15 +101,14 @@ import {  StyleSheet,
         console.log('jsonresult is --------------' + jsonResult)
         if(jsonResult.status === 200){
           console.log('successfully update!')
+          let userInfo = {
+            userid: this.state.userid
+          }
+          console.log('going to showlog')
+          this.props.navigation.navigate('ShowLog', {userInfo: userInfo})
         }
       })
       .catch(err => console.log('error in updating' + err))
-
-      let userInfo = {
-        userid: this.state.userid
-      }
-
-      this.props.navigation.navigate('SingleLog', {userInfo: userInfo})
     }
 
     render(){
