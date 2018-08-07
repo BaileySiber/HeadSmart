@@ -34,6 +34,8 @@ import {  StyleSheet,
       fetch(url + '/' + userInfo.userid + '/oldLogs')
       .then(resp => resp.json())
       .then(json => {
+        console.log('results areeeee ------' + json)
+        console.log('type of results' + typeof json)
         this.setState({
           entries: json
         })
