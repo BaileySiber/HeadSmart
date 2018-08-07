@@ -2,3 +2,4 @@ node_modules/**/*
 .expo/*
 npm-debug.*
 url.js
+env.sh
