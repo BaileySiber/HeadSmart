@@ -12,6 +12,7 @@ import HomePageScreen from "./Components/homepage";
 import StatsScreen from "./Components/stats";
 import ReevaluateScreen from "./Components/reevaluate"
 import ShowLogScreen from "./Components/showLog"
+import OldLogScreen from "./Components/oldLogs"
 import PhysicalActivity from "./Exercises/timer";
 import Funny from "./Exercises/gifs";
 // import Gratitude from "./Exercises/gratList";
@@ -23,7 +24,7 @@ import Funny from "./Exercises/gifs";
 // import Shower from "./Exercises/shower";
 // import letterAngry from "./Exercises/letterAngry";
 import Breathing from "./Exercises/bubble";
-// import Drink from "./Exercises/drink";
+import Drink from "./Exercises/drink";
 import Grounding from "./Exercises/grounding";
 // import Eat from "./Exercises/eat";
 
@@ -89,6 +90,9 @@ export default StackNavigator({
   ShowLog: {
     screen: ShowLogScreen
   },
+  OldLogs: {
+    screen: OldLogScreen
+  },
   PhysicalActivity: {
     screen: PhysicalActivity
   },
@@ -122,9 +126,9 @@ export default StackNavigator({
   Breathing: {
     screen: Breathing
   },
-  // Drink: {
-  //   screen: Drink
-  // },
+  Drink: {
+    screen: Drink
+  },
   Grounding: {
     screen: Grounding
   },

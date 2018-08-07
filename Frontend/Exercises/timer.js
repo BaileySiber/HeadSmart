@@ -32,7 +32,7 @@ export default class TimerScreen extends React.Component {
   toreEvaluate(){
     let userInfo = {
       userid: this.state.userid,
-      name: this.state.suggestions
+      name: this.state.name
     }
     this.props.navigation.navigate('Reevaluate', {userInfo: userInfo});
   }

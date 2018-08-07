@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Animated, TextInput, Button, ListView, Image } from 'react-native';
+import { StyleSheet, Text, View, Animated, TextInput, Button, ListView, Image, TouchableOpacity, } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import axios from 'axios'; //npm install axios
 
@@ -26,13 +26,20 @@ export default class App extends React.Component {
       name: userInfo.name
     })
 
-
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     const queryUrl = "http://api.giphy.com/v1/gifs/search?limit=10&q=funny&api_key=" + API_KEY;
     axios.get(queryUrl).then(response => {
       console.log(response.data)
       this.setState({dataSource: ds.cloneWithRows(response.data.data)});
     }).catch(error => console.log(error.message));
+  }
+
+  toreEvaluate(){
+    let userInfo = {
+      userid: this.state.userid,
+      name: this.state.name
+    }
+    this.props.navigation.navigate('Reevaluate', {userInfo: userInfo});
   }
 
 
@@ -51,7 +58,28 @@ export default class App extends React.Component {
           source={{uri: gif.images.downsized.url}} />
           }
         />
+
+        <View style={{alignItems:'center'}}>
+          <TouchableOpacity onPress={() => this.toreEvaluate()} style={styles.doneButton}>
+            <Text style={{fontSize: 40, color: "black", fontFamily:"Cochin"}}>Done</Text>
+          </TouchableOpacity>
+        </View>
+
       </View>
     );
   }
 }
+
+
+const styles = StyleSheet.create({
+  doneButton: {
+    marginTop: "50%",
+    borderColor: 'white',
+    width: 200,
+    height: 100,
+    borderRadius: 15,
+    borderWidth: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+})

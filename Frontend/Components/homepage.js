@@ -27,7 +27,7 @@ export default class HomePage extends React.Component{
     this.props.navigation.navigate("Mood", {userInfo: this.state});
   }
   toOld(){
-    this.props.navigation.navigate("Old", {userInfo: this.state});
+    this.props.navigation.navigate("OldLogs", {userInfo: this.state});
   }
   toStats(){
     this.props.navigation.navigate("Stats", {userInfo: this.state});

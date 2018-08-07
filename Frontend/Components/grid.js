@@ -101,6 +101,9 @@ import {  StyleSheet,
   export class FullIcon extends React.Component {
     constructor(props){
       super(props);
+      this.state = {
+        selected: false
+      }
     }
 
     render(){

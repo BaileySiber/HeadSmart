@@ -30,9 +30,9 @@ export default class Journal extends React.Component{
       userid: userInfo.userid
     });
 
-    console.log(url+'/'+ userInfo.userid + '/showLog')
+    console.log(url+'/'+ userInfo.userid + '/showLastLog')
 
-    fetch(url + '/' + userInfo.userid + '/showLog')
+    fetch(url + '/' + userInfo.userid + '/showLastLog')
     .then(resp => resp.json())
     .then(json => {
       this.setState({
@@ -49,7 +49,12 @@ export default class Journal extends React.Component{
     .catch(err => console.log('error getting most recent log' + err))
   }
 
-
+toHome() {
+  let userInfo = {
+    userid: this.state.userid,
+  }
+  this.props.navigation.navigate('HomePage', {userInfo: userInfo});
+}
 
 
   render(){
@@ -79,6 +84,11 @@ export default class Journal extends React.Component{
           <Text style={{textAlign: 'center', color:"white", fontFamily: "Cochin", margin:"5%", fontSize: 20}}>Suggestion: {this.state.completedSuggestion}</Text>
         </View>
 
+        <View style={{alignItems:'center'}}>
+          <TouchableOpacity onPress={() => this.toHome()} style={styles.doneButton}>
+            <Text style={{fontSize: 20, color: "white", fontFamily:"Cochin"}}>Done</Text>
+          </TouchableOpacity>
+        </View>
 
       </LinearGradient>
 
@@ -97,5 +107,14 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  doneButton: {
+    borderColor: 'white',
+    width: 100,
+    height: 50,
+    borderRadius: 15,
+    borderWidth: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
   }
-});
+})
