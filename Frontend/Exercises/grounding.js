@@ -7,6 +7,22 @@ import Swiper from 'react-native-swiper'
 
 
 export default class GroundingScreen extends React.Component {
+
+  constructor() {
+    super();
+    this.state = {
+      userid: "",
+      name: ""
+    };
+  }
+
+  componentDidMount(){
+    let userInfo = this.props.navigation.getParam('userInfo');
+    this.setState({
+      userid: userInfo.userid,
+      name: userInfo.name
+    })
+
   static navigationOptions = {
     title: 'Swiper'
   };
@@ -30,7 +46,7 @@ class Instructions extends React.Component{
   static navigationOptions = {
     title: 'Instructions'
   };
-  
+
   render() {
     return (
       <View style={styles.container}>

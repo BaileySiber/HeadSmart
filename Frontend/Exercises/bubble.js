@@ -11,7 +11,23 @@ import {  StyleSheet,
  } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 
-export default BubbleScreen extends React.Component{
+export default class BubbleScreen extends React.Component{
+  constructor() {
+    super();
+    this.state = {
+      userid: "",
+      name: ""
+    };
+  }
+
+  componentDidMount(){
+    let userInfo = this.props.navigation.getParam('userInfo');
+    this.setState({
+      userid: userInfo.userid,
+      name: userInfo.name
+    })
+
+
   render(){
     return (
       <View style={styles.container}>

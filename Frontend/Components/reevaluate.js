@@ -101,6 +101,10 @@ import {  StyleSheet,
       })
       .catch(err => console.log('error in updating' + err))
 
+      let userInfo = {
+        userid: this.state.userid
+      }
+
       this.props.navigation.navigate('SingleLog', {userInfo: userInfo})
     }
 
@@ -124,7 +128,7 @@ import {  StyleSheet,
                   <Text style={{color:"white", fontFamily: "Cochin", fontSize: 50}}>Negative</Text>
                 </View>
               }
-              
+
 
 
               {this.state.positiveBool ?

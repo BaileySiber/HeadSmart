@@ -11,8 +11,8 @@ import SuggestionsScreen from "./Components/suggestions";
 import HomePageScreen from "./Components/homepage";
 import StatsScreen from "./Components/stats";
 import ReevaluateScreen from "./Components/reevaluate"
-// import PhysicalActivity from "./Exercises/timer";
-// import Funny from "./Exercises/gifs";
+import PhysicalActivity from "./Exercises/timer";
+import Funny from "./Exercises/gifs";
 // import Gratitude from "./Exercises/gratList";
 // import letterSelf from "./Exercises/letterSelf";
 // import letterOther from "./Exercises/letterOther";
@@ -21,9 +21,9 @@ import ReevaluateScreen from "./Components/reevaluate"
 // import Music from "./Exercises/music";
 // import Shower from "./Exercises/shower";
 // import letterAngry from "./Exercises/letterAngry";
-// import Breathing from "./Exercises/bubble";
+import Breathing from "./Exercises/bubble";
 // import Drink from "./Exercises/drink";
-// import Grounding from "./Exercises/grounding";
+import Grounding from "./Exercises/grounding";
 // import Eat from "./Exercises/eat";
 
 
@@ -84,13 +84,13 @@ export default StackNavigator({
   },
   Reevaluate: {
     screen: ReevaluateScreen
-  }
-  // PhysicalActivity: {
-  //   screen: PhysicalActivity
-  // },
-  // Funny: {
-  //   screen: Funny
-  // },
+  },
+  PhysicalActivity: {
+    screen: PhysicalActivity
+  },
+  Funny: {
+    screen: Funny
+  },
   // Gratitude: {
   //   screen: Gratitude
   // },
@@ -115,19 +115,19 @@ export default StackNavigator({
   // letterAngry: {
   //   screen: letterAngry
   // },
-  // Breathing: {
-  //   screen: Breathing
-  // },
+  Breathing: {
+    screen: Breathing
+  },
   // Drink: {
   //   screen: Drink
   // },
-  // Grounding: {
-  //   screen: Grounding
-  // },
+  Grounding: {
+    screen: Grounding
+  },
   // Eat: {
   //   screen: Eat
   // },
-}, {initialRouteName: 'Reevaluate'});
+}, {initialRouteName: 'Login'});
 
 
 

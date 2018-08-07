@@ -4,11 +4,26 @@ import * as Animatable from 'react-native-animatable';
 import TimerCountdown from 'react-native-timer-countdown';
 
 export default class TimerScreen extends React.Component {
-  state = {
-    start: false,
-    duration: 0,
-    exercise: 'run'
+
+  constructor() {
+    super();
+    this.state = {
+      userid: "",
+      name: "",
+      start: false,
+      duration: 0,
+      exercise: 'run'
+    };
   }
+
+  componentDidMount(){
+    let userInfo = this.props.navigation.getParam('userInfo');
+    this.setState({
+      userid: userInfo.userid,
+      name: userInfo.name
+    })
+  }
+
 
   minToMili(min){
     return min * 60000

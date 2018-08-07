@@ -4,6 +4,7 @@ import * as Animatable from 'react-native-animatable';
 import axios from 'axios'; //npm install axios
 
 const API_KEY = process.env.API_KEY;
+
 export default class App extends React.Component {
   constructor() {
     super();
@@ -11,12 +12,21 @@ export default class App extends React.Component {
     this.state = {
       dataSource: ds.cloneWithRows([]),
       search: false,
-      searchStr: ""
+      searchStr: "",
+      userid: "",
+      name: ""
     };
   }
 
 
   componentDidMount(){
+    let userInfo = this.props.navigation.getParam('userInfo');
+    this.setState({
+      userid: userInfo.userid,
+      name: userInfo.name
+    })
+
+
     const ds = new ListView.DataSource({rowHasChanged: (r1, r2) => r1 !== r2});
     const queryUrl = "http://api.giphy.com/v1/gifs/search?limit=10&q=funny&api_key=" + API_KEY;
     axios.get(queryUrl).then(response => {
