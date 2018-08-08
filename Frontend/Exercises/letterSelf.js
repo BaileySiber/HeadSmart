@@ -65,6 +65,10 @@ export default class LetterSelfScreen extends React.Component{
             </TouchableOpacity>
           </View>
         </View> :
+
+        <View>
+
+
         <Text style={{fontSize: 20, textAlign: 'center', margin: "5%", marginTop: "10%", color: "white"}}>
           Write a letter addressed to yourself, forgiving yourself for whatever you are feeling down about. Think about what you would write if you were forgiving a friend!
         </Text>
@@ -74,6 +78,8 @@ export default class LetterSelfScreen extends React.Component{
         <TouchableOpacity onPress={() => this.setState({show: true})} style={styles.doneButton}>
           <Text style={{fontSize: 25, color: "white", fontFamily:"Cochin"}}>Let's Write!</Text>
         </TouchableOpacity>
+
+        </View>
       }
       </View>
     )
