@@ -2,6 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, Animated, TextInput, Button, ListView, Image, TouchableOpacity } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import { StackNavigator } from 'react-navigation';
+import { Slider } from 'react-native-elements';
 import Swiper from 'react-native-swiper'
 
 
@@ -12,7 +13,17 @@ export default class GroundingScreen extends React.Component {
     super();
     this.state = {
       userid: "",
-      name: ""
+      name: "",
+      instructions: true,
+      sliderOne: false,
+      sliderOneInst: false,
+      scoreOne: 0,
+      scoreTwo: 0,
+      questions: false,
+      questionsInst: false,
+      sliderTwoInst: false,
+      sliderTwo: false,
+      done: false
     };
   }
 
@@ -20,7 +31,7 @@ export default class GroundingScreen extends React.Component {
     let userInfo = this.props.navigation.getParam('userInfo');
     this.setState({
       userid: userInfo.userid,
-      name: userInfo.name
+      name: userInfo.name,
     })
   }
 
@@ -32,39 +43,178 @@ export default class GroundingScreen extends React.Component {
     this.props.navigation.navigate('Reevaluate', {userInfo: userInfo});
   }
 
-  static navigationOptions = {
-    title: 'Swiper'
-  };
 
   render() {
     return (
-      <Swiper>
-        <Instructions/>
-        <SliderOne/>
-        <Questions/>
-        <SliderTwo/>
-        <Done Reevaluate={this.toreEvaluate.bind(this)}/>
-      </Swiper>
-    );
-  }
-}
 
+      <View>
+        {this.state.instructions ?
+          <View>
+            <Animatable.Text animation="fadeInDown" style={styles.instructions}>
+              Checking your magnification is helpful when you are feeling shameful or guilty.
+            </Animatable.Text>
+            <Animatable.Text onPress={()=> this.setState({
+              instructions:false,
+              sliderOne: true,
+              sliderOneInst: true,
+            })} animation="fadeInDown" delay={1000} style={{fontSize: 20, fontStyle: 'italic'}}>
+            Let's go
+          </Animatable.Text>
+        </View>
+        :
+        null }
 
+        {this.state.sliderOne ?
+          <View>
+            {this.state.sliderOneInst ?
+              <View>
+                <Animatable.Text animation="fadeIn">
+                  Let's start by rating how guilty or shameful you feel...
+                </Animatable.Text>
+                <TouchableOpacity onPress={()=> this.setState({
+                  sliderOneInst: false
+                })}>
+                <Animatable.Text delay={1000} animation="fadeIn">
+                  Ok
+                </Animatable.Text>
+              </TouchableOpacity>
+            </View>
+            :
 
-class Instructions extends React.Component{
-  static navigationOptions = {
-    title: 'Instructions'
-  };
+            <View>
+              <Text >My feelings of guilt/shame are a: {this.state.scoreOne}</Text>
+              <View style={styles.sliderBox}>
+                <Slider
+                  style={{width: "80%"}}
+                  value={this.state.scoreOne}
+                  onValueChange={(val) => this.setState({scoreOne: val})}
+                  step={1}
+                  minimumValue={0}
+                  maximumValue={10}
+                  thumbTintColor={"white"}
+                  minimumTrackTintColor={"white"}
+                  maximumTrackTintColor={"white"}
+                  animateTransitions={true} />
+                </View>
 
-  render() {
-    return (
-      <View style={styles.container}>
-        <Animatable.Text animation="fadeInDown" style={styles.instructions}>
-           Checking your magnification is helpful when you are feeling shameful or guilty.
-        </Animatable.Text>
-        <Animatable.Text animation="fadeInDown" style={{fontSize: 20, fontStyle: 'italic'}}>
-          Swipe left to get started...
-        </Animatable.Text>
+                <TouchableOpacity onPress={() => this.setState({
+                  sliderOne: false,
+                  questions: true,
+                  questionsInst: true
+                })}>
+                <Text> Ok </Text>
+              </TouchableOpacity>
+
+            </View>
+          }
+        </View> : null }
+
+        {this.state.questions ?
+          <View>
+            {this.state.questionsInst ?
+              <View>
+                <Animatable.Text animation="fadeIn" style={styles.instructions}>
+                  When something goes wrong, it is easy to catastrophize or magnify the situation in an unproductive way
+                </Animatable.Text>
+                <Animatable.Text delay={1000} animation="fadeIn" style={styles.instructions}>
+                  Let's make sure you aren't doing this. Think about the following questions when you are ready!
+                </Animatable.Text>
+                <TouchableOpacity onPress={()=> this.setState({
+                  questionsInst: false
+                })}>
+                <Animatable.Text delay={2000} animation="fadeIn" style={styles.instructions}>
+                  Let's go
+                </Animatable.Text>
+              </TouchableOpacity>
+            </View>
+            :
+            <View>
+              <Animatable.Text animation="fadeIn">
+                Questions:
+              </Animatable.Text>
+              <Animatable.Text delay={1000} animation="fadeIn">
+                Are you blaming yourself for something that wasn't really or entirely your fault?
+              </Animatable.Text>
+              <Animatable.Text delay={2000} animation="fadeIn">
+                Are you making assumptions about what other people are thinking?
+              </Animatable.Text>
+              <Animatable.Text delay={3000} animation="fadeIn">
+                Are you stuck in black-and-white/all-or-nothing thinking?
+              </Animatable.Text>
+              <Animatable.Text delay={4000} animation="fadeIn">
+                Are you judging who you are over one action or mistake?
+              </Animatable.Text>
+              <Animatable.Text delay={5000} animation="fadeIn">
+                Think about these questions for a bit, click Ok when you are ready to move on!
+              </Animatable.Text>
+              <TouchableOpacity onPress={()=> this.setState({
+                questions: false,
+                sliderTwoInst: true,
+                sliderTwo: true,
+              })}>
+              <Animatable.Text delay={6000} animation="fadeIn">
+                Ok
+              </Animatable.Text>
+            </TouchableOpacity>
+          </View>
+        }
+      </View> : null }
+
+      {this.state.sliderTwo ?
+        <View>
+          {this.state.sliderTwoInst ?
+            <View>
+              <Animatable.Text animation="fadeIn" style={styles.instructions}>
+                Let's rerank how guilty or shameful you feel...
+              </Animatable.Text>
+              <TouchableOpacity onPress={()=> this.setState({
+                sliderTwoInst: false
+              })}>
+              <Animatable.Text animation="fadeIn" style={styles.instructions}>
+                Ok
+              </Animatable.Text>
+            </TouchableOpacity>
+          </View>
+          :
+          <View>
+            <Text>My feelings of guilt/shame are a: {this.state.scoreTwo}</Text>
+            <View style={styles.sliderBox}>
+              <Slider
+                style={{width: "80%"}}
+                value={this.state.scoreTwo}
+                onValueChange={(val) => this.setState({scoreTwo: val})}
+                step={1}
+                minimumValue={0}
+                maximumValue={10}
+                thumbTintColor={"white"}
+                minimumTrackTintColor={"white"}
+                maximumTrackTintColor={"white"}
+                animateTransitions={true} />
+              </View>
+              <TouchableOpacity onPress={() => this.setState({
+                sliderTwo: false,
+                done: true
+              })}>
+              <Text> Ok </Text>
+            </TouchableOpacity>
+          </View>
+        }
+      </View> : null }
+
+      {this.state.done ?
+        <View>
+          <Animatable.Text animation="fadeIn">
+            Good job - you have completed this exercise!
+          </Animatable.Text>
+          <TouchableOpacity onPress={() => this.toreEvaluate()}>
+            <Animatable.Text animation="fadeIn">
+              Done
+            </Animatable.Text>
+          </TouchableOpacity>
+        </View>
+        :
+        null }
+
       </View>
     )
   }
@@ -73,166 +223,40 @@ class Instructions extends React.Component{
 
 
 
-//fade in each text input after the prior has been completed...show swipe option after
-class SliderOne extends React.Component {
-  state = {
-    intro: true,
-    score: 0
-    slider: false,
-    done: false
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: '#4dd6ba',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  instructions:{
+    fontSize: 30,
+    fontWeight: "bold",
+    color: "grey",
+  },
+  questions: {
+    fontSize: 20
+  },
+  doneButton: {
+    marginTop: "50%",
+    borderColor: 'white',
+    width: 200,
+    height: 100,
+    borderRadius: 15,
+    borderWidth: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  contentText:{
+    color: "white",
+    textAlign: 'center',
+    fontSize: 50,
+    fontFamily:"Georgia"
+  },
+  sliderBox: {
+    height: "50%",
+    width: "100%",
+    alignItems: 'center'
   }
-
-  render() {
-    return (
-      <View style={styles.container}>
-        {this.state.intro ?
-          <TouchableOpacity onPress={()=> this.setState({
-            intro:false,
-            slider:true
-          })}>
-          <Animatable.Text animation="fadeIn" style={styles.instructions}>
-            Let's start by rating how guilty or shameful you feel... click here when you are ready
-          </Animatable.Text>
-        </TouchableOpacity> : null}
-
-        {this.state.slider ?
-
-          <Text style={styles.contentText}>My feelings of guilt/shame are a: {this.state.score}</Text>
-
-          <View style={styles.sliderBox}>
-            <Slider
-              style={{width: "80%"}}
-              value={this.state.score}
-              onValueChange={(val) => this.setState({score: val})}
-              step={1}
-              minimumValue={0}
-              maximumValue={10}
-              thumbTintColor={"white"}
-              minimumTrackTintColor={"white"}
-              maximumTrackTintColor={"white"}
-              animateTransitions={true} />
-            </View>
-
-          <TouchableOpacity onPress={() => this.setState({
-            slider: false,
-            done: true
-          })}>
-          <Text> Next </Text>
-        </TouchableOpacity>
-
-
-        :
-
-        null}
-
-        {this.state.done ?
-          <Animatable.Text animation="slideInDown" style={styles.instructions}>
-            Swipe left to continue...
-          </Animatable.Text>
-          : null}
-        </View>
-      )
-    }
-  }
-
-
-    class Inputs extends React.Component{
-      render() {
-        return (
-          <View style={styles.container}>
-            <Text>
-              Next let's look around your current environment...tell me:
-            </Text>
-            <Text>
-              How many red things can you find or see?
-            </Text>
-            <TextInput placeholder="enter here"
-              style={{height: 50, borderWidth: 2, borderColor: "grey", width: 300, fontSize: 25}}/>
-              <Text>
-                How many blue?
-              </Text>
-              <TextInput placeholder="enter here"
-                style={{height: 50, borderWidth: 2, borderColor: "grey", width: 300, fontSize: 25}}/>
-                <Text>
-                  How many people are there?
-                </Text>
-                <TextInput placeholder="enter here"
-                  style={{height: 50, borderWidth: 2, borderColor: "grey", width: 300, fontSize: 25}}/>
-                  <Text>
-                    What sounds do you hear?
-                  </Text>
-                  <TextInput placeholder="enter here"
-                    style={{height: 50, borderWidth: 2, borderColor: "grey", width: 300, fontSize: 25}}/>
-                    <Text>
-                      Awesome - swipe left!
-                    </Text>
-                  </View>
-                )
-              }
-            }
-
-            class Done extends React.Component{
-              static navigationOptions = {
-                title: 'Done'
-              };
-
-              goBack() {
-                this.props.navigation.navigate('Instructions')
-              }
-
-              render() {
-                return (
-                  <View style={styles.container}>
-                    <Animatable.Text animation="fadeIn" style={styles.instructions}>
-                      Good job - you have completed this exercise!
-                    </Animatable.Text>
-                    <Animatable.Text animation="fadeIn" style={styles.instructions}>
-                      If you need more, swipe left!
-                    </Animatable.Text>
-                    <TouchableOpacity onPress={this.props.Reevaluate}>
-                      <Animatable.Text animation="fadeIn" style={styles.instructions}>
-                        Done
-                      </Animatable.Text>
-                    </TouchableOpacity>
-                  </View>
-                )
-              }
-            }
-
-
-
-            const styles = StyleSheet.create({
-              container: {
-                flex: 1,
-                backgroundColor: '#4dd6ba',
-                alignItems: 'center',
-                justifyContent: 'center',
-              },
-              instructions:{
-                fontSize: 30,
-                fontWeight: "bold",
-                color: "grey",
-              },
-              doneButton: {
-                marginTop: "50%",
-                borderColor: 'white',
-                width: 200,
-                height: 100,
-                borderRadius: 15,
-                borderWidth: 1,
-                justifyContent: 'center',
-                alignItems: 'center'
-              },
-               contentText:{
-                  color: "white",
-                  textAlign: 'center',
-                  fontSize: 50,
-                  fontFamily:"Georgia"
-                },
-              sliderBox: {
-                paddingTop: 15,
-                height: 80,
-                width: "100%",
-                alignItems: 'center'
-              }
-            });
+});

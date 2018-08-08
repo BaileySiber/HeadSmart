@@ -18,7 +18,7 @@ export default class GratListScreen extends React.Component{
       userid: "",
       name: "",
       item: '',
-      gratList: ds.cloneWithRows([]),
+      gratList: [],
     };
   }
 
@@ -40,7 +40,7 @@ export default class GratListScreen extends React.Component{
 
   addList(){
     this.setState({
-      gratList: ds.cloneWithRows([...this.state.gratList, this.state.item]),
+      gratList: [...this.state.gratList, this.state.item],
       item: ''
     })
   }
@@ -51,7 +51,8 @@ export default class GratListScreen extends React.Component{
         <Text style={{fontSize: 25, textAlign: 'center', margin: "5%", marginTop: "10%", color: "white"}}>
           Write 10 things that you are grateful for about yourself!
         </Text>
-        <ListView dataSource={this.state.renderList}
+
+        <ListView dataSource={ds.cloneWithRows(this.state.gratList)}
           renderRow={item => (
                 <Text style={{fontSize: 12, textAlign: 'center', margin: "5%", marginTop: "10%", color: "white"}}>
                   {item}
@@ -66,15 +67,16 @@ export default class GratListScreen extends React.Component{
             borderColor: "white",
             borderWidth: 2
           }}
-          placeholder=" Username"
+          placeholder="ex: my sense of humor"
+          value={this.state.item}
           onChangeText={text => {
             this.setState({ item: text })}
           }
         />
-        <TouchableOpacity onPress={() => this.addList} style={styles.donebutton}>
+        <TouchableOpacity onPress={() => this.addList()} style={styles.donebutton}>
           <Text style={{fontSize: 30, color: "white", fontFamily:"Cochin"}}>Add!</Text>
         </TouchableOpacity>
-          {this.state.gratList.length() === 10 ? <View style={{alignItems:'center'}}>
+          {this.state.gratList.length === 10 ? <View style={{alignItems:'center'}}>
             <TouchableOpacity onPress={() => this.toreEvaluate()} style={styles.doneButton}>
               <Text style={{fontSize: 30, color: "white", fontFamily:"Cochin"}}>Done</Text>
             </TouchableOpacity>
