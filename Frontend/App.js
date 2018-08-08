@@ -26,7 +26,7 @@ import Funny from "./Exercises/gifs";
 import Breathing from "./Exercises/bubble";
 import Drink from "./Exercises/drink";
 import Grounding from "./Exercises/grounding";
-// import Eat from "./Exercises/eat";
+import Eat from "./Exercises/eat";
 
 
 import { StackNavigator } from 'react-navigation';
@@ -132,9 +132,9 @@ export default StackNavigator({
   Grounding: {
     screen: Grounding
   },
-  // Eat: {
-  //   screen: Eat
-  // },
+  Eat: {
+    screen: Eat
+  },
 }, {initialRouteName: 'Login'});
 
 

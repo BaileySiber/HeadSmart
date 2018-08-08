@@ -1,2 +1,2 @@
-let url = 'https://a2e77d2f.ngrok.io';
+let url = 'http://f82213fb.ngrok.io';
 export default url;

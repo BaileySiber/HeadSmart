@@ -10,7 +10,7 @@ import {  StyleSheet,
  } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 
-export default class BubbleScreen extends React.Component{
+export default class DrinkScreen extends React.Component{
   constructor() {
     super();
     this.state = {
@@ -41,11 +41,11 @@ export default class BubbleScreen extends React.Component{
     return (
       <View style={{backgroundColor:"#00a3cc", alignItems:'center', height: '100%'}}>
         <Text style={{fontSize: 25, textAlign: 'center', margin: "5%", marginTop: "10%", color: "white"}}>
-
           Drinking and holding something warm, like a cup of tea, can help to reduce sadness and anxiety </Text>
-        <Animatable.Text delay={1000} animation="fadeIn" duration={5000}
-          style={{fontSize: 18, textAlign: 'center', margin: "10%", color: "white"}}>
-          Make tea, hot milk, or hot cocoa to sip! </Animatable.Text>
+
+      <Text style={{fontSize: 18, textAlign: 'center', marginTop: "5%", marginLeft:'10%', marginRight:'10%', color: "white"}}>
+          Make tea, hot milk, or hot cocoa to sip! </Text>
+          
         <Animatable.Image
           animation="pulse" duration={2000} iterationCount="infinite"
           source={{uri: 'http://clipartstation.com/wp-content/uploads/2017/11/hot-coffee-clipart-black-and-white.png'}}

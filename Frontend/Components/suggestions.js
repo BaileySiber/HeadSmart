@@ -29,6 +29,8 @@ export default class SuggestionsScreen extends React.Component {
   componentDidMount(){
     let userInfo = this.props.navigation.getParam('userInfo');
     let suggestions = userInfo.suggestions.suggestion
+    console.log('userInfo.sug in sug.js is ---------' + userInfo.suggestions)
+    console.log('suggestions in sug.js is ---------' + suggestions)
     let userid = userInfo.userid
     this.setState({
       renderList: ds.cloneWithRows(suggestions),

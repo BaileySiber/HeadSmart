@@ -42,7 +42,6 @@ export default class GroundingScreen extends React.Component {
       <Swiper>
         <Instructions/>
         <SayItOnce/>
-        <SayItTwice/>
         <Inputs/>
         <Done Reevaluate={this.toreEvaluate.bind(this)}/>
       </Swiper>
@@ -120,7 +119,7 @@ class SayItOnce extends React.Component {
             done: true
           })}>
           <Animatable.Text animation="fadeIn" style={styles.instructions}>
-            Say your full home address out loud two times...
+                Say the name of the state or country you are in out loud five times...
           </Animatable.Text>
         </TouchableOpacity>: null}
         {this.state.done ?
@@ -132,70 +131,6 @@ class SayItOnce extends React.Component {
       )
     }
   }
-
-
-
-
-
-  class SayItTwice extends React.Component {
-    state = {
-      intro: true,
-      presidents: false,
-      country: false,
-      favorite: false,
-      done: false
-    }
-
-    render() {
-      return (
-        <View style={styles.container}>
-          {this.state.intro ?
-            <TouchableOpacity onPress={()=> this.setState({
-              intro:false,
-              presidents:true
-            })}>
-            <Animatable.Text animation="fadeIn" style={styles.instructions}>
-              Let's do a couple more....
-            </Animatable.Text>
-          </TouchableOpacity> : null}
-          {this.state.presidents ?
-            <TouchableOpacity onPress={() => this.setState({
-              presidents: false,
-              country: true
-            })}>
-            <Animatable.Text animation="fadeIn" style={styles.instructions}>
-              Say the name of your favorite president out loud three times...
-            </Animatable.Text>
-          </TouchableOpacity> : null}
-          {this.state.country ?
-            <TouchableOpacity onPress={() => this.setState({
-              country: false,
-              favorite: true
-            })}>
-            <Animatable.Text animation="fadeIn" style={styles.instructions}>
-              Say the name of the state or country you are in out loud five times...
-            </Animatable.Text>
-          </TouchableOpacity> : null}
-          {this.state.favorite ?
-            <TouchableOpacity onPress={() => this.setState({
-              favorite: false,
-              done: true
-            })}>
-            <Animatable.Text animation="fadeIn" style={styles.instructions}>
-              Say the name of your favorite book, tv show or movie out loud twice...
-            </Animatable.Text>
-          </TouchableOpacity> : null}
-          {this.state.done ?
-            <Animatable.Text animation="slideInDown" style={styles.instructions}>
-              Nice work - swipe left for more!
-            </Animatable.Text>
-            : null}
-          </View>
-        )
-      }
-    }
-
-
 
 
     class Inputs extends React.Component{
