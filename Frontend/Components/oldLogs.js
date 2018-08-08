@@ -30,20 +30,26 @@ import {  StyleSheet,
         userid: userInfo.userid
       });
 
-      console.log(url + '/' + userInfo.userid + '/oldLogs')
       fetch(url + '/' + userInfo.userid + '/oldLogs')
       .then(resp => resp.json())
       .then(json => {
-        console.log('results areeeee ------' + json)
-        console.log('type of results' + typeof json)
         this.setState({
           entries: json
         })
       })
     }
 
-    navFullLog(n){
-      console.log('n in function is ------' + n)
+    navFullLog(id){
+      fetch(url + '/' + id + '/showSingleLog')
+      .then(resp => resp.json())
+      .then(json => {
+        let userInfo = {
+          log: json,
+          userid: this.state.userid
+        }
+        this.props.navigation.navigate('ShowLog', {userInfo: userInfo});
+      })
+      .catch(err => console.log('err sending full log info' + err))
     }
 
 
@@ -64,7 +70,7 @@ import {  StyleSheet,
                 let n = rowData;
                 return (
                   <View style={styles.entryBox}>
-                    <TouchableOpacity onPress={(n) => this.navFullLog(n)}>
+                    <TouchableOpacity onPress={() => this.navFullLog(this.state.entries[n]._id)}>
                     <Text style={{color: 'white', fontSize: 20}}>{n}:{this.state.entries[n].creationTime}</Text>
                     </TouchableOpacity>
                     </View>
