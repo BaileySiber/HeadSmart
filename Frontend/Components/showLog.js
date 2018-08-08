@@ -17,37 +17,31 @@ import { LinearGradient } from "expo";
 export default class Journal extends React.Component{
   constructor(props){
     super(props);
-
-    this.state= {
-      userid: '',
+    this.state = {
+      journalBody: '',
+      emotionColor: 0,
+      reasons: [],
+      newDetailedEmotions: [],
+      oldDetailedEmotions: [],
+      completedSuggestion: '',
+      userid: ''
     }
-
   }
+
+
   componentDidMount(){
     let userInfo = this.props.navigation.getParam('userInfo');
-    console.log('userid is -----------' + userInfo.userid)
     this.setState({
-      userid: userInfo.userid
-    });
-
-    console.log(url+'/'+ userInfo.userid + '/showLastLog')
-
-    fetch(url + '/' + userInfo.userid + '/showLastLog')
-    .then(resp => resp.json())
-    .then(json => {
-      this.setState({
-        journalBody: json.journalBody,
-        emotionColor: json.emotionColor,
-        reasons: json.reasons,
-        newDetailedEmotions: json.newDetailedEmotions,
-        oldDetailedEmotions: json.oldDetailedEmotions,
-        completedSuggestion: json.completedSuggestion,
-        creationTime: json.creationTime
-      })
-      console.log("reasons is ----------" + this.state.reasons)
-    })
-    .catch(err => console.log('error getting most recent log' + err))
-  }
+          journalBody: userInfo.log.journalBody,
+          emotionColor: userInfo.log.emotionColor,
+          reasons: userInfo.log.reasons,
+          newDetailedEmotions: userInfo.log.newDetailedEmotions,
+          oldDetailedEmotions: userInfo.log.oldDetailedEmotions,
+          completedSuggestion: userInfo.log.completedSuggestion,
+          creationTime: userInfo.log.creationTime,
+          userid: userInfo.userid
+        })
+    };
 
 toHome() {
   let userInfo = {

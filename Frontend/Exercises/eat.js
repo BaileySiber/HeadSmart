@@ -51,7 +51,7 @@ export default class EatScreen extends React.Component{
         <Animatable.Image
           animation="pulse" duration={2000} iterationCount="infinite"
           source={require('./pepper.png')}
-          style={{width: "25%", height: "25%"}}
+          style={{width: "30%", height: "30%"}}
           />
 
           <View style={{alignItems:'center'}}>
