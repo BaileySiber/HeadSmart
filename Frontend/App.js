@@ -15,13 +15,13 @@ import ShowLogScreen from "./Components/showLog"
 import OldLogScreen from "./Components/oldLogs"
 import PhysicalActivity from "./Exercises/timer";
 import Funny from "./Exercises/gifs";
-// import Gratitude from "./Exercises/gratList";
+import Gratitude from "./Exercises/gratList";
 // import letterSelf from "./Exercises/letterSelf";
 // import letterOther from "./Exercises/letterOther";
-// import Magnify from "./Exercises/magnify";
+import Magnify from "./Exercises/magnify";
 // import Call from "./Exercises/call";
 // import Music from "./Exercises/music";
-// import Shower from "./Exercises/shower";
+import Shower from "./Exercises/shower";
 // import letterAngry from "./Exercises/letterAngry";
 import Breathing from "./Exercises/bubble";
 import Drink from "./Exercises/drink";
@@ -99,27 +99,27 @@ export default StackNavigator({
   Funny: {
     screen: Funny
   },
-  // Gratitude: {
-  //   screen: Gratitude
-  // },
+  Gratitude: {
+    screen: Gratitude
+  },
   // letterSelf: {
   //   screen: letterSelf
   // },
   // letterOther: {
   //   screen: letterOther
   // },
-  // Magnify: {
-  //   screen: Magnify
-  // },
+  Magnify: {
+    screen: Magnify
+  },
   // Call: {
   //   screen: Call
   // },
   // Music: {
   //   screen: Music
   // },
-  // Shower: {
-  //   screen: Shower
-  // },
+  Shower: {
+    screen: Shower
+  },
   // letterAngry: {
   //   screen: letterAngry
   // },
