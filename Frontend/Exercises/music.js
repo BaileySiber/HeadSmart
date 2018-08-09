@@ -10,6 +10,7 @@ import {  StyleSheet,
  } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 
+
 export default class MusicScreen extends React.Component{
   constructor() {
     super();
@@ -43,7 +44,13 @@ export default class MusicScreen extends React.Component{
       await soundObject.loadAsync(require('.././assets/weightless.mp3'));
       await soundObject.playAsync();
       // Your sound is playing!
-      console.log('music playing!')
+      Alert.alert(
+        'Music is playing!',
+        "Turn off silent mode or put on your earbuds",
+        [
+          { text: 'Ready to Relax' }
+        ]
+      )
     } catch (error) {
       // An error occurred!
       console.log('error playing music:', error)
@@ -55,16 +62,22 @@ export default class MusicScreen extends React.Component{
     return (
       <View style={{backgroundColor:"#00a3cc", alignItems:'center', height: '100%'}}>
         <Text style={{fontSize: 22, textAlign: 'center', margin: "5%", marginTop: "10%", color: "white"}}>
-          Listen to this soothing music and relax!
+          Listen to this music and relax!
         </Text>
 
-        <TouchableOpacity onPress={this.play}>
+
           <Animatable.Image
             animation="pulse" duration={2000} iterationCount="infinite"
             source={require('./music.png')}
-            style={{width: "25%", height: "25%", marginBottom: "5%"}}
+            style={{width: "30%", height: "30%", marginBottom: "5%"}}
+            onPress={this.music}
             />
-        </TouchableOpacity>
+
+            <View style={{alignItems:'center'}}>
+              <TouchableOpacity onPress={this.play} style={styles.doneButton}>
+                <Text style={{fontSize: 30, color: "white", fontFamily:"Cochin"}}>Play</Text>
+              </TouchableOpacity>
+            </View>
 
           <View style={{alignItems:'center'}}>
             <TouchableOpacity onPress={() => this.toreEvaluate()} style={styles.doneButton}>
