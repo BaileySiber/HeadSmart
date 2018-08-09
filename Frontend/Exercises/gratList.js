@@ -76,7 +76,7 @@ export default class GratListScreen extends React.Component{
         <TouchableOpacity onPress={() => this.addList()} style={styles.donebutton}>
           <Text style={{fontSize: 30, color: "white", fontFamily:"Cochin"}}>Add!</Text>
         </TouchableOpacity>
-          {this.state.gratList.length === 10 ? <View style={{alignItems:'center'}}>
+          {this.state.gratList.length >= 10 ? <View style={{alignItems:'center'}}>
             <TouchableOpacity onPress={() => this.toreEvaluate()} style={styles.doneButton}>
               <Text style={{fontSize: 30, color: "white", fontFamily:"Cochin"}}>Done</Text>
             </TouchableOpacity>
