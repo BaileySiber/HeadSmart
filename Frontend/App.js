@@ -20,7 +20,7 @@ import letterSelf from "./Exercises/letterSelf";
 import letterOther from "./Exercises/letterOther";
 import Magnify from "./Exercises/magnify";
 // import Call from "./Exercises/call";
-// import Music from "./Exercises/music";
+import Music from "./Exercises/music";
 import Shower from "./Exercises/shower";
 import letterAngry from "./Exercises/letterAngry";
 import Breathing from "./Exercises/bubble";
@@ -114,9 +114,9 @@ export default StackNavigator({
   // Call: {
   //   screen: Call
   // },
-  // Music: {
-  //   screen: Music
-  // },
+  Music: {
+    screen: Music
+  },
   Shower: {
     screen: Shower
   },
