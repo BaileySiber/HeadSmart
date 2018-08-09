@@ -14,6 +14,7 @@ import {
 } from "react-native"
 import { LinearGradient } from "expo";
 
+
 export default class Journal extends React.Component{
   constructor(props){
     super(props);
