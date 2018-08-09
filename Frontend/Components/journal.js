@@ -58,21 +58,45 @@ export default class Journal extends React.Component{
     .then(result => result.json())
     .then(jsonResult => {
       if(jsonResult){
-        this.setState({
-          suggestions: jsonResult
-        })
-        Alert.alert(
-          'Journal skipped',
-          "Let's get to suggestions!",
-          [
-            { text: 'OK', onPress: () =>  this.props.navigation.navigate('Suggestions', {userInfo: userInfo})}
-          ]
-        )
-        let userInfo = {
-          userid: this.state.userid,
-          suggestions: this.state.suggestions
+
+        if(jsonResult === "you are happy you donut need our help!"){
+
+          fetch(url + '/' + this.state.userid + '/showLastLog')
+          .then(resp => resp.json())
+          .then(json => {
+            let userInfo = {
+              log: json,
+              userid: this.state.userid
+            }
+
+            Alert.alert(
+              'Journal saved',
+              "Seems like you are having a good day overall, so we will skip suggestions!",
+              [
+                { text: 'OK', onPress: () =>  this.props.navigation.navigate('ShowLog', {userInfo: userInfo})}
+              ]
+            )
+          })
+          .catch(err => console.log('error sending happy log' + err))
         }
-        this.props.navigation.navigate('Suggestions', {userInfo: userInfo});
+
+        else {
+          this.setState({
+            suggestions: jsonResult
+          })
+          Alert.alert(
+            'Journal skipped',
+            "Let's get to suggestions!",
+            [
+              { text: 'OK', onPress: () =>  this.props.navigation.navigate('Suggestions', {userInfo: userInfo})}
+            ]
+          )
+          let userInfo = {
+            userid: this.state.userid,
+            suggestions: this.state.suggestions
+          }
+          this.props.navigation.navigate('Suggestions', {userInfo: userInfo});
+        }
       }
     })
   }
@@ -101,21 +125,45 @@ export default class Journal extends React.Component{
     .then(result => result.json())
     .then(jsonResult => {
       if(jsonResult){
-        this.setState({
-          suggestions: jsonResult
-        })
-        let userInfo = {
-          userid: this.state.userid,
-          suggestions: this.state.suggestions
+        if(jsonResult === "you are happy you donut need our help!"){
+
+          fetch(url + '/' + this.state.userid + '/showLastLog')
+          .then(resp => resp.json())
+          .then(json => {
+            let userInfo = {
+              log: json,
+              userid: this.state.userid
+            }
+
+            Alert.alert(
+              'Journal saved',
+              "Seems like you are having a good day overall, so we will skip suggestions!",
+              [
+                { text: 'OK', onPress: () =>  this.props.navigation.navigate('ShowLog', {userInfo: userInfo})}
+              ]
+            )
+          })
+          .catch(err => console.log('error sending happy log' + err))
         }
-        Alert.alert(
-          'Journal saved',
-          "Let's get to suggestions!",
-          [
-            { text: 'OK', onPress: () =>  this.props.navigation.navigate('Suggestions', {userInfo: userInfo})}
-          ]
-        )
+
+        else {
+          this.setState({
+            suggestions: jsonResult
+          })
+          let userInfo = {
+            userid: this.state.userid,
+            suggestions: this.state.suggestions
+          }
+          Alert.alert(
+            'Journal saved',
+            "Let's get to suggestions!",
+            [
+              { text: 'OK', onPress: () =>  this.props.navigation.navigate('Suggestions', {userInfo: userInfo})}
+            ]
+          )
+        }
       }
+
     })
     .catch(err => console.log('error saving post' + err))
   }
@@ -167,9 +215,9 @@ export default class Journal extends React.Component{
             <View style={{alignItems: 'center', paddingTop: "10%"}}>
 
               <View style={{marginBottom: "5%"}}>
-              <TouchableOpacity style={styles.buttonStyle} onPress={() => this.skipSection()}>
-                <Text style={{fontSize: 30, textAlign: 'center', color:"white", fontFamily:"Cochin"}}>Skip</Text>
-              </TouchableOpacity>
+                <TouchableOpacity style={styles.buttonStyle} onPress={() => this.skipSection()}>
+                  <Text style={{fontSize: 30, textAlign: 'center', color:"white", fontFamily:"Cochin"}}>Skip</Text>
+                </TouchableOpacity>
               </View>
 
               <TouchableOpacity style={styles.buttonStyle} onPress={() => this.yesJournal()}>
