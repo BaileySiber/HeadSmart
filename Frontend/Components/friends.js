@@ -69,6 +69,7 @@ export default class FriendsScreen extends React.Component {
       })
       .catch(err => console.log(err))
     }
+    
 
     //seding friendRequest
     sendRequest(username){
