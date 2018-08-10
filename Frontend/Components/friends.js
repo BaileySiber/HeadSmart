@@ -25,24 +25,30 @@ export default class FriendsScreen extends React.Component {
       pendingList: [],
       friend: '',
     }
+    let userInfo = this.props.navigation.getParam('userInfo');
+    console.log(userInfo.userid)
+    fetch(url + '/' + userInfo.userid + '/getFriends')
+    .then(response => response.json())
+    .then(result => {
+      this.setState({
+        friendList: result.friends,
+        userid: userInfo.userid
+      });
+      console.log('getting friendList', result)
+      return fetch(url + '/' + userInfo.userid + '/getPending')
+    })
+    .then(response => response.json())
+    .then(result => {
+      this.setState({
+        pendingList: result.pending
+      })
+      console.log('getting pendingList', result)
+    })
+    .catch(err => console.log(err))
+  }
 
-    componentDidMount(){
-      let userInfo = this.props.navigation.getParam('userInfo');
-      fetch(url + '/' + userInfo.userid + '/getFriends')
-      .then(result => {
-        this.setState({
-          friendList: result,
-          userid: userInfo.userid
-        });
-        return fetch(url + '/' + userInfo.userid + '/getPending')
-      })
-      .then(result => {
-        this.setState({
-          pendingList: result
-        })
-      })
-      .catch(err => console.log(err))
-    }
+    // componentDidMount() {
+    // }
 
     removeFriend(id) {
       let queryUrl = url + '/' + this.state.userid + '/removeFriend';
@@ -69,7 +75,7 @@ export default class FriendsScreen extends React.Component {
       })
       .catch(err => console.log(err))
     }
-    
+
 
     //seding friendRequest
     sendRequest(username){
@@ -85,7 +91,7 @@ export default class FriendsScreen extends React.Component {
       })
       .then(response => response.json())
       .then(json => {
-        if(json.status === 200){
+        if(json[status] === 200){
           Alert.alert(
             "Sent!",
             "Waiting for the response",
@@ -96,6 +102,7 @@ export default class FriendsScreen extends React.Component {
           })
         }
       })
+      .catch(err => console.log(err))
     }
 
     acceptRequest(id){
@@ -113,6 +120,7 @@ export default class FriendsScreen extends React.Component {
       .then(json => {
         if(json === "request sent"){
           fetch(url + '/' + userInfo.userid + '/getFriends')
+          .then(response => response.json())
           .then(result => {
             this.setState({
               friendList: result
@@ -140,6 +148,7 @@ export default class FriendsScreen extends React.Component {
       .then(json => {
         if(json.status === 200){
           fetch(url + '/' + userInfo.userid + '/getPending')
+          .then(response => response.json())
           .then(result => {
             this.setState({
               pendingList: result
@@ -153,62 +162,66 @@ export default class FriendsScreen extends React.Component {
 
     render(){
       return (
-        <View style={{backgroundColor:"#00a3cc", alignItems:'center', height: '100%'}}>
+        <View style={{backgroundColor:"#00a3cc", height: '100%'}}>
           <Text style={{fontSize: 25, textAlign: 'center', margin: "5%", marginTop: "10%", color: "white"}}>
             Here are your friends!
           </Text>
-          <Text style={{fontSize: 18, textAlign: 'center', margin: "5%", marginTop: "10%", color: "white"}}>
-            If your friend's emotion number is low (<4), try to reach out
-          </Text>
-          <List>
-          <ListView dataSource={ds.cloneWithRows(this.state.friendList)}
-            renderRow={(friend, i) => (
-              <ListItem
-                leftIcon={<Icon name='account_box' />}
-                key={i}
-                title={friend.name}
-                subtitle={"Current Emotion : " + friend.emo.toString()}
-                rightIcon={<Icon name='delete' />}
-                onPressRightIcon={() => this.removeFriend(friend.id)}
-              />
-            )}
-          />
-          </List>
+          {this.state.friendList.length ?
+            <List containerStyle={{marginBottom: 10}}>
+              <ListView dataSource={ds.cloneWithRows(this.state.friendList)}
+                renderRow={(friend, i) => (
+                  <ListItem
+                    leftIcon={<Icon name='account_box' />}
+                    key={i}
+                    title={friend.name}
+                    subtitle={"Current Emotion : " + friend.emo.toString()}
+                    rightIcon={<Icon name='delete' />}
+                    onPressRightIcon={() => this.removeFriend(friend.id)} />
+                )}/>
+              </List>: null
+            }
+            <Text style={{fontSize: 18, textAlign: 'center', margin: "5%", marginTop: "10%", color: "white"}}>
+              If your friend's emotion number is low, try to reach out
+            </Text>
+            <View style={{alignItems: 'center'}}>
           <TextInput
             style={{
               margin: 15,
               width: 200,
-              height: 40,
+              height: 25,
               borderColor: "white",
               borderWidth: 2
             }}
-            placeholder="Send request with friend's username"
+            placeholder="Send request with username"
             value={this.state.friend}
             onChangeText={text => {
               this.setState({ friend: text })}
             }
           />
           <TouchableOpacity onPress={() => this.sendRequest(this.state.friend)} style={styles.addbutton}>
-            <Text style={{fontSize: 30, color: "white", fontFamily:"Cochin"}}>Send!</Text>
+            <Text style={{fontSize: 20, color: "white", fontFamily:"Cochin"}}>Send!</Text>
           </TouchableOpacity>
+          </View>
 
           <Text style={{fontSize: 15, textAlign: 'center', margin: "5%", marginTop: "10%", color: "white"}}>
             Pending Requests
           </Text>
-          <List>
-          <ListView dataSource={ds.cloneWithRows(this.state.pendingList)}
-            renderRow={(friend, i) => (
-              <ListItem
-                leftIcon={<Icon name='check_circle_outline' />}
-                leftIconOnPress={() => this.acceptRequest(friend.id)}
-                key={i}
-                title={friend.name}
-                rightIcon={<Icon name='delete' />}
-                onPressRightIcon={() => this.deleteRequest(friend.id)}
+          {this.state.pendingList.length ?
+            <List>
+              <ListView dataSource={ds.cloneWithRows(this.state.pendingList)}
+                renderRow={(friend, i) => (
+                  <ListItem
+                    leftIcon={<Icon name='check_circle_outline' />}
+                    leftIconOnPress={() => this.acceptRequest(friend.id)}
+                    key={i}
+                    title={friend.name}
+                    rightIcon={<Icon name='delete' />}
+                    onPressRightIcon={() => this.deleteRequest(friend.id)}
+                  />
+                )}
               />
-            )}
-          />
-          </List>
+            </List>
+          : null }
         </View>
       )
     }

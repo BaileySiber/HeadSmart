@@ -40,7 +40,7 @@ export default class HomePage extends React.Component{
     let userInfo = this.props.navigation.getParam('userInfo');
     let queryUrl = url + '/' + userInfo.userid ;
     return fetch(queryUrl)
-    .then(response=> response.json())
+    .then(response => response.json())
     .then(json => {
       this.setState({
         name: json.name,
