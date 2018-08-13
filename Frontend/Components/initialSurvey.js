@@ -10,7 +10,7 @@ import {  StyleSheet,
   Button,
   RefreshControl,
   AsyncStorage,
- } from 'react-native';
+} from 'react-native';
 import { ButtonGroup } from 'react-native-elements';
 import { LinearGradient } from 'expo';
 import Swipeout from 'react-native-swipeout'
@@ -35,6 +35,7 @@ export default class SurveyScreen extends React.Component {
     fetch(url + '/' + userid + '/showSuggestions')
     .then(resp => resp.json())
     .then(json => {
+      console.log('sugs are -------------' + json)
       this.setState({
         suggestionsArr: ds.cloneWithRows(json)
       })
@@ -42,7 +43,7 @@ export default class SurveyScreen extends React.Component {
   }
 
 
-//finish removeSuggestion and addSuggestion
+  //finish removeSuggestion and addSuggestion
 
   removeSuggestion(suggest) {
     //update state, splice out this suggestion
@@ -62,7 +63,7 @@ export default class SurveyScreen extends React.Component {
         suggestionsArr: ds.cloneWithRows(json.suggestions)
       })
       Alert.alert(
-         'This suggestion has been delted!'
+        'This suggestion has been delted!'
       )
     })
     .catch(err => console.log(err))
@@ -80,7 +81,7 @@ export default class SurveyScreen extends React.Component {
     return fetch(queryUrl, {
       method: "POST",
       headers: {
-          "Content-Type": "application/json"
+        "Content-Type": "application/json"
       },
       body: JSON.stringify({
         name: this.state.suggestionName,
@@ -98,7 +99,7 @@ export default class SurveyScreen extends React.Component {
           suggestionsArr: ds.cloneWithRows(json.suggestions)
         })
         Alert.alert(
-           'This suggestion has been Added!'
+          'This suggestion has been Added!'
         )
       }
     })
@@ -131,165 +132,192 @@ export default class SurveyScreen extends React.Component {
       <Swiper showsButton={false} loop={false}>
         <Intro />
         <View>
-          <LinearGradient style={{height:"100%"}} colors={["#b3e0ff", "#00a3cc"]} >
-              <Text style={styles.welcomeText}>{this.state.userInfo.name}</Text>
-               <ListView
-                 dataSource={this.state.suggestionsArr}
-                 renderRow={(suggest) => {
-                   let swipeBtns = [{
-                      text: 'Delete',
-                      backgroundColor: 'red',
-                      onPress: () => { this.removeSuggestion(suggest) }
-                      }];
-                   return (
-                     <Swipeout right={swipeBtns}
-                       autoClose='true'
-                       backgroundColor= 'transparent'>
-                      <TouchableOpacity
-                        style={styles.suggestBox}
-                        //add an onSwipe to removeSuggestion
-                        >
-                        <View style={styles.suggestBox}><Text>{suggest.name}</Text></View>
-                        <View><Text>{suggest.description}</Text></View>
-                    </TouchableOpacity>
-                </Swipeout>
-              )}}
-              />
+          <LinearGradient style={{height:"100%"}} colors={["#CAE2D0", "#b5cbbb"]} >
+            <Text style={styles.welcomeText}>{this.state.userInfo.name}</Text>
+            <ListView
+              dataSource={this.state.suggestionsArr}
+              renderRow={(suggest) => {
+                let swipeBtns = [{
+                  text: 'Delete',
+                  backgroundColor: 'red',
+                  onPress: () => { this.removeSuggestion(suggest) }
+                }];
+                return (
+                  <Swipeout right={swipeBtns}
+                    autoClose= {true}
+                    backgroundColor= 'transparent'>
+                    <TouchableOpacity
+                      style={styles.suggestBox}
+                      //add an onSwipe to removeSuggestion
+                      >
+                        <View style={styles.suggestBox}><Text style={styles.name}>{suggest.name}</Text></View>
+                        <View><Text style={styles.description}>{suggest.description}</Text></View>
+                      </TouchableOpacity>
+                    </Swipeout>
+                  )}}
+                />
                 <View style={{paddingBottom: 20, alignItems: 'center',
-                justifyContent: 'center'}}>
-                <TouchableOpacity onPress={this.showAddSuggestion.bind(this)} style={styles.button}>
-                  <Text style={styles.buttonText}>Add a suggestion</Text>
-                </TouchableOpacity>
-                {
-                  this.state.openAdd ?
-                  <View style={styles.suggestBox}>
-                    <TextInput placeholder="Title" style={styles.textInp} value={this.state.suggestionName} onChangeText={(text) => this.setState({suggestionName: text})} />
-                    <TextInput placeholder="Description" style={styles.textInp} value={this.state.suggestionDescription} onChangeText={(text) => this.setState({suggestionDescription: text})} />
-                    <ButtonGroup
-                      onPress={this.updateIndex.bind(this)}
-                      selectedIndex={this.state.selectedIndex}
-                      buttons={this.state.buttons}
-                      containerStyle={{height: 50}}
-                    />
-                    <TextInput placeholder="Emotion Tags" style={styles.textInp} value={emotionTags} onChangeText={(text) => this.setState({emotions: text})} />
-                    <View style={{ flexDirection: "row", justifyContent: "space-between"}}>
-                    <TouchableOpacity onPress={this.addSuggestion.bind(this)} style={styles.addButton}>
-                      <Text style={styles.buttonText}>Add</Text>
-                    </TouchableOpacity>
+                  justifyContent: 'center'}}>
+                  <TouchableOpacity onPress={this.showAddSuggestion.bind(this)} style={styles.button}>
+                    <Text style={styles.buttonText}>Add a suggestion</Text>
+                  </TouchableOpacity>
+                  {
+                    this.state.openAdd ?
+                    <View style={styles.suggestBox}>
+                      <TextInput placeholder="Title" style={styles.textInp} value={this.state.suggestionName} onChangeText={(text) => this.setState({suggestionName: text})} />
+                      <TextInput placeholder="Description" style={styles.textInp} value={this.state.suggestionDescription} onChangeText={(text) => this.setState({suggestionDescription: text})} />
+                      <ButtonGroup
+                        onPress={this.updateIndex.bind(this)}
+                        selectedIndex={this.state.selectedIndex}
+                        buttons={this.state.buttons}
+                        containerStyle={{height: 50}}
+                      />
+                      <TextInput placeholder="Emotion Tags" style={styles.textInp} value={emotionTags} onChangeText={(text) => this.setState({emotions: text})} />
+                      <View style={{ flexDirection: "row", justifyContent: "space-between"}}>
+                        <TouchableOpacity onPress={this.addSuggestion.bind(this)} style={styles.addButton}>
+                          <Text style={styles.buttonText}>Add</Text>
+                        </TouchableOpacity>
 
-                    <TouchableOpacity onPress={this.cancelSuggestion.bind(this)} style={styles.cancelButton}>
-                      <Text style={styles.buttonText}>Cancel</Text>
+                        <TouchableOpacity onPress={this.cancelSuggestion.bind(this)} style={styles.cancelButton}>
+                          <Text style={styles.buttonText}>Cancel</Text>
+                        </TouchableOpacity>
+                      </View>
+                    </View>
+                    : null}
+
+                    <TouchableOpacity onPress={this.registerFinal.bind(this)} style={styles.button}>
+                      <Text style={styles.buttonText}>Done</Text>
                     </TouchableOpacity>
                   </View>
-                  </View>
-                : null}
-
-                <TouchableOpacity onPress={this.registerFinal.bind(this)} style={styles.button}>
-                  <Text style={styles.buttonText}>Done</Text>
-                </TouchableOpacity>
+                </LinearGradient>
               </View>
-          </LinearGradient>
-        </View>
-      </Swiper>
-    );
-  }
-}
+            </Swiper>
+          );
+        }
+      }
 
-class Intro extends React.Component {
-  render() {
-    return (
-      <View style={styles.container}>
-        <LinearGradient style={{height:"100%"}} colors={["#b3e0ff", "#00a3cc"]} >
-          <Animatable.Text animation="fadeOutUp" delay="1500" style={styles.welcomeText}>
-              Welcome To Head Smart!
-          </Animatable.Text>
-          <Animatable.Text animation="fadeInUp" delay="1700" style={styles.welcomeText}>
-              This app will offer you suggestions/exercises to improve your mood in the moment
-          </Animatable.Text>
-          <Animatable.Text animation="fadeInUp" delay="3500" style={styles.welcomeText}>
-              We have some already and add/delete as you wish!
-          </Animatable.Text>
-        </LinearGradient>
-      </View>
-    )
-  }
-}
+      class Intro extends React.Component {
+        render() {
+          return (
+            <View style={styles.container}>
+              <LinearGradient style={{height:"100%"}} colors={["#CAE2D0", "#b5cbbb"]} >
+                <View>
+                  <Animatable.Text animation="fadeOutUp" delay={3500} style={styles.welcomeOne}>
+                    Welcome To Head Smart!
+                  </Animatable.Text>
+                </View>
+
+                <View>
+                  <Animatable.Text animation="fadeInUp" delay={4000} style={styles.welcomeText}>
+                    In this app we will help you to reflect on your emotions and cope with any negative feelings you might have
+                  </Animatable.Text>
+                  <Animatable.Text animation="fadeInUp" delay={5000} style={styles.welcomeText}>
+                    We do this by offering you different suggestions, depending on the emotions you are feeling. Check them out, and feel free to delete or add as you wish!
+                  </Animatable.Text>
+                </View>
+
+              </LinearGradient>
+            </View>
+          )
+        }
+      }
 
 
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  suggestBox: {
-    justifyContent: 'center',
-    backgroundColor: '#e6ffff',
-    alignItems: 'center',
-    borderRadius: 10
-  },
-  textInp: {
-    margin: 10,
-    width: 280,
-    height: 30,
-    borderColor: "#8aa5ad",
-    borderWidth: 1.5,
-    backgroundColor: 'white'
-  },
-  button: {
-    backgroundColor: 'white',
-    width: 200,
-    height: 40,
-    borderWidth: 2,
-    borderColor: "grey",
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 5,
-    margin: 10,
-    //marginBottom: 10
-  },
-  buttonText : {
-    fontSize: 20,
-    fontFamily: 'Cochin',
-    textAlign: 'center',
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  addButton: {
-    fontSize: 17,
-    fontFamily: 'Cochin',
-    textAlign: 'center',
-    alignItems: "center",
-    justifyContent: 'center',
-    // paddingBottom: 10,
-    borderWidth: 2,
-    borderColor: "grey",
-    borderRadius: 5,
-    margin: 8,
-    height: 35,
-    width: 80
-  },
-  cancelButton: {
-    fontSize: 17,
-    fontFamily: 'Cochin',
-    textAlign: 'center',
-    alignItems: "center",
-    justifyContent: 'center',
-    // paddingBottom: 10,
-    borderWidth: 2,
-    borderColor: "grey",
-    borderRadius: 5,
-    margin: 8,
-    height: 35,
-    width: 80,
-    alignSelf: "flex-end"
-  },
-  welcomeText:{
-    fontSize: 32,
-    fontFamily: 'Georgia',
-    textAlign: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
-    color: 'white',
-    margin: 10
-  }
-})
+      const styles = StyleSheet.create({
+        container: {
+          alignItems: 'center',
+          justifyContent: 'center'
+        },
+        name: {
+          textAlign: 'center',
+          fontSize: 25,
+          fontFamily: 'Georgia',
+          color: "#79877c"
+        },
+        description: {
+          textAlign: 'center',
+          fontSize: 15,
+          fontFamily: 'Georgia',
+          color: "#79877c",
+          marginBottom: 5
+        },
+        suggestBox: {
+          justifyContent: 'center',
+          backgroundColor: '#e9f3ec',
+          margin: 5,
+          alignItems: 'center',
+          borderRadius: 10
+        },
+        textInp: {
+          margin: 10,
+          width: 280,
+          height: 30,
+          borderColor: "#8aa5ad",
+          borderWidth: 1.5,
+          backgroundColor: 'white'
+        },
+        button: {
+          width: 200,
+          height: 40,
+          borderWidth: 3,
+          borderColor: "white",
+          alignItems: "center",
+          justifyContent: "center",
+          borderRadius: 5,
+          margin: 10,
+        },
+        buttonText : {
+          fontSize: 20,
+          fontFamily: 'Georgia',
+          color: "#505a53",
+          textAlign: 'center',
+          justifyContent: 'center',
+          alignItems: 'center'
+        },
+        addButton: {
+          fontSize: 17,
+          fontFamily: 'Cochin',
+          textAlign: 'center',
+          alignItems: "center",
+          justifyContent: 'center',
+          borderWidth: 2,
+          borderColor: "grey",
+          borderRadius: 5,
+          margin: 8,
+          height: 35,
+          width: 80
+        },
+        cancelButton: {
+          fontSize: 17,
+          fontFamily: 'Cochin',
+          textAlign: 'center',
+          alignItems: "center",
+          justifyContent: 'center',
+          borderWidth: 2,
+          borderColor: "grey",
+          borderRadius: 5,
+          margin: 8,
+          height: 35,
+          width: 80,
+          alignSelf: "flex-end"
+        },
+        welcomeOne:{
+          fontSize: 40,
+          fontFamily: 'Georgia',
+          textAlign: 'center',
+          justifyContent: 'center',
+          alignItems: 'center',
+          color: '#505a53',
+          marginTop: 5
+        },
+        welcomeText:{
+          fontSize: 25,
+          fontFamily: 'Georgia',
+          textAlign: 'center',
+          justifyContent: 'center',
+          alignItems: 'center',
+          color: '#505a53',
+          margin: 10,
+          marginTop: 5
+        }
+      })

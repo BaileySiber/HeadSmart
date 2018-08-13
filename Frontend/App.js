@@ -29,7 +29,7 @@ import Grounding from "./Exercises/grounding";
 import Eat from "./Exercises/eat";
 
 
-import { StackNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation';
 
 class App extends React.Component {
   constructor() {
@@ -53,7 +53,7 @@ class App extends React.Component {
 }
 
 
-export default StackNavigator({
+export default createStackNavigator({
   Login: {
     screen: LoginScreen,
   },

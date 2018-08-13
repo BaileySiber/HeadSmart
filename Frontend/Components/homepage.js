@@ -4,6 +4,7 @@ import {
   StyleSheet,
   View,
   Text,
+  Image,
   TouchableOpacity,
   TextInput,
   ListView,
@@ -51,28 +52,31 @@ export default class HomePage extends React.Component{
   render(){
     return(
       <View>
-        <LinearGradient style={{height:"100%"}} colors={["#00a3cc", "#00a3cc"]} >
+        <LinearGradient style={{height:"100%"}} colors={["#CAE2D0", "#CAE2D0"]} >
           <View style={{alignItems:"center", justifyContent:"center"}}>
-            <Text style={{fontFamily:"Georgia", color:"white", fontSize:40, marginTop: 30, marginBottom: 80}}>Home</Text>
+            <Text style={{fontFamily:"Georgia", color:"#79877c", fontSize:60, marginTop: 30, marginBottom: 20}}>Home</Text>
           </View>
           <View style={{alignItems:"center", justifyContent:"center"}}>
             <View>
               <TouchableOpacity style={{alignItems:"center", justifyContent:"center", margin: 20}} onPress={() => this.toNew()}>
-              <Text style={{fontFamily:"Georgia", color:"white", fontSize:30}}>
+              <Image style={{height:50, width: 40}} source={require('./new.png')}/>
+              <Text style={{fontFamily:"Georgia", color:"#79877c", fontSize:30}}>
               New Log
               </Text>
               </TouchableOpacity>
             </View>
             <View>
               <TouchableOpacity style={{alignItems:"center", justifyContent:"center", margin: 20}} onPress={() => this.toOld()}>
-              <Text style={{fontFamily:"Georgia", color:"white", fontSize:30}}>
+              <Image style={{height:40, width: 50}} source={require('./old.png')}/>
+              <Text style={{fontFamily:"Georgia", color:"#79877c", fontSize:30}}>
               Old Logs
               </Text>
               </TouchableOpacity>
             </View>
             <View>
               <TouchableOpacity style={{alignItems:"center", justifyContent:"center", margin: 20}} onPress={() => this.toStats()}>
-              <Text style={{fontFamily:"Georgia", color:"white", fontSize:30}}>
+              <Image style={{height:50, width: 40}} source={require('./stats.png')}/>
+              <Text style={{fontFamily:"Georgia", color:"#79877c", fontSize:30}}>
               Statistics
               </Text>
               </TouchableOpacity>

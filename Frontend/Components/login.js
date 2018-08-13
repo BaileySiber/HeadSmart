@@ -53,11 +53,11 @@ export default class LoginScreen extends React.Component {
   render() {
     return (
       <View >
-        <LinearGradient style={{height: "100%"}} colors={["#b3e0ff", "#00a3cc"]} >
+        <LinearGradient style={{height: "100%"}} colors={["#CAE2D0", "#CAE2D0"]} >
         <Text style={styles.textBig}>Head Smart</Text>
 
         <View style={{alignItems: 'center'}}>
-        <Image style={{height:80, width: 80}} source={require('./bulb.png')}/>
+        <Image style={{height:85, width: 180}} source={require('./whale.png')}/>
       </View>
 
 
@@ -67,6 +67,7 @@ export default class LoginScreen extends React.Component {
               margin: 15,
               width: 200,
               height: 40,
+              backgroundColor: "white",
               borderColor: "white",
               borderWidth: 2
             }}
@@ -80,6 +81,7 @@ export default class LoginScreen extends React.Component {
               margin: 15,
               width: 200,
               height: 40,
+              backgroundColor: "white",
               borderColor: "white",
               borderWidth: 2
             }}
@@ -122,12 +124,12 @@ export default class LoginScreen extends React.Component {
       alignItems: 'center',
     },
     textBig: {
-      color:"white",
-      fontSize: 50,
+      color:"#79877c",
+      fontSize: 55,
       textAlign: 'center',
       margin: 10,
       marginTop: 30,
-      fontFamily: "Georgia"
+      fontFamily: "Georgia",
     },
     button: {
       alignItems: 'center',
@@ -135,13 +137,13 @@ export default class LoginScreen extends React.Component {
       margin: 10,
       borderColor: "white",
       borderRadius: 5,
-      borderWidth: 1,
+      borderWidth: 3,
       width: 150
     },
     buttonLabel: {
       fontFamily:"Cochin",
-      color:"white",
+      color:"#79877c",
       textAlign: 'center',
-      fontSize: 25
+      fontSize: 30
     },
   });

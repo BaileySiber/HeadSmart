@@ -61,14 +61,14 @@ import {  StyleSheet,
     render() {
       return (
 
-          <LinearGradient style={{display: 'flex', flex: 1}} colors={["#b3e0ff", "#00a3cc"]} >
+          <LinearGradient style={{display: 'flex', flex: 1}} colors={["#CAE2D0", "#CAE2D0"]} >
 
             <View style={{alignItems: "center", justifyContent: "center", flex: 1}}>
               <Text style={styles.textBig}>Register</Text>
             </View>
 
 
-            <View style={{alignItems: "center", flex: 5}}>
+            <View style={{alignItems: "center", flex: 3}}>
               <TextInput
                 style={styles.textInp}
                 placeholder=" Name"
@@ -118,7 +118,7 @@ import {  StyleSheet,
         fontSize: 40,
         textAlign: 'center',
         margin: 10,
-        color: "white",
+        color: "#79877c",
         fontFamily: 'Georgia'
       },
       button: {
@@ -127,19 +127,21 @@ import {  StyleSheet,
         marginTop: 10,
         borderRadius: 5,
         borderColor: "white",
-        borderWidth: 1,
+        borderWidth: 3,
         width: 200
       },
       buttonLabel: {
         textAlign: 'center',
-        fontSize: 20,
-        color: "white"
+        fontSize: 25,
+        fontFamily: 'Georgia',
+        color: "#79877c"
       },
       textInp: {
-        margin: 15,
+        margin: 10,
         width: 200,
         height: 40,
+        backgroundColor: "white",
         borderColor: "white",
-        borderWidth: 2,
+        borderWidth: 3,
       }
     });
