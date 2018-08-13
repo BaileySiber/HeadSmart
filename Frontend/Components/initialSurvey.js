@@ -42,9 +42,6 @@ export default class SurveyScreen extends React.Component {
     })
   }
 
-
-  //finish removeSuggestion and addSuggestion
-
   removeSuggestion(suggest) {
     //update state, splice out this suggestion
     let userid = this.state.userInfo.userid;

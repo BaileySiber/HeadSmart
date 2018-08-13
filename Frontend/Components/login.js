@@ -23,6 +23,7 @@ export default class LoginScreen extends React.Component {
       userid: ''
     }
   }
+  
   login(){
     let queryUrl = url + '/login';
     return fetch(queryUrl, {

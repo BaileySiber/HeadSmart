@@ -25,6 +25,7 @@ import {  StyleSheet,
       }
     }
 
+
     register(){
       Alert.alert(
         "Register",
