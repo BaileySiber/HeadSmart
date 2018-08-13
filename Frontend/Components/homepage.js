@@ -33,12 +33,15 @@ export default class HomePage extends React.Component{
   toStats(){
     this.props.navigation.navigate("Stats", {userInfo: this.state});
   }
+  toFriends(){
+    this.props.navigation.navigate("Friends", {userInfo: this.state});
+  }
 
   componentDidMount() {
     let userInfo = this.props.navigation.getParam('userInfo');
     let queryUrl = url + '/' + userInfo.userid ;
     return fetch(queryUrl)
-    .then(response=> response.json())
+    .then(response => response.json())
     .then(json => {
       this.setState({
         name: json.name,
@@ -78,6 +81,13 @@ export default class HomePage extends React.Component{
               <Image style={{height:50, width: 40}} source={require('./stats.png')}/>
               <Text style={{fontFamily:"Georgia", color:"#79877c", fontSize:30}}>
               Statistics
+              </Text>
+              </TouchableOpacity>
+            </View>
+            <View>
+              <TouchableOpacity style={{alignItems:"center", justifyContent:"center", margin: 20}} onPress={() => this.toFriends()}>
+              <Text style={{fontFamily:"Georgia", color:"white", fontSize:30}}>
+              Friends
               </Text>
               </TouchableOpacity>
             </View>

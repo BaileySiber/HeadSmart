@@ -13,6 +13,7 @@ import StatsScreen from "./Components/stats";
 import ReevaluateScreen from "./Components/reevaluate"
 import ShowLogScreen from "./Components/showLog"
 import OldLogScreen from "./Components/oldLogs"
+import FriendsScreen from "./Components/friends"
 import PhysicalActivity from "./Exercises/timer";
 import Funny from "./Exercises/gifs";
 import Gratitude from "./Exercises/gratList";
@@ -92,6 +93,9 @@ export default createStackNavigator({
   },
   OldLogs: {
     screen: OldLogScreen
+  },
+  Friends: {
+    screen: FriendsScreen
   },
   PhysicalActivity: {
     screen: PhysicalActivity
