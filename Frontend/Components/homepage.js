@@ -15,6 +15,7 @@ import {
 } from "react-native"
 import { LinearGradient } from "expo";
 
+
 export default class HomePage extends React.Component{
   constructor(){
     super();
@@ -55,42 +56,55 @@ export default class HomePage extends React.Component{
     return(
       <View>
         <LinearGradient style={{height:"100%"}} colors={["#CAE2D0", "#CAE2D0"]} >
-          <View style={{alignItems:"center", justifyContent:"center"}}>
-            <Text style={{fontFamily:"Georgia", color:"#79877c", fontSize:60, marginTop: 30, marginBottom: 20}}>Home</Text>
+
+          <View style={{alignItems: "center", marginTop: "10%"}}>
+
+            <Text style={{fontFamily:"Georgia", color:"black", fontSize: 45}}>Home</Text>
+
+            <View style={{display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-around", margin: "5%"}}>
+              <View>
+                <TouchableOpacity style={{borderRadius: 6, backgroundColor: "#e9f3ec", alignItems: "center", justifyContent:"center", margin: "5%"}} onPress={() => this.toNew()}>
+                  <Image style={{marginTop: "14%", height:50, width: 40}} source={require('./new.png')}/>
+                  <Text style={{marginBottom: "14%", fontFamily:"Georgia", color:"gray", fontSize: 20}}>
+                    New Log
+                  </Text>
+                </TouchableOpacity>
+              </View>
+              <View>
+                <TouchableOpacity style={{borderRadius: 6, backgroundColor: "#e9f3ec", alignItems:"center", justifyContent:"center", margin: "5%"}} onPress={() => this.toOld()}>
+                  <Image style={{marginTop: "14%", height:40, width: 50, marginBottom: "10%"}} source={require('./old.png')}/>
+                  <Text style={{marginBottom: "14%", fontFamily:"Georgia", color:"gray", fontSize:20}}>
+                    Old Logs
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+
+            <View style={{display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-around"}}>>
+              <View>
+                <TouchableOpacity style={{borderRadius: 6, backgroundColor: "#e9f3ec", alignItems:"center", justifyContent:"center", margin: "5%"}} onPress={() => this.toStats()}>
+                  <Image style={{marginTop: "14%", height:50, width: 40}} source={require('./stats.png')}/>
+                  <Text style={{marginBottom: "14%", fontFamily:"Georgia", color:"gray", fontSize:20}}>
+                    Statistics
+                  </Text>
+                </TouchableOpacity>
+              </View>
+              <View>
+                <TouchableOpacity style={{borderRadius: 6, backgroundColor: "#e9f3ec", alignItems:"center", justifyContent:"center", margin: "5%"}} onPress={() => this.toFriends()}>
+                  <Image style={{marginTop: "15%", marginRight: "5%", marginLeft: "5%", height:50, width: 50}} source={require('./friends.png')}/>
+                  <Text style={{marginBottom: "15%", fontFamily:"Georgia", color:"gray", fontSize:20}}>
+                    Friends
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+
+              <Image style={{height:"30%", width: "70%"}} source={require('./welcome.png')}/>
+
           </View>
-          <View style={{alignItems:"center", justifyContent:"center"}}>
-            <View>
-              <TouchableOpacity style={{alignItems:"center", justifyContent:"center", margin: 20}} onPress={() => this.toNew()}>
-              <Image style={{height:50, width: 40}} source={require('./new.png')}/>
-              <Text style={{fontFamily:"Georgia", color:"#79877c", fontSize:30}}>
-              New Log
-              </Text>
-              </TouchableOpacity>
-            </View>
-            <View>
-              <TouchableOpacity style={{alignItems:"center", justifyContent:"center", margin: 20}} onPress={() => this.toOld()}>
-              <Image style={{height:40, width: 50}} source={require('./old.png')}/>
-              <Text style={{fontFamily:"Georgia", color:"#79877c", fontSize:30}}>
-              Old Logs
-              </Text>
-              </TouchableOpacity>
-            </View>
-            <View>
-              <TouchableOpacity style={{alignItems:"center", justifyContent:"center", margin: 20}} onPress={() => this.toStats()}>
-              <Image style={{height:50, width: 40}} source={require('./stats.png')}/>
-              <Text style={{fontFamily:"Georgia", color:"#79877c", fontSize:30}}>
-              Statistics
-              </Text>
-              </TouchableOpacity>
-            </View>
-            <View>
-              <TouchableOpacity style={{alignItems:"center", justifyContent:"center", margin: 20}} onPress={() => this.toFriends()}>
-              <Text style={{fontFamily:"Georgia", color:"white", fontSize:30}}>
-              Friends
-              </Text>
-              </TouchableOpacity>
-            </View>
-          </View>
+
+
+
         </LinearGradient>
       </View>
     )

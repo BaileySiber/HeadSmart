@@ -12,6 +12,10 @@ import {  StyleSheet,
   AsyncStorage } from 'react-native';
   import { LinearGradient } from 'expo';
 
+  // import Amplify, { Auth } from 'aws-amplify';
+  // import AWSConfig from '../AWS/aws-exports'
+  // Amplify.configure(AWSConfig)
+
   export default class RegisterScreen extends React.Component {
     constructor(){
       super();
@@ -20,19 +24,33 @@ import {  StyleSheet,
         password: "",
         name: "",
         email: "",
-        phoneNumber: "",
-        userid: ''
+        phone_number: "",
+        userid: '',
+        // confirmationCode: ''
       }
     }
 
 
-    register(){
-      Alert.alert(
-        "Register",
-        "Register button pressed!",
-        [{ text: "yay" }] // Button
-      );
-    }
+    // signUp() {
+    //   Auth.signUp({
+    //     username: this.state.username,
+    //     password: this.state.password,
+    //     attributes: {
+    //       email: this.state.email,
+    //       phone_number: this.state.phone_number,
+    //       name: this.state.name
+    //     }
+    //   })
+    //   .then(() => console.log('successful signup!'))
+    //   .catch(err => console.log('error signing up!' + JSON.stringify(err)))
+    // }
+    //
+    // confirmSignUp() {
+    //   Auth.confirmSignUp(this.state.username, this.state.confirmationCode)
+    //   .then(() => console.log('successful confirmation!'))
+    //   .catch(err => console.log('error confirming sign up!' + err))
+    // }
+
 
     onPress() {
       let queryUrl = url + '/register';
@@ -51,98 +69,111 @@ import {  StyleSheet,
       })
       .then(response => response.json())
       .then(json => {
-            this.setState({
-              userid: json._id
-            })
-            this.props.navigation.navigate('Survey', {userInfo: this.state});
-          })
+        this.setState({
+          userid: json._id
+        })
+        this.props.navigation.navigate('Survey', {userInfo: this.state});
+      })
       .catch(err => console.log('error:' + err))
     }
 
     render() {
       return (
 
-          <LinearGradient style={{display: 'flex', flex: 1}} colors={["#CAE2D0", "#CAE2D0"]} >
+        <LinearGradient style={{display: 'flex', flex: 1}} colors={["#CAE2D0", "#CAE2D0"]} >
 
-            <View style={{alignItems: "center", justifyContent: "center", flex: 1}}>
-              <Text style={styles.textBig}>Register</Text>
-            </View>
-
-
-            <View style={{alignItems: "center", flex: 3}}>
-              <TextInput
-                style={styles.textInp}
-                placeholder=" Name"
-                onChangeText={text => this.setState({ name: text })}
-              />
-              <TextInput
-                style={styles.textInp}
-                placeholder=" Email"
-                onChangeText={text => this.setState({ email: text })}
-              />
-              <TextInput
-                style={styles.textInp}
-                placeholder=" Phone Number"
-                onChangeText={text => this.setState({ phoneNumber: text })}
-              />
-              <TextInput
-                style={styles.textInp}
-                placeholder=" Username"
-                onChangeText={text => this.setState({ username: text })}
-              />
-              <TextInput
-                style={styles.textInp}
-                placeholder=" Password"
-                onChangeText={text => this.setState({ password: text })}
-              />
-            </View>
+          <View style={{alignItems: "center", justifyContent: "center", flex: 1}}>
+            <Text style={styles.textBig}>Register</Text>
+          </View>
 
 
-            <View style={{alignItems: 'center', flex: 1}}>
-              <TouchableOpacity
-                style={styles.button}
-                onPress={this.onPress.bind(this)}
-                >
-                  <Text style={styles.buttonLabel}>Register</Text>
-                </TouchableOpacity>
+          <View style={{alignItems: "center", flex: 7}}>
+            <TextInput
+              style={styles.textInp}
+              placeholder=" Name"
+              onChangeText={text => this.setState({ name: text })}
+            />
+            <TextInput
+              style={styles.textInp}
+              placeholder=" Email"
+              onChangeText={text => this.setState({ email: text })}
+            />
+            <TextInput
+              style={styles.textInp}
+              placeholder=" Phone Number"
+              onChangeText={text => this.setState({ phone_number: text })}
+            />
+            <TextInput
+              style={styles.textInp}
+              placeholder=" Username"
+              onChangeText={text => this.setState({ username: text })}
+            />
+            <TextInput
+              style={styles.textInp}
+              placeholder=" Password"
+              onChangeText={text => this.setState({ password: text })}
+            />
+
+            <TouchableOpacity
+              style={styles.button}
+              onPress={this.onPress.bind(this)}
+              >
+                <Text style={styles.buttonLabel}>Register</Text>
+              </TouchableOpacity>
+
+              {/* <TextInput
+                style={styles.textInp}
+                placeholder=" Confirmation Code"
+                onChangeText={text => this.setState({ confirmationCode: text })}
+              /> */}
+
+              {/* <View style={{alignItems: 'center', flex: 1}}>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={this.confirmSignUp.bind(this)}
+                  >
+                    <Text style={styles.buttonLabel}>Confirm</Text>
+                  </TouchableOpacity>
+                </View> */}
+
               </View>
 
 
             </LinearGradient>
 
-        );
+          );
+        }
       }
-    }
 
-    const styles = StyleSheet.create({
-      textBig: {
-        fontSize: 40,
-        textAlign: 'center',
-        margin: 10,
-        color: "#79877c",
-        fontFamily: 'Georgia'
-      },
-      button: {
-        paddingTop: 10,
-        paddingBottom: 10,
-        marginTop: 10,
-        borderRadius: 5,
-        borderColor: "white",
-        borderWidth: 3,
-        width: 200
-      },
-      buttonLabel: {
-        textAlign: 'center',
-        fontSize: 25,
-        fontFamily: 'Georgia',
-        color: "#79877c"
-      },
-      textInp: {
-        margin: 10,
-        width: 200,
-        height: 40,
-        backgroundColor: "white",
-        borderColor: "white",
-        borderWidth: 3,
-      }
-    });
+      const styles = StyleSheet.create({
+        textBig: {
+          fontSize: 35,
+          textAlign: 'center',
+          margin: 10,
+          color: "#79877c",
+          fontFamily: 'Georgia'
+        },
+        button: {
+          paddingTop: 10,
+          paddingBottom: 10,
+          marginTop: 10,
+          borderRadius: 5,
+          borderColor: "white",
+          borderWidth: 3,
+          width: 200
+        },
+        buttonLabel: {
+          textAlign: 'center',
+          fontSize: 20,
+          fontFamily: 'Georgia',
+          color: "#79877c"
+        },
+        textInp: {
+          margin: 5,
+          width: 200,
+          height: 40,
+          backgroundColor: "white",
+          borderColor: "white",
+          borderWidth: 3,
+        }
+      });
