@@ -7,6 +7,7 @@ import {  StyleSheet,
   ListView,
   Alert,
   Button,
+  Image,
   RefreshControl,
   AsyncStorage } from 'react-native';
   import { LinearGradient } from 'expo';
@@ -40,38 +41,43 @@ import {  StyleSheet,
 
     render() {
       return(
-          <LinearGradient style={{display: 'flex', flex: 1}} colors={["#00a3cc", "white"]} >
+        <LinearGradient style={{display: 'flex', flex: 1}} colors={["#CAE2D0", "#CAE2D0"]} >
 
-              <View style={styles.contentBox}>
-                <Text style={styles.contentText}>How are you?</Text>
-              </View>
+          <View style={styles.contentBox}>
+            <Text style={styles.contentText}>How are you?</Text>
+          </View>
 
-              <View style={{alignItems:"center", flex: 1}}>
-                <Text style={styles.contentText}>{this.state.value}</Text>
-              </View>
+          <View style={{alignItems:"center", flex: 1}}>
+            <Text style={styles.val}>{this.state.value}</Text>
+          </View>
 
 
-              <View style={styles.slider}>
-                <Slider
-                  style={{width: "80%"}}
-                  value={this.state.value}
-                  onValueChange={(val) => this.setState({value: val })}
-                  step={1}
-                  minimumValue={1}
-                  maximumValue={7}
-                  thumbTintColor={"white"}
-                  minimumTrackTintColor={"white"}
-                  maximumTrackTintColor={"white"}
-                  animateTransitions={true} />
-                </View>
+          <View style={styles.slider}>
+            <Slider
+              style={{width: "80%"}}
+              value={this.state.value}
+              onValueChange={(val) => this.setState({value: val })}
+              step={1}
+              minimumValue={1}
+              maximumValue={7}
+              thumbTintColor={"#505a53"}
+              minimumTrackTintColor={"#505a53"}
+              maximumTrackTintColor={"#505a53"}
+              animateTransitions={true} />
+            </View>
 
-                <View style={{flex: 3, alignItems: 'center'}}>
-                  <TouchableOpacity onPress={this.continue.bind(this)} style={styles.nextButton}>
-                    <Text style={{fontSize: 16, color: "white", fontFamily:"Cochin", fontWeight:"500"}}>Next</Text>
-                  </TouchableOpacity>
-                </View>
+            <View style={{flex: 1, flexDirection: 'row', justifyContent:'space-between', marginLeft: "5%", marginRight: "5%"}}>
+              <Image style={{height:40, width: 40}} source={require('./sad.png')}/>
+              <Image style={{height:40, width: 40}} source={require('./happy.png')}/>
+            </View>
 
-            </LinearGradient>
+            <View style={{flex: 3, alignItems: 'center'}}>
+              <TouchableOpacity onPress={this.continue.bind(this)} style={styles.nextButton}>
+                <Text style={{fontSize: 30, color: "#79877c", fontFamily:"Cochin"}}>Next</Text>
+              </TouchableOpacity>
+            </View>
+
+          </LinearGradient>
         )
       }
     }
@@ -89,17 +95,23 @@ import {  StyleSheet,
         marginTop: 50
       },
       contentText:{
-        color: "white",
+        color: "#505a53",
         fontSize: 50,
         fontFamily:"Georgia"
       },
+      val:{
+        color: "#505a53",
+        fontSize: 60,
+        fontFamily:"Georgia"
+      },
       nextButton: {
-        borderColor: 'white',
-        width: 120,
-        height: 35,
+        width: 150,
+        height: 50,
         borderRadius: 15,
-        borderWidth: 1,
+        borderWidth: 3,
         justifyContent: 'center',
+        backgroundColor: '#e9f3ec',
+        borderColor: '#e9f3ec',
         alignItems: 'center'
       }
     });

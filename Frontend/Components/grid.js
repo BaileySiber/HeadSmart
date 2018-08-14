@@ -56,11 +56,12 @@ import {  StyleSheet,
     render(){
       return(
 
-        <LinearGradient style={{display: 'flex', flex:1}} colors={["#b3e0ff", "#00a3cc"]} >
+        <LinearGradient style={{display: 'flex', flex:1}} colors={["#CAE2D0", "#CAE2D0"]} >
 
 
-            <View style={{flex:1, marginTop: "10%"}}>
-              <Text style={styles.titleText}>What affected you today?</Text>
+            <View style={{flex:1, marginTop: "10%", marginBottom: "5%"}}>
+              <Text style={styles.titleText}>What affected you </Text>
+                <Text style={styles.titleText}> today?</Text>
             </View>
 
 
@@ -109,8 +110,8 @@ import {  StyleSheet,
     render(){
       return(
         <TouchableOpacity onPress={() => this.props.select(this.props.caption)} style={styles.iconStyle}>
-          <Icon color='white' type='ionicon' name={this.props.iconName} size={50} />
-          <Text style={{fontSize: 15, color: 'white'}}>{this.props.caption}</Text>
+          <Icon color='gray' type='ionicon' name={this.props.iconName} size={50} />
+          <Text style={{fontSize: 15, color: 'gray'}}>{this.props.caption}</Text>
         </TouchableOpacity>
       )
     }
@@ -121,34 +122,36 @@ import {  StyleSheet,
       justifyContent: "center",
       alignItems: 'center',
       borderWidth: 2,
-      borderColor: 'white',
+      borderRadius: 10,
+      borderColor: '#CAE2D0',
+      backgroundColor: '#e9f3ec',
       width: "33.33%",
       paddingBottom: "2%"
     },
     nextButton: {
       alignItems: "center",
       justifyContent: 'center',
-      borderWidth: 1,
-      borderColor: 'white',
+      borderWidth: 3,
+      borderColor: '#e9f3ec',
       width: 120,
-      height: 35,
+      height: 50,
       borderRadius: 15
 
     },
     titleText:{
       textAlign:"center",
       justifyContent: 'center',
-      fontSize: 30,
-      color:"white",
+      fontSize: 40,
+      color:"#505a53",
       fontFamily:"Cochin"
     },
     nextText:{
-      fontSize: 20,
+      fontSize: 25,
       fontFamily: 'Cochin',
       textAlign:"center",
       justifyContent: 'center',
       fontSize: 25,
-      color:"white",
+      color:"#505a53",
       fontFamily:"Cochin"
     }
   })

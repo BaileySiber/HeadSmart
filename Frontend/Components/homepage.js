@@ -59,7 +59,7 @@ export default class HomePage extends React.Component{
 
           <View style={{alignItems: "center", marginTop: "10%"}}>
 
-            <Text style={{fontFamily:"Georgia", color:"black", fontSize: 45}}>Home</Text>
+            <Text style={{fontFamily:"Georgia", color:"#505a53", fontSize: 45}}>Home</Text>
 
             <View style={{display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "space-around", margin: "5%"}}>
               <View>

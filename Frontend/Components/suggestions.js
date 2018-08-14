@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   TextInput,
   ListView,
+  Image,
   Alert,
   Button,
   RefreshControl,
@@ -43,91 +44,92 @@ export default class SuggestionsScreen extends React.Component {
     }
     switch(name) {
       case 'Physical activity':
-        this.props.navigation.navigate("PhysicalActivity", {userInfo: userInfo})
-        break;
+      this.props.navigation.navigate("PhysicalActivity", {userInfo: userInfo})
+      break;
       case 'Watch something funny':
-        this.props.navigation.navigate("Funny", {userInfo: userInfo})
-        break;
+      this.props.navigation.navigate("Funny", {userInfo: userInfo})
+      break;
       case 'Gratitude list':
-        this.props.navigation.navigate("Gratitude", {userInfo: userInfo})
-        break;
+      this.props.navigation.navigate("Gratitude", {userInfo: userInfo})
+      break;
       case 'Apology letter to self':
-        this.props.navigation.navigate("letterSelf", {userInfo: userInfo})
-        break;
+      this.props.navigation.navigate("letterSelf", {userInfo: userInfo})
+      break;
       case 'Apology letter to someone else':
-        this.props.navigation.navigate("letterOther", {userInfo: userInfo})
-        break;
+      this.props.navigation.navigate("letterOther", {userInfo: userInfo})
+      break;
       case 'Check your magnification':
-        this.props.navigation.navigate("Magnify", {userInfo: userInfo})
-        break;
+      this.props.navigation.navigate("Magnify", {userInfo: userInfo})
+      break;
       case 'Call someone!':
-        this.props.navigation.navigate("Call", {userInfo: userInfo})
-        break;
+      this.props.navigation.navigate("Call", {userInfo: userInfo})
+      break;
       case 'Listen to music':
-        this.props.navigation.navigate("Music", {userInfo: userInfo})
-        break;
+      this.props.navigation.navigate("Music", {userInfo: userInfo})
+      break;
       case 'Take a shower':
-        this.props.navigation.navigate("Shower", {userInfo: userInfo})
-        break;
+      this.props.navigation.navigate("Shower", {userInfo: userInfo})
+      break;
       case 'Write angry letter':
-        this.props.navigation.navigate("letterAngry", {userInfo: userInfo})
-        break;
+      this.props.navigation.navigate("letterAngry", {userInfo: userInfo})
+      break;
       case 'Breathing exercise':
-        this.props.navigation.navigate("Breathing", {userInfo: userInfo})
-        break;
+      this.props.navigation.navigate("Breathing", {userInfo: userInfo})
+      break;
       case 'Drink something warm':
-        this.props.navigation.navigate("Drink", {userInfo: userInfo})
-        break;
+      this.props.navigation.navigate("Drink", {userInfo: userInfo})
+      break;
       case 'Grounding exercise':
-        this.props.navigation.navigate("Grounding", {userInfo: userInfo})
-        break;
+      this.props.navigation.navigate("Grounding", {userInfo: userInfo})
+      break;
       case 'Eat!':
-        this.props.navigation.navigate("Eat", {userInfo: userInfo})
-        break;
+      this.props.navigation.navigate("Eat", {userInfo: userInfo})
+      break;
     }
 
   }
 
   render(){
     return(
-      <View>
-        <LinearGradient style={{height:"100%", paddingTop: "10%"}} colors={["#b3e0ff", "#00a3cc"]} >
+      <LinearGradient style={{display: 'flex', flex: 1, height:"100%", paddingTop: "10%", alignItems: 'center'}} colors={["#CAE2D0", "#CAE2D0"]} >
           <ListView dataSource={this.state.renderList}
             renderRow={item => (
               <TouchableOpacity onPress={() => this.callExercise(item.name)}>
-                  <Text style={styles.name}>
-                    {item.name}
-                  </Text>
-                  <Text style={styles.description}>
-                    {item.description}
-                  </Text>
+                <View style={{padding: "2%", marginLeft: '5%', marginRight:'5%', marginBottom:"2%", backgroundColor: '#e9f3ec', borderRadius: 20}}>
+                <Text style={styles.name}>
+                  {item.name}
+                </Text>
+                <Text style={styles.description}>
+                  {item.description}
+                </Text>
+              </View>
               </TouchableOpacity>
             )}
           />
-        </LinearGradient>
-      </View>
+          <Image style={{height:"20%", width: "70%"}} source={require('./pick.png')}/>
+      </LinearGradient>
     )
   }
 }
 
 const styles = StyleSheet.create({
   name: {
-    color:"white",
+    color:"#505a53",
     fontSize: 30,
     textAlign: 'center',
-    marginTop: '5%',
+    marginTop: '3%',
     marginLeft: '5%',
     marginRight: '5%',
     fontFamily: "Georgia"
   },
   description: {
-    color:"white",
+    color:"#505a53",
     fontSize: 15,
     textAlign: 'center',
+    marginTop:'3%',
     marginLeft: '10%',
     marginRight: '10%',
-    marginBottom: '10%',
-    marginTop: '5%',
+    marginBottom: '2%',
     fontFamily: "Georgia"
   }
 })

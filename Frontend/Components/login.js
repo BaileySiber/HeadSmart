@@ -23,7 +23,7 @@ export default class LoginScreen extends React.Component {
       userid: ''
     }
   }
-  
+
   login(){
     let queryUrl = url + '/login';
     return fetch(queryUrl, {
@@ -38,9 +38,10 @@ export default class LoginScreen extends React.Component {
     })
     .then(response => response.json())
     .then(json => {
-      if (json.userid){
+      console.log('json is ------' + json)
+      if (json){
         this.setState({
-          userid: json.userid
+          userid: json
         });
         this.props.navigation.navigate('HomePage', {userInfo: this.state});
       }
