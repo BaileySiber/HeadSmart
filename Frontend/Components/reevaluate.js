@@ -120,15 +120,15 @@ import {  StyleSheet,
         <View style={{display: 'flex', flex: 1}}>
           {!this.state.effective ?
 
-            <View style={{display: 'flex', flex: 1, backgroundColor: "#00a3cc"}}>
+            <View style={{display: 'flex', flex: 1, backgroundColor: "#CAE2D0"}}>
 
               {this.state.positiveBool ?
-                <View style={{alignItems: 'center'}}>
-                  <Text style={{color:"white", fontFamily: "Cochin", fontSize: 50}}>Positive</Text>
+                <View style={{alignItems: 'center', paddingTop:15}}>
+                  <Text style={{color:"#505a53", fontFamily: "Cochin", fontSize: 50}}>Positive</Text>
                 </View>
                 :
-                <View style={{alignItems: 'center'}}>
-                  <Text style={{color:"white", fontFamily: "Cochin", fontSize: 50}}>Negative</Text>
+                <View style={{alignItems: 'center', paddingTop:15}}>
+                  <Text style={{color:"#505a53", fontFamily: "Cochin", fontSize: 50}}>Negative</Text>
                 </View>
               }
 
@@ -142,7 +142,7 @@ import {  StyleSheet,
                   let n = rowData;
                   return (
                     <View style={styles.sliderBox}>
-                      <Text style={{color: 'white', fontSize: 20}}>{n}: {this.state.positiveObj[n]}</Text>
+                      <Text style={{color: '#505a53', fontSize: 20}}>{n}: {this.state.positiveObj[n]}</Text>
                       <Slider
                         style={{width: "80%"}}
                         value={this.state.positiveObj[n]}
@@ -150,9 +150,9 @@ import {  StyleSheet,
                         step={1}
                         minimumValue={0}
                         maximumValue={10}
-                        thumbTintColor={"white"}
-                        minimumTrackTintColor={"white"}
-                        maximumTrackTintColor={"white"}
+                        thumbTintColor={"#505a53"}
+                        minimumTrackTintColor={"#505a53"}
+                        maximumTrackTintColor={"#505a53"}
                         animateTransitions={true} />
                       </View>
                     )}
@@ -164,7 +164,7 @@ import {  StyleSheet,
                     let n = rowData;
                     return (
                       <View style={styles.sliderBox}>
-                        <Text style={{color: 'white', fontSize: 20}}>{n}: {this.state.negativeObj[n]}</Text>
+                        <Text style={{color: '#505a53', fontSize: 20}}>{n}: {this.state.negativeObj[n]}</Text>
                         <Slider
                           style={{width: "80%"}}
                           value={this.state.negativeObj[n]}
@@ -172,9 +172,9 @@ import {  StyleSheet,
                           step={1}
                           minimumValue={0}
                           maximumValue={10}
-                          thumbTintColor={"white"}
-                          minimumTrackTintColor={"white"}
-                          maximumTrackTintColor={"white"}
+                          thumbTintColor={"#505a53"}
+                          minimumTrackTintColor={"#505a53"}
+                          maximumTrackTintColor={"#505a53"}
                           animateTransitions={true} />
                         </View>
                       )}
@@ -182,38 +182,23 @@ import {  StyleSheet,
                   }
 
                   {this.state.positiveBool ?
-                    <View style={{alignItems: 'center'}}>                                                         //positive or negative at top
+                    <View style={{alignItems: 'center', marginBottom: "5%"}}>                                                         //positive or negative at top
                     <TouchableOpacity style={styles.buttonStyle} onPress={() => this.toNegatives()}>
-                      <Text style={{fontSize: 16, color: "white", fontFamily:"Cochin"}}>Next</Text>
+                      <Text style={{fontSize: 25, color: "#79877c", fontFamily:"Cochin"}}>Next</Text>
                     </TouchableOpacity>
                   </View>
-
-
                   :
-
-                  <View style={{alignItems:'center'}}>
+                  <View style={{alignItems:'center', marginBottom: "5%"}}>
                     <TouchableOpacity style={styles.buttonStyle} onPress={() => this.toEffectiveness()}>
-                      <Text style={{fontSize: 16, color: "white", fontFamily:"Cochin"}}>Next</Text>
+                      <Text style={{fontSize: 25, color: "#79877c", fontFamily:"Cochin"}}>Next</Text>
                     </TouchableOpacity>
                   </View>
-
-
-
                 }
-
               </View>
-
               :
-
-              <View style={{display: 'flex', flex: 1, backgroundColor: "#00a3cc"}}>
-
-
+              <View style={{display: 'flex', flex: 1, backgroundColor: "#CAE2D0", paddingTop: '10%'}}>
                 <Text style={styles.contentText}>How useful was the suggestion?</Text>
-
-
                 <Text style={styles.contentText}>{this.state.score}</Text>
-
-
                 <View style={styles.sliderBox}>
                   <Slider
                     style={{width: "80%"}}
@@ -222,24 +207,21 @@ import {  StyleSheet,
                     step={1}
                     minimumValue={0}
                     maximumValue={10}
-                    thumbTintColor={"white"}
-                    minimumTrackTintColor={"white"}
-                    maximumTrackTintColor={"white"}
+                    thumbTintColor={"#505a53"}
+                    thumbTintColor={"#505a53"}
+                    minimumTrackTintColor={"#505a53"}
+                    maximumTrackTintColor={"#505a53"}
                     animateTransitions={true} />
                   </View>
 
                   <View style={{alignItems:'center'}}>
                     <TouchableOpacity onPress={() => this.toFinal()} style={styles.doneButton}>
-                      <Text style={{fontSize: 16, color: "white", fontFamily:"Cochin", fontWeight:"500"}}>Done</Text>
+                      <Text style={{fontSize: 25, color: "#79877c", fontFamily:"Cochin"}}>Done</Text>
                     </TouchableOpacity>
                   </View>
-
-
                 </View>
               }
-
             </View>
-
           )
         }
       }
@@ -256,13 +238,14 @@ import {  StyleSheet,
           justifyContent: "center",
         },
         contentText:{
-          color: "white",
+          color: "#505a53",
           textAlign: 'center',
           fontSize: 50,
           fontFamily:"Georgia"
         },
         buttonStyle: {
-          borderColor: 'white',
+          borderColor: '#e9f3ec',
+          backgroundColor: '#e9f3ec',
           width: 120,
           height: 35,
           borderRadius: 15,
@@ -271,7 +254,8 @@ import {  StyleSheet,
           alignItems: 'center'
         },
         doneButton: {
-          borderColor: 'white',
+          borderColor: '#e9f3ec',
+          backgroundColor: '#e9f3ec',
           width: 120,
           height: 35,
           borderRadius: 15,

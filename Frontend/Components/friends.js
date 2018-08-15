@@ -6,6 +6,7 @@ import {
   Text,
   TouchableOpacity,
   TextInput,
+  Image,
   ListView,
   Alert,
   Button,
@@ -47,8 +48,6 @@ export default class FriendsScreen extends React.Component {
     .catch(err => console.log(err))
   }
 
-    // componentDidMount() {
-    // }
 
     removeFriend(id) {
       let queryUrl = url + '/' + this.state.userid + '/removeFriend';
@@ -162,8 +161,8 @@ export default class FriendsScreen extends React.Component {
 
     render(){
       return (
-        <View style={{backgroundColor:"#00a3cc", height: '100%'}}>
-          <Text style={{fontSize: 25, textAlign: 'center', margin: "5%", marginTop: "10%", color: "white"}}>
+        <View style={{backgroundColor:"#CAE2D0", height: '100%'}}>
+          <Text style={{fontFamily: "Georgia", fontSize: 30, textAlign: 'center', margin: "5%", marginTop: "10%", color: "#79877c"}}>
             Here are your friends!
           </Text>
           {this.state.friendList.length ?
@@ -180,30 +179,36 @@ export default class FriendsScreen extends React.Component {
                 )}/>
               </List>: null
             }
-            <Text style={{fontSize: 18, textAlign: 'center', margin: "5%", marginTop: "10%", color: "white"}}>
-              If your friend's emotion number is low, try to reach out
-            </Text>
+
+            <View style={{marginTop: "5%", alignItems:'center'}}>
+            <Image style={{height:70, width: 190}} source={require('./whales.png')}/>
+            </View>
+
             <View style={{alignItems: 'center'}}>
+              <Text style={{fontFamily: "Georgia", fontSize: 25, textAlign: 'center', marginTop: "5%", color: "#79877c"}}>
+                Send friend request:
+              </Text>
           <TextInput
             style={{
               margin: 15,
               width: 200,
-              height: 25,
+              height: 35,
               borderColor: "white",
+              backgroundColor: "white",
               borderWidth: 2
             }}
-            placeholder="Send request with username"
+            placeholder="username"
             value={this.state.friend}
             onChangeText={text => {
               this.setState({ friend: text })}
             }
           />
-          <TouchableOpacity onPress={() => this.sendRequest(this.state.friend)} style={styles.addbutton}>
-            <Text style={{fontSize: 20, color: "white", fontFamily:"Cochin"}}>Send!</Text>
+          <TouchableOpacity style={styles.addButton} onPress={() => this.sendRequest(this.state.friend)}>
+            <Text style={styles.buttonLabel}>Send</Text>
           </TouchableOpacity>
           </View>
 
-          <Text style={{fontSize: 15, textAlign: 'center', margin: "5%", marginTop: "10%", color: "white"}}>
+          <Text style={{fontSize: 20, textAlign: 'center', margin: "5%", marginTop: "10%", color: "#79877c"}}>
             Pending Requests
           </Text>
           {this.state.pendingList.length ?
@@ -229,13 +234,18 @@ export default class FriendsScreen extends React.Component {
 
 const styles = StyleSheet.create({
   addButton: {
-    borderColor: 'white',
-    width: 100,
-    height: 50,
-    borderRadius: 15,
-    borderWidth: 1,
-    justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: '20%'
+    padding: 10,
+    margin: 10,
+    borderColor: "white",
+    borderRadius: 5,
+    borderWidth: 3,
+    width: 150
+  },
+  buttonLabel: {
+    fontFamily:"Cochin",
+    color:"#79877c",
+    textAlign: 'center',
+    fontSize: 20
   }
 })

@@ -41,7 +41,6 @@ export default class Journal extends React.Component{
   }
 
   skipSection(){
-
     const queryUrl = url + '/' + this.state.userid + '/newLog';
     return fetch(queryUrl, {
       method: "POST",
@@ -179,7 +178,7 @@ export default class Journal extends React.Component{
 
           <View>
             <View>
-              <Text style={{textAlign: 'center', color:"#505a53", fontFamily: "Georgia", fontSize: 40}}>Daily Journal</Text>
+              <Text style={{marginTop: "5%", textAlign: 'center', color:"#505a53", fontFamily: "Georgia", fontSize: 40}}>Daily Journal</Text>
             </View>
 
             <TouchableOpacity>
@@ -190,7 +189,6 @@ export default class Journal extends React.Component{
             <View style={{alignItems:"center", justifyContent:"center"}}>
               <TextInput
                 style={{
-                  margin: 10,
                   width: '80%',
                   height: '80%',
                   borderColor: "white",

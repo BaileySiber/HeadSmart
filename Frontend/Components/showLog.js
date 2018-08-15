@@ -21,6 +21,7 @@ export default class Journal extends React.Component{
       journalBody: '',
       emotionColor: 0,
       reasons: [],
+      creationTime: '',
       newDetailedEmotions: [],
       oldDetailedEmotions: [],
       completedSuggestion: '',
@@ -31,6 +32,10 @@ export default class Journal extends React.Component{
 
   componentDidMount(){
     let userInfo = this.props.navigation.getParam('userInfo');
+
+    var dateString = userInfo.log.creationTime.toString();
+    console.log(dateString)
+
     this.setState({
           journalBody: userInfo.log.journalBody,
           emotionColor: userInfo.log.emotionColor,

@@ -59,9 +59,9 @@ import {  StyleSheet,
       });
       return(
         <View>
-          <LinearGradient style={{height:"100%"}} colors={["#00a3cc", "#00a3cc"]}>
+          <LinearGradient style={{height:"100%"}} colors={["#CAE2D0", "#CAE2D0"]}>
 
-            <Text>
+            <Text style={{fontFamily:"Georgia", color:"#505a53", textAlign:'center', fontSize: 40, marginBottom: "5%", marginTop: "5%"}}>
               Old logs
             </Text>
               <ListView                                                                       //list of names/intensities
@@ -70,8 +70,8 @@ import {  StyleSheet,
                 let n = rowData;
                 return (
                   <View style={styles.entryBox}>
-                    <TouchableOpacity onPress={() => this.navFullLog(this.state.entries[n]._id)}>
-                    <Text style={{color: 'white', fontSize: 20}}>{n}:{this.state.entries[n].creationTime}</Text>
+                    <TouchableOpacity style={styles.log} onPress={() => this.navFullLog(this.state.entries[n]._id)}>
+                    <Text style={{color: '#505a53', fontSize: 20}}>{this.state.entries[n].creationTime}</Text>
                     </TouchableOpacity>
                     </View>
                   )}
@@ -89,17 +89,10 @@ import {  StyleSheet,
           width: "100%",
           alignItems: 'center'
         },
-        Title: {
-          textAlign: 'center',
-          fontSize: 20
-        },
-        buttonStyle: {
-          borderColor: 'white',
-          width: 120,
-          height: 35,
-          borderRadius: 15,
-          borderWidth: 1,
-          justifyContent: 'center',
-          alignItems: 'center'
+        log: {
+          padding: "5%",
+          backgroundColor: '#e9f3ec',
+          borderRadius: 10,
+          marginBottom:"5%",
         }
       })

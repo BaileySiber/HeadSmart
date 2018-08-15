@@ -44,42 +44,36 @@ export default class StatsScreen extends React.Component {
 
   render(){
     return(
-      <View style={{flex:1}}>
-          <LinearGradient style={{height:"100%"}} colors={["#7fd64d", "#4dd6ba"]} >
 
-          <View style={{flex:1, backgroundColor: this.state.emo_color, }}>
-          <Text style={{color: 'white', fontSize: 30}}>Your Top 5 emotions:</Text>
-          <View style={{justifyContent: "space-evenly"}}>
-          <Text style={{color: 'white', fontSize: 20}}>{this.state.topEmotions[0]}</Text>
-          <Text style={{color: 'white', fontSize: 20}}>{this.state.topEmotions[1]}</Text>
-          <Text style={{color: 'white', fontSize: 20}}>{this.state.topEmotions[2]}</Text>
-          <Text style={{color: 'white', fontSize: 20}}>{this.state.topEmotions[3]}</Text>
-          <Text style={{color: 'white', fontSize: 20}}>{this.state.topEmotions[4]}</Text>
-          </View>
-          </View>
+      <LinearGradient style={{height:"100%"}} colors={["#CAE2D0", "#CAE2D0"]} >
 
-          <View style={{flex:1}}>
-          <Text style={{color: "#658BF3", fontSize: 30}}>We think these aspects of your life affect your emotions the most:</Text>
-          <View style={{justifyContent: "space-evenly"}}>
-          <Text style={{color: 'white', fontSize: 20}}>{this.state.topReasons[0]}</Text>
-          <Text style={{color: 'white', fontSize: 20}}>{this.state.topReasons[1]}</Text>
-          <Text style={{color: 'white', fontSize: 20}}>{this.state.topReasons[2]}</Text>
-          </View>
-          </View>
+        <Text style={{marginTop: "5%", color: '#505a53', fontSize: 25, textAlign: 'center'}}>Your Top 5 emotions are:</Text>
+        <Text style={styles.emo}>{this.state.topEmotions[0]}</Text>
+        <Text style={styles.emo}>{this.state.topEmotions[1]}</Text>
+        <Text style={styles.emo}>{this.state.topEmotions[2]}</Text>
+        <Text style={styles.emo}>{this.state.topEmotions[3]}</Text>
+        <Text style={styles.emo}>{this.state.topEmotions[4]}</Text>
 
-          <View style={{flex:1, justifyContent: "space-evenly"}}>
-          <Text style={{color: 'white', fontSize: 20}}>{this.state.mostProductiveActivity} helped you the most!</Text>
-          <Text style={{color: 'white', fontSize: 20}}>You did {this.state.mostUsedSuggestion} most often!</Text>
-          </View>
-
-          <View style={{flex:1, justifyContent: 'center'}}>
-          <Text style={{color: 'white', fontSize: 20}}>You have logged {this.state.totalLogs} times!</Text>
-          </View>
+        <Text style={{color: "#505a53", fontSize: 25, textAlign: 'center'}}>What affects you the most:</Text>
+        <Text style={styles.emo}>{this.state.topReasons[0]}</Text>
+        <Text style={styles.emo}>{this.state.topReasons[1]}</Text>
+        <Text style={styles.emo}>{this.state.topReasons[2]}</Text>
 
 
-          </LinearGradient>
-          </View>
+        <Text style={{color: '#505a53', fontSize: 25, textAlign:'center', marginLeft: "5%", marginRight:"5%"}}>{this.state.mostProductiveActivity} helps you the most!</Text>
+        <Text style={{color: '#505a53', fontSize: 25, textAlign:'center', marginLeft: "5%", marginRight:"5%"}}>You do {this.state.mostUsedSuggestion} most often!</Text>
 
+        <Text style={{marginTop: "10%", color: '#505a53', fontSize: 20, textAlign:'center'}}>You have logged {this.state.totalLogs} times!</Text>
+
+      </LinearGradient>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  emo: {
+    color: '#505a53',
+    textAlign: 'center',
+    fontSize: 15
+  }
+})

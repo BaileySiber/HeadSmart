@@ -91,7 +91,7 @@ export default class SuggestionsScreen extends React.Component {
 
   render(){
     return(
-      <LinearGradient style={{display: 'flex', flex: 1, height:"100%", paddingTop: "10%", alignItems: 'center'}} colors={["#CAE2D0", "#CAE2D0"]} >
+      <LinearGradient style={{display: 'flex', flex: 1, height:"100%", paddingTop: "5%", alignItems: 'center'}} colors={["#CAE2D0", "#CAE2D0"]} >
           <ListView dataSource={this.state.renderList}
             renderRow={item => (
               <TouchableOpacity onPress={() => this.callExercise(item.name)}>
