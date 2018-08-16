@@ -54,14 +54,14 @@ export default class StatsScreen extends React.Component {
         <Text style={styles.emo}>{this.state.topEmotions[3]}</Text>
         <Text style={styles.emo}>{this.state.topEmotions[4]}</Text>
 
-        <Text style={{color: "#505a53", fontSize: 25, textAlign: 'center'}}>What affects you the most:</Text>
+        <Text style={{marginTop: "5%", color: "#505a53", fontSize: 25, textAlign: 'center'}}>What affects you the most:</Text>
         <Text style={styles.emo}>{this.state.topReasons[0]}</Text>
         <Text style={styles.emo}>{this.state.topReasons[1]}</Text>
         <Text style={styles.emo}>{this.state.topReasons[2]}</Text>
 
 
-        <Text style={{color: '#505a53', fontSize: 25, textAlign:'center', marginLeft: "5%", marginRight:"5%"}}>{this.state.mostProductiveActivity} helps you the most!</Text>
-        <Text style={{color: '#505a53', fontSize: 25, textAlign:'center', marginLeft: "5%", marginRight:"5%"}}>You do {this.state.mostUsedSuggestion} most often!</Text>
+        <Text style={{marginTop: "5%", color: '#505a53', fontSize: 25, textAlign:'center', marginLeft: "5%", marginRight:"5%"}}>{this.state.mostProductiveActivity} helps you the most!</Text>
+        <Text style={{marginTop: "5%", color: '#505a53', fontSize: 25, textAlign:'center', marginLeft: "5%", marginRight:"5%"}}>You do {this.state.mostUsedSuggestion} most often!</Text>
 
         <Text style={{marginTop: "10%", color: '#505a53', fontSize: 20, textAlign:'center'}}>You have logged {this.state.totalLogs} times!</Text>
 
@@ -74,6 +74,6 @@ const styles = StyleSheet.create({
   emo: {
     color: '#505a53',
     textAlign: 'center',
-    fontSize: 15
+    fontSize: 20
   }
 })

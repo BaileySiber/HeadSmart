@@ -12,6 +12,7 @@ import {  StyleSheet,
   AsyncStorage } from 'react-native';
   import { LinearGradient } from 'expo';
   import { Slider } from 'react-native-elements';
+  import moment from "moment";
 
 
   export default class EmotionsScreen extends React.Component{
@@ -52,7 +53,6 @@ import {  StyleSheet,
       .catch(err => console.log('err sending full log info' + err))
     }
 
-
     render(){
       const ds = new ListView.DataSource({
         rowHasChanged: (r1, r2) => r1 !== r2
@@ -65,18 +65,17 @@ import {  StyleSheet,
               Old logs
             </Text>
               <ListView                                                                       //list of names/intensities
-              dataSource={ds.cloneWithRows(Object.keys(this.state.entries))}
+              dataSource={ds.cloneWithRows(Object.keys(this.state.entries).reverse())}
               renderRow={rowData => {
                 let n = rowData;
                 return (
                   <View style={styles.entryBox}>
                     <TouchableOpacity style={styles.log} onPress={() => this.navFullLog(this.state.entries[n]._id)}>
-                    <Text style={{color: '#505a53', fontSize: 20}}>{this.state.entries[n].creationTime}</Text>
+                    <Text style={{color: '#505a53', fontSize: 20, textAlign:'center'}}>{moment(this.state.entries[n].creationTime).format("dddd, MMMM Do YYYY, h:mm:ss a")}</Text>
                     </TouchableOpacity>
                     </View>
                   )}
                 } />
-
               </LinearGradient>
             </View>
           )}
@@ -84,15 +83,14 @@ import {  StyleSheet,
 
       const styles = StyleSheet.create({
         entryBox: {
-          paddingTop: 15,
-          height: 80,
-          width: "100%",
-          alignItems: 'center'
+          alignItems: 'center',
+          marginLeft: "5%",
+          marginRight: "5%",
+          marginBottom: '5%'
         },
         log: {
           padding: "5%",
           backgroundColor: '#e9f3ec',
           borderRadius: 10,
-          marginBottom:"5%",
         }
       })

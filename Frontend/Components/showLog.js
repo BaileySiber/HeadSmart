@@ -13,6 +13,7 @@ import {
   AsyncStorage
 } from "react-native"
 import { LinearGradient } from "expo";
+import moment from "moment";
 
 export default class Journal extends React.Component{
   constructor(props){
@@ -43,7 +44,7 @@ export default class Journal extends React.Component{
           newDetailedEmotions: userInfo.log.newDetailedEmotions,
           oldDetailedEmotions: userInfo.log.oldDetailedEmotions,
           completedSuggestion: userInfo.log.completedSuggestion,
-          creationTime: userInfo.log.creationTime,
+          creationTime: moment(userInfo.log.creationTime).format("dddd, MMMM Do YYYY, h:mm:ss a"),
           userid: userInfo.userid
         })
     };
