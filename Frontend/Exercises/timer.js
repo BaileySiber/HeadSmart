@@ -46,9 +46,9 @@ export default class TimerScreen extends React.Component {
 
         {this.state.end ?
 
-          <View style={{alignItems:'center'}}>
-            <TouchableOpacity onPress={() => this.toreEvaluate()} style={styles.doneButton}>
-              <Text style={{fontSize: 25, color: "#505a53", fontFamily:"Cochin"}}>Done</Text>
+          <View style={{display: 'flex', flex:1, alignItems:'center', justifyContent:'center'}}>
+            <TouchableOpacity onPress={() => this.toreEvaluate()} style={styles.button}>
+                <Text style={styles.buttonLabel}>Done</Text>
             </TouchableOpacity>
           </View>
 
@@ -104,12 +104,9 @@ export default class TimerScreen extends React.Component {
                 </TouchableOpacity>
 
               </View>
-
             }
-
           </View>
         }
-
       </View>
     );
   }
@@ -117,15 +114,20 @@ export default class TimerScreen extends React.Component {
 
 
 const styles = StyleSheet.create({
-  doneButton: {
-    marginTop: "50%",
-    borderColor: 'white',
-    width: 200,
-    height: 50,
-    borderRadius: 15,
-    borderWidth: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+  button: {
+    alignItems: 'center',
+    padding: 10,
+    margin: 10,
+    borderColor: "white",
+    borderRadius: 5,
+    borderWidth: 3,
+    width: 150
+  },
+  buttonLabel: {
+    fontFamily:"Cochin",
+    color:"#79877c",
+    textAlign: 'center',
+    fontSize: 30
   },
   list: {
     color: "#505a53",

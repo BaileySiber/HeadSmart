@@ -3,6 +3,7 @@ import url from './url';
 import {
   StyleSheet,
   View,
+  ScrollView,
   Text,
   TouchableOpacity,
   TextInput,
@@ -38,83 +39,92 @@ export default class Journal extends React.Component{
     console.log(dateString)
 
     this.setState({
-          journalBody: userInfo.log.journalBody,
-          emotionColor: userInfo.log.emotionColor,
-          reasons: userInfo.log.reasons,
-          newDetailedEmotions: userInfo.log.newDetailedEmotions,
-          oldDetailedEmotions: userInfo.log.oldDetailedEmotions,
-          completedSuggestion: userInfo.log.completedSuggestion,
-          creationTime: moment(userInfo.log.creationTime).format("dddd, MMMM Do YYYY, h:mm:ss a"),
-          userid: userInfo.userid
-        })
-    };
+      journalBody: userInfo.log.journalBody,
+      emotionColor: userInfo.log.emotionColor,
+      reasons: userInfo.log.reasons,
+      newDetailedEmotions: userInfo.log.newDetailedEmotions,
+      oldDetailedEmotions: userInfo.log.oldDetailedEmotions,
+      completedSuggestion: userInfo.log.completedSuggestion,
+      creationTime: moment(userInfo.log.creationTime).format("dddd, MMMM Do YYYY, h:mm:ss a"),
+      userid: userInfo.userid
+    })
+  };
 
-toHome() {
-  let userInfo = {
-    userid: this.state.userid,
+  toHome() {
+    let userInfo = {
+      userid: this.state.userid,
+    }
+    this.props.navigation.navigate('HomePage', {userInfo: userInfo});
   }
-  this.props.navigation.navigate('HomePage', {userInfo: userInfo});
-}
 
 
   render(){
 
     return (
 
-      <LinearGradient style={{height:"100%"}} colors={["#00a3cc", "#00a3cc"]} >
+      <LinearGradient style={{display:'flex', flex:1, height:"100%"}} colors={["#CAE2D0", "#CAE2D0"]} >
 
 
         <View>
-          <Text style={{textAlign: 'center', color:"white", fontFamily: "Cochin", margin:"5%", fontSize: 30}}>Your Log from: {this.state.creationTime}</Text>
+          <Text style={{textAlign: 'center', color:"#79877c", fontFamily: "Georgia", margin:"5%", fontSize: 25}}>{this.state.creationTime}</Text>
         </View>
 
-        <View>
-          <Text style={{textAlign: 'center', color:"white", fontFamily: "Cochin", margin:"5%", fontSize: 20}}>Overall mood: {this.state.emotionColor}</Text>
+        <View style={{flex:1}}>
+          <Text style={{textAlign: 'center', color:"#79877c", fontFamily: "Georgia", margin:"5%", fontSize: 20}}>Overall mood: {this.state.emotionColor}</Text>
         </View>
 
-        <View>
-          <Text style={{textAlign: 'center', color:"white", fontFamily: "Cochin", margin:"5%", fontSize: 20}}>Reasons: {this.state.reasons} </Text>
-        </View>
 
-        <View>
-          <Text style={{textAlign: 'center', color:"white", fontFamily: "Cochin", margin:"5%", fontSize: 20}}>Journal: {this.state.journalBody}</Text>
-        </View>
+        {this.state.reasons ?
+          <View style={{flex:1}}>
+            <Text style={{textAlign: 'center', color:"#79877c", fontFamily: "Georgia", margin:"5%", fontSize: 20}}>Reasons: {this.state.reasons} </Text>
+          </View>
+          : null }
 
-        <View>
-          <Text style={{textAlign: 'center', color:"white", fontFamily: "Cochin", margin:"5%", fontSize: 20}}>Suggestion: {this.state.completedSuggestion}</Text>
-        </View>
+          {this.state.journalBody ?
+            <View style={{flex:1}}>
+              <View>
+                <Text style={{textAlign: 'center', color:"#79877c", fontFamily: "Georgia", fontSize: 20}}>Journal:</Text>
+              </View>
+              <View style={{paddingTop:"3%", marginLeft:"10%", marginRight:"10%", backgroundColor: '#e9f3ec', borderRadius:10}}>
+                <Text style={{backgroundColor: '#e9f3ec', textAlign: 'center', color:"#79877c", fontFamily: "Georgia", fontSize: 15}}>{this.state.journalBody}</Text>
+              </View>
+            </View>
+            : null}
 
-        <View style={{alignItems:'center'}}>
-          <TouchableOpacity onPress={() => this.toHome()} style={styles.doneButton}>
-            <Text style={{fontSize: 20, color: "white", fontFamily:"Cochin"}}>Done</Text>
-          </TouchableOpacity>
-        </View>
+            {this.state.completedSuggestion ?
+              <View style={{flex:1}}>
+                <Text style={{textAlign: 'center', color:"#79877c", fontFamily: "Georgia", margin:"5%", fontSize: 20}}>Suggestion: {this.state.completedSuggestion}</Text>
+              </View>
+              : null}
 
-      </LinearGradient>
+              <View style={{flex: 1, alignItems:'center'}}>
+                <TouchableOpacity onPress={() => this.toHome()} style={styles.doneButton}>
+                  <Text style={styles.buttonLabel}>Done</Text>
+                </TouchableOpacity>
+              </View>
 
-    );
-  }
-}
+            </LinearGradient>
+
+          );
+        }
+      }
 
 
 
-const styles = StyleSheet.create({
-  buttonStyle: {
-    borderColor: 'white',
-    width: 120,
-    height: 50,
-    borderRadius: 15,
-    borderWidth: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  doneButton: {
-    borderColor: 'white',
-    width: 100,
-    height: 50,
-    borderRadius: 15,
-    borderWidth: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
-})
+      const styles = StyleSheet.create({
+        buttonLabel: {
+          fontFamily:"Cochin",
+          color:"#79877c",
+          textAlign: 'center',
+          fontSize: 20
+        },
+        doneButton: {
+          alignItems: 'center',
+          padding: 10,
+          margin: 5,
+          borderColor: "white",
+          borderRadius: 5,
+          borderWidth: 3,
+          width: 150
+        }
+      })

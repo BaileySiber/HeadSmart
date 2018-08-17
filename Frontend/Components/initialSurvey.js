@@ -24,7 +24,7 @@ export default class SurveyScreen extends React.Component {
     this.state = {
       suggestionName: '',
       suggestionDescription: '',
-      userInfo: this.props.navigation.getParam('userInfo'),  //this.props = this.props.navigation.getParam
+      userInfo: this.props.navigation.getParam('userInfo'),
       suggestionsArr: ds.cloneWithRows([]),
       openAdd: false,
       emotions: [],
@@ -43,7 +43,6 @@ export default class SurveyScreen extends React.Component {
   }
 
   removeSuggestion(suggest) {
-    //update state, splice out this suggestion
     let userid = this.state.userInfo.userid;
     fetch(url + '/' + userid + '/deleteSuggestion', {
       method: "POST",
@@ -68,8 +67,6 @@ export default class SurveyScreen extends React.Component {
 
   registerFinal() {
     this.props.navigation.navigate('HomePage', {userInfo: this.state.userInfo});
-    //fetch post a new user
-    //with userInfo from state, and suggestions arr
   }
 
   addSuggestion() {
@@ -123,11 +120,15 @@ export default class SurveyScreen extends React.Component {
   }
 
   render() {
+
     let emotionTags = this.state.emotions.slice()
     emotionTags = emotionTags.join(' ')
+
     return (
+
       <Swiper showsButton={false} loop={false}>
-        <Intro />
+
+        <Intro/>
         <View>
           <LinearGradient style={{height:"100%"}} colors={["#CAE2D0", "#b5cbbb"]} >
             <Text style={styles.welcomeText}>{this.state.userInfo.name}</Text>
@@ -145,7 +146,6 @@ export default class SurveyScreen extends React.Component {
                     backgroundColor= 'transparent'>
                     <TouchableOpacity
                       style={styles.suggestBox}
-                      //add an onSwipe to removeSuggestion
                       >
                         <View style={styles.suggestBox}><Text style={styles.name}>{suggest.name}</Text></View>
                         <View><Text style={styles.description}>{suggest.description}</Text></View>
@@ -181,7 +181,6 @@ export default class SurveyScreen extends React.Component {
                       </View>
                     </View>
                     : null}
-
                     <TouchableOpacity onPress={this.registerFinal.bind(this)} style={styles.button}>
                       <Text style={styles.buttonText}>Done</Text>
                     </TouchableOpacity>
@@ -196,8 +195,10 @@ export default class SurveyScreen extends React.Component {
       class Intro extends React.Component {
         render() {
           return (
+
             <View style={styles.container}>
               <LinearGradient style={{height:"100%"}} colors={["#CAE2D0", "#b5cbbb"]} >
+
                 <View>
                   <Animatable.Text animation="fadeOutUp" delay={3500} style={styles.welcomeOne}>
                     Welcome To Head Smart!
@@ -218,7 +219,6 @@ export default class SurveyScreen extends React.Component {
           )
         }
       }
-
 
       const styles = StyleSheet.create({
         container: {

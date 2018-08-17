@@ -166,5 +166,5 @@ import {  StyleSheet,
           color:"#79877c",
           textAlign: 'center',
           fontSize: 30
-        },
+        }
       });

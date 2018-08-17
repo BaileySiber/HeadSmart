@@ -7,7 +7,7 @@ import {  StyleSheet,
   ListView,
   Alert,
   Button,
- } from 'react-native';
+} from 'react-native';
 import * as Animatable from 'react-native-animatable';
 
 export default class DrinkScreen extends React.Component{
@@ -39,37 +39,43 @@ export default class DrinkScreen extends React.Component{
 
   render(){
     return (
-      <View style={{backgroundColor:"#00a3cc", alignItems:'center', height: '100%'}}>
-        <Text style={{fontSize: 25, textAlign: 'center', margin: "5%", marginTop: "10%", color: "white"}}>
+      <View style={{backgroundColor:"#CAE2D0", alignItems:'center', height: '100%'}}>
+        <Text style={{fontFamily:'Georgia', fontSize: 25, textAlign: 'center', margin: "5%", marginTop: "10%", color: "#505a53"}}>
           Drinking and holding something warm, like a cup of tea, can help to reduce sadness and anxiety </Text>
 
-      <Text style={{fontSize: 18, textAlign: 'center', marginTop: "5%", marginLeft:'10%', marginRight:'10%', color: "white"}}>
-          Make tea, hot milk, or hot cocoa to sip! </Text>
-          
-        <Animatable.Image
-          animation="pulse" duration={2000} iterationCount="infinite"
-          source={{uri: 'http://clipartstation.com/wp-content/uploads/2017/11/hot-coffee-clipart-black-and-white.png'}}
-          style={{width: "25%", height: "25%"}}
-          />
+          <Text style={{fontFamily:'Georgia', fontSize: 18, textAlign: 'center', marginTop: "3%", marginLeft:'10%', marginRight:'10%', color: "#505a53"}}>
+            Make tea, hot milk, or hot cocoa to sip! </Text>
 
-          <View style={{alignItems:'center'}}>
-            <TouchableOpacity onPress={() => this.toreEvaluate()} style={styles.doneButton}>
-              <Text style={{fontSize: 30, color: "white", fontFamily:"Cochin"}}>Done</Text>
-            </TouchableOpacity>
+            <Animatable.Image
+              animation="pulse" duration={2000} iterationCount="infinite"
+              source={{uri: 'http://clipartstation.com/wp-content/uploads/2017/11/hot-coffee-clipart-black-and-white.png'}}
+              style={{width: "25%", height: "25%"}}
+            />
+
+            <View style={{alignItems:'center'}}>
+              <TouchableOpacity onPress={() => this.toreEvaluate()} style={styles.button}>
+                <Text style={styles.buttonLabel}>Done</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-      </View>
-    )
-  }
-}
+        )
+      }
+    }
 
-const styles = StyleSheet.create({
-  doneButton: {
-    borderColor: 'white',
-    width: 100,
-    height: 50,
-    borderRadius: 15,
-    borderWidth: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
-})
+    const styles = StyleSheet.create({
+      button: {
+        alignItems: 'center',
+        padding: 10,
+        margin: 10,
+        borderColor: "white",
+        borderRadius: 5,
+        borderWidth: 3,
+        width: 150
+      },
+      buttonLabel: {
+        fontFamily:"Cochin",
+        color:"#505a53",
+        textAlign: 'center',
+        fontSize: 30
+      }
+    })

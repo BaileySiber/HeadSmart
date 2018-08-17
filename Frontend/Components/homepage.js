@@ -15,8 +15,8 @@ import {
 } from "react-native"
 import { LinearGradient } from "expo";
 
-
 export default class HomePage extends React.Component{
+
   constructor(){
     super();
     this.state={
@@ -25,6 +25,7 @@ export default class HomePage extends React.Component{
       userid: ''
     }
   }
+
   toNew(){
     this.props.navigation.navigate("Mood", {userInfo: this.state});
   }
@@ -54,9 +55,9 @@ export default class HomePage extends React.Component{
 
   render(){
     return(
+
       <View>
         <LinearGradient style={{height:"100%"}} colors={["#CAE2D0", "#CAE2D0"]} >
-
           <View style={{alignItems: "center", marginTop: "10%"}}>
 
             <Text style={{fontFamily:"Georgia", color:"#505a53", fontSize: 45}}>Home</Text>
@@ -99,11 +100,9 @@ export default class HomePage extends React.Component{
               </View>
             </View>
 
-              <Image style={{height:"30%", width: "70%"}} source={require('./welcome.png')}/>
+            <Image style={{height:"30%", width: "70%"}} source={require('./welcome.png')}/>
 
           </View>
-
-
 
         </LinearGradient>
       </View>

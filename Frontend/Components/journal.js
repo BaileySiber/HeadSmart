@@ -60,7 +60,6 @@ export default class Journal extends React.Component{
       if(jsonResult){
 
         if(jsonResult === "you are happy you donut need our help!"){
-
           fetch(url + '/' + this.state.userid + '/showLastLog')
           .then(resp => resp.json())
           .then(json => {
@@ -68,7 +67,6 @@ export default class Journal extends React.Component{
               log: json,
               userid: this.state.userid
             }
-
             Alert.alert(
               'Journal saved',
               "Seems like you are having a good day overall, so we will skip suggestions!",
@@ -126,7 +124,6 @@ export default class Journal extends React.Component{
     .then(jsonResult => {
       if(jsonResult){
         if(jsonResult === "you are happy you donut need our help!"){
-
           fetch(url + '/' + this.state.userid + '/showLastLog')
           .then(resp => resp.json())
           .then(json => {
@@ -134,7 +131,6 @@ export default class Journal extends React.Component{
               log: json,
               userid: this.state.userid
             }
-
             Alert.alert(
               'Journal saved',
               "Seems like you are having a good day overall, so we will skip suggestions!",
@@ -168,7 +164,6 @@ export default class Journal extends React.Component{
     .catch(err => console.log('error saving post' + err))
   }
 
-
   render(){
     return (
 
@@ -180,69 +175,56 @@ export default class Journal extends React.Component{
             <View>
               <Text style={{marginTop: "5%", textAlign: 'center', color:"#505a53", fontFamily: "Georgia", fontSize: 40}}>Daily Journal</Text>
             </View>
-
             <TouchableOpacity>
               <Text style={{fontFamily: "Georgia", marginTop: "10%", color: "#505a53", fontSize: 20, textAlign: 'center'}} onPress={()=> this.postJournal()}>
                 Save </Text>
-            </TouchableOpacity>
-
-            <View style={{alignItems:"center", justifyContent:"center"}}>
-              <TextInput
-                style={{
-                  width: '80%',
-                  height: '80%',
-                  borderColor: "white",
-                  backgroundColor: '#e9f3ec',
-                  borderWidth: 2
-                }}
-                multiline = {true}
-                placeholder="Write your journal here"
-                onChangeText={text => {
-                  this.setState({ journal: text })}
-                }
-              />
+              </TouchableOpacity>
+              <View style={{alignItems:"center", justifyContent:"center"}}>
+                <TextInput
+                  style={{
+                    width: '80%',
+                    height: '80%',
+                    borderColor: "white",
+                    backgroundColor: '#e9f3ec',
+                    borderWidth: 2
+                  }}
+                  multiline = {true}
+                  placeholder="Write your journal here"
+                  onChangeText={text => {
+                    this.setState({ journal: text })}
+                  }
+                />
+              </View>
             </View>
-
-          </View>
-
-          :
-
-          <View style={{display: 'flex', flex: 1, justifyContent: 'center'}}>
-
-            <Text style={{textAlign: 'center', color:"#505a53", fontFamily: "Georgia", fontSize: 40, paddingTop: "5%"}}>Do you want to make a journal entry?</Text>
-            <View style={{alignItems: 'center', paddingTop: "10%"}}>
-
-              <View style={{marginBottom: "5%"}}>
-                <TouchableOpacity style={styles.buttonStyle} onPress={() => this.skipSection()}>
-                  <Text style={{fontSize: 30, textAlign: 'center', color:"#505a53", fontFamily:"Georgia"}}>Skip</Text>
+            :
+            <View style={{display: 'flex', flex: 1, justifyContent: 'center'}}>
+              <Text style={{textAlign: 'center', color:"#505a53", fontFamily: "Georgia", fontSize: 40, paddingTop: "5%"}}>Do you want to make a journal entry?</Text>
+              <View style={{alignItems: 'center', paddingTop: "10%"}}>
+                <View style={{marginBottom: "5%"}}>
+                  <TouchableOpacity style={styles.buttonStyle} onPress={() => this.skipSection()}>
+                    <Text style={{fontSize: 30, textAlign: 'center', color:"#505a53", fontFamily:"Georgia"}}>Skip</Text>
+                  </TouchableOpacity>
+                </View>
+                <TouchableOpacity style={styles.buttonStyle} onPress={() => this.yesJournal()}>
+                  <Text style={{fontSize: 30, textAlign: 'center', color:"#505a53", fontFamily:"Georgia"}}>Journal</Text>
                 </TouchableOpacity>
               </View>
-
-              <TouchableOpacity style={styles.buttonStyle} onPress={() => this.yesJournal()}>
-                <Text style={{fontSize: 30, textAlign: 'center', color:"#505a53", fontFamily:"Georgia"}}>Journal</Text>
-              </TouchableOpacity>
             </View>
-
-          </View>
-        }
-
-      </LinearGradient>
-
-    );
+          }
+        </LinearGradient>
+      );
+    }
   }
-}
 
-
-
-const styles = StyleSheet.create({
-  buttonStyle: {
-    borderColor: '#e9f3ec',
-    backgroundColor: '#e9f3ec',
-    width: 120,
-    height: 50,
-    borderRadius: 15,
-    borderWidth: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
-});
+  const styles = StyleSheet.create({
+    buttonStyle: {
+      borderColor: '#e9f3ec',
+      backgroundColor: '#e9f3ec',
+      width: 120,
+      height: 50,
+      borderRadius: 15,
+      borderWidth: 1,
+      justifyContent: 'center',
+      alignItems: 'center'
+    }
+  });

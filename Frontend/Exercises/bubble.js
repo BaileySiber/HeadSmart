@@ -41,10 +41,10 @@ export default class BubbleScreen extends React.Component{
     return (
       <View style={styles.container}>
         <Animatable.Text animation="fadeIn" duration={5000}
-          style={{fontSize: 28, textAlign: 'center', margin: 10, fontColor: "white"}}>
+          style={{fontFamily:'Georgia', fontSize: 28, textAlign: 'center', margin: "5%", marginTop: "10%", color: "#505a53"}}>
           Heard you had a hard day..</Animatable.Text>
         <Animatable.Text animation="fadeIn" duration={5000}
-          style={{fontSize: 18, textAlign: 'center', margin: 10, fontColor: "white"}}>
+          style={{fontFamily:'Georgia', fontSize: 18, textAlign: 'center', marginTop: "3%", marginLeft:'10%', marginRight:'10%', color: "#505a53"}}>
           Blow it away with a bubble!</Animatable.Text>
         <Animatable.Image
           animation="zoomIn" duration={4250} iterationCount={10} direction="alternate" easing="linear"
@@ -53,8 +53,8 @@ export default class BubbleScreen extends React.Component{
           />
 
           <View style={{alignItems:'center'}}>
-            <TouchableOpacity onPress={() => this.toreEvaluate()} style={styles.doneButton}>
-              <Text style={{fontSize: 40, color: "black", fontFamily:"Cochin"}}>Done</Text>
+            <TouchableOpacity onPress={() => this.toreEvaluate()} style={styles.button}>
+              <Text style={styles.buttonLabel}>Done</Text>
             </TouchableOpacity>
           </View>
       </View>
@@ -63,14 +63,19 @@ export default class BubbleScreen extends React.Component{
 }
 
 const styles = StyleSheet.create({
-  doneButton: {
-    marginTop: "50%",
-    borderColor: 'white',
-    width: 200,
-    height: 100,
-    borderRadius: 15,
-    borderWidth: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+  button: {
+    alignItems: 'center',
+    padding: 10,
+    margin: 10,
+    borderColor: "white",
+    borderRadius: 5,
+    borderWidth: 3,
+    width: 150
+  },
+  buttonLabel: {
+    fontFamily:"Cochin",
+    color:"#505a53",
+    textAlign: 'center',
+    fontSize: 30
   }
 })
