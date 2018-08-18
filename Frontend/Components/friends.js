@@ -185,6 +185,7 @@ export default class FriendsScreen extends React.Component {
               renderRow={(friend, i) => (
                 <View style={styles.friendDisplay}>
                   <Text style={styles.friendName}>{friend.name}</Text>
+                  <Text style={styles.friendName}>{friend.emo}</Text>
                   <TouchableOpacity>
                     <Icon name='delete' onPress={() => this.removeFriend(friend.id)}/>
                   </TouchableOpacity>
