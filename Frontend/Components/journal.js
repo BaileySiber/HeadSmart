@@ -43,7 +43,6 @@ export default class Journal extends React.Component{
 
   skipSection(){
     if(this.state.journalSaved){
-      console.log('tryna be like a sneeeeekkkkkkkk')
       return;
     }
     this.setState({
@@ -125,7 +124,6 @@ export default class Journal extends React.Component{
 
   postJournal(){
     if(this.state.journalSaved){
-      console.log('tryna be like a sneeeeekkkkkkkk')
       return;
     }
     this.setState({
