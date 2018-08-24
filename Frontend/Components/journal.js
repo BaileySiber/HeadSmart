@@ -26,6 +26,7 @@ export default class Journal extends React.Component{
       emotions: [],
       reasons: [],
       wantJournal: false,
+      journalSaved: false,
       suggestions: {}
     }
 
@@ -41,6 +42,13 @@ export default class Journal extends React.Component{
   }
 
   skipSection(){
+    if(this.state.journalSaved){
+      console.log('tryna be like a sneeeeekkkkkkkk')
+      return;
+    }
+    this.setState({
+      journalSaved: true
+    })
     const queryUrl = url + '/' + this.state.userid + '/newLog';
     return fetch(queryUrl, {
       method: "POST",
@@ -58,7 +66,6 @@ export default class Journal extends React.Component{
     .then(result => result.json())
     .then(jsonResult => {
       if(jsonResult){
-
         if(jsonResult === "you are happy you donut need our help!"){
           fetch(url + '/' + this.state.userid + '/showLastLog')
           .then(resp => resp.json())
@@ -75,7 +82,12 @@ export default class Journal extends React.Component{
               ]
             )
           })
-          .catch(err => console.log('error sending happy log' + err))
+          .catch(err => {
+            console.log('error sending happy log' + err)
+            this.setState({
+              journalSaved: false
+            })
+          })
         }
 
         else {
@@ -97,6 +109,12 @@ export default class Journal extends React.Component{
         }
       }
     })
+    .catch(err => {
+      console.log('error sending sugs')
+      this.setState({
+        journalSaved: false
+      })
+    })
   }
 
   yesJournal(){
@@ -106,6 +124,13 @@ export default class Journal extends React.Component{
   }
 
   postJournal(){
+    if(this.state.journalSaved){
+      console.log('tryna be like a sneeeeekkkkkkkk')
+      return;
+    }
+    this.setState({
+      journalSaved: true
+    })
     const queryUrl = url + '/' + this.state.userid + '/newLog';
     return fetch(queryUrl, {
       method: "POST",
@@ -139,7 +164,12 @@ export default class Journal extends React.Component{
               ]
             )
           })
-          .catch(err => console.log('error sending happy log' + err))
+          .catch(err => {
+            console.log('error sending happy log' + err)
+            this.setState({
+              journalSaved: false
+            })
+          })
         }
 
         else {
@@ -159,9 +189,13 @@ export default class Journal extends React.Component{
           )
         }
       }
-
     })
-    .catch(err => console.log('error saving post' + err))
+    .catch(err => {
+      console.log('error saving post' + err)
+      this.setState({
+        journalSaved: false
+      })
+    })
   }
 
   render(){

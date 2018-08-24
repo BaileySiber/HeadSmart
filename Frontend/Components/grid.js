@@ -11,6 +11,7 @@ import {  StyleSheet,
   RefreshControl,
   AsyncStorage } from 'react-native';
   import { Icon } from 'react-native-elements';
+  import _ from 'underscore';
   import { LinearGradient } from 'expo';
 
   export default class GridScreen extends React.Component {

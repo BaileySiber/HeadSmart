@@ -22,7 +22,8 @@
     "react-native-swipeout": "^2.3.3",
     "react-native-swiper": "^1.5.13",
     "react-native-timer-countdown": "^2.0.3",
-    "react-navigation": "^2.6.2"
+    "react-navigation": "^2.6.2",
+    "underscore": "^1.9.1"
   },
   "devDependencies": {
     "react-circular-slider-bar": "^1.2.0"
