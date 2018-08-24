@@ -22,7 +22,6 @@ import {  StyleSheet,
         userid: '',
         value: '',
         emotions: [],
-        selected: false,
       }
     }
 
@@ -37,10 +36,19 @@ import {  StyleSheet,
 
     select(caption) {
       let arr = this.state.reasons.slice()
-      arr.push(caption)
-      this.setState({
-        reasons: arr,
-      });
+      if (arr.some(element => {
+        return element === caption
+      })){
+        arr = _.reject(arr, elem => (elem === caption))
+        this.setState({
+          reasons: arr
+        })
+      } else {
+        arr.push(caption)
+        this.setState({
+          reasons: arr,
+        });
+      }
     }
 
     next(){
@@ -66,19 +74,19 @@ import {  StyleSheet,
 
           <View style={{flex:3}}>
             <View style={{flexDirection: "row", justifyContent: "space-between"}}>
-              <FullIcon iconName="md-bookmarks" caption="Education" select={this.select.bind(this)} selected={this.state.selected} />
-              <FullIcon iconName="ios-briefcase" caption="Work" select={this.select.bind(this)} selected={this.state.selected} />
-              <FullIcon iconName="ios-home" caption="Family" select={this.select.bind(this)} selected={this.state.selected} />
+              <FullIcon iconName="md-bookmarks" caption="Education" select={this.select.bind(this)}  />
+              <FullIcon iconName="ios-briefcase" caption="Work" select={this.select.bind(this)}  />
+              <FullIcon iconName="ios-home" caption="Family" select={this.select.bind(this)}  />
             </View>
             <View style={{flexDirection: "row", justifyContent: "space-between"}}>
-              <FullIcon iconName="md-heart" caption="Relationship" select={this.select.bind(this)} selected={this.state.selected} />
-              <FullIcon iconName="ios-restaurant" caption="Food" select={this.select.bind(this)} selected={this.state.selected} />
-              <FullIcon iconName="md-car" caption="Travel" select={this.select.bind(this)} selected={this.state.selected} />
+              <FullIcon iconName="md-heart" caption="Relationship" select={this.select.bind(this)}  />
+              <FullIcon iconName="ios-restaurant" caption="Food" select={this.select.bind(this)}  />
+              <FullIcon iconName="md-car" caption="Travel" select={this.select.bind(this)}  />
             </View>
             <View style={{flexDirection: "row", justifyContent: "space-between"}}>
-              <FullIcon iconName="ios-contacts" caption="Friends" select={this.select.bind(this)} selected={this.state.selected} />
-              <FullIcon iconName="md-bicycle" caption="Exercise" select={this.select.bind(this)} selected={this.state.selected} />
-              <FullIcon iconName="ios-partly-sunny" caption="Weather" select={this.select.bind(this)} selected={this.state.selected} />
+              <FullIcon iconName="ios-contacts" caption="Friends" select={this.select.bind(this)}  />
+              <FullIcon iconName="md-bicycle" caption="Exercise" select={this.select.bind(this)}  />
+              <FullIcon iconName="ios-partly-sunny" caption="Weather" select={this.select.bind(this)}  />
             </View>
           </View>
 
@@ -106,7 +114,7 @@ import {  StyleSheet,
     render(){
       return(
         <TouchableOpacity onPress={() => {
-          this.setState({selected: true})
+          this.setState({selected: !this.state.selected})
           return this.props.select(this.props.caption)
         }} style={this.state.selected ? styles.iconStyleT : styles.iconStyleF}>
         <Icon color='gray' type='ionicon' name={this.props.iconName} size={50} />
