@@ -47,8 +47,20 @@ export default class FriendsScreen extends React.Component {
     .catch(err => console.log(err))
   }
 
+
+  removeFriendHelper(id){
+    Alert.alert(
+      'Are you sure you want to delete this friend?',
+      '',
+      [
+        { text: 'Yep', onPress: () => this.removeFriend(id) },
+        { text: 'Nevermind'},
+      ],
+    )
+  }
+
+
   removeFriend(id) {
-    console.log('removing friend', id);
     let queryUrl = url + '/' + this.state.userid + '/removeFriend';
     fetch(queryUrl, {
       method: "POST",
@@ -65,7 +77,6 @@ export default class FriendsScreen extends React.Component {
         fetch(url + '/' + this.state.userid + '/getFriends')
         .then(result => result.json())
         .then(json => {
-          console.log('json in removeFriend is  ------' + json)
           this.setState({
             friendList: json
           });
@@ -74,6 +85,17 @@ export default class FriendsScreen extends React.Component {
       }
     })
     .catch(err => console.log(err))
+  }
+
+  sendRequestHelper(username){
+    Alert.alert(
+      'Warning:',
+      'Remember that friends will be able to see your most recent logged mood in their friend list. Make sure to only send requests to people you trust!',
+      [
+        { text: 'Send', onPress: () => this.sendRequest(username) },
+        { text: 'Nevermind'},
+      ],
+    )
   }
 
   sendRequest(username){
@@ -90,6 +112,7 @@ export default class FriendsScreen extends React.Component {
     .then(response => response.json())
     .then(json => {
       if(json.status === 200){
+        this.setState({friend: ""})
         Alert.alert(
           "Sent!",
           "Waiting for the response",
@@ -103,7 +126,21 @@ export default class FriendsScreen extends React.Component {
     .catch(err => console.log(err))
   }
 
+
+  acceptRequestHelper(id){
+    Alert.alert(
+      'Warning:',
+      'Remember that friends will be able to see your most recent logged mood in their friend list. Make sure to only accept requests from people you trust!',
+      [
+        { text: 'Accept', onPress: () => this.acceptRequest(id) },
+        { text: 'Nevermind'},
+      ],
+    )
+  }
+
+
   acceptRequest(id){
+
     let queryUrl = url + '/' + this.state.userid + '/friendRequestAccept';
     fetch(queryUrl, {
       method: "POST",
@@ -117,27 +154,39 @@ export default class FriendsScreen extends React.Component {
     .then(response => response.json())
     .then(json => {
       if(json.status === 200){
+        fetch(url + '/' + this.state.userid + '/getPending')
+        .then(response => response.json())
+        .then(result => {
+          this.setState({
+            pendingList: result
+          })
+        })
         fetch(url + '/' + this.state.userid + '/getFriends')
         .then(response => response.json())
         .then(result => {
           this.setState({
             friendList: result
           });
-          fetch(url + '/' + this.state.userid + '/getPending')
-          .then(response => response.json())
-          .then(result => {
-            this.setState({
-              pendingList: result
-            })
-          })
         })
       }
     })
     .catch(err => console.log(err))
   }
 
+
+  deleteRequestHelper(id){
+    Alert.alert(
+      'Are you sure you want to delete this request?',
+      '',
+      [
+        { text: 'Yep', onPress: () => this.deleteRequest(id) },
+        { text: 'Nevermind'},
+      ],
+    )
+  }
+
+
   deleteRequest(id) {
-    console.log('in delete')
     let queryUrl = url + '/' + this.state.userid + '/removeFriend';
     fetch(queryUrl, {
       method: "POST",
@@ -187,7 +236,7 @@ export default class FriendsScreen extends React.Component {
                   <Text style={styles.friendName}>{friend.name}</Text>
                   <Text style={styles.friendName}>{friend.emo}</Text>
                   <TouchableOpacity>
-                    <Icon name='delete' onPress={() => this.removeFriend(friend.id)}/>
+                    <Icon name='delete' onPress={() => this.removeFriendHelper(friend.id)}/>
                   </TouchableOpacity>
                 </View>
               )}
@@ -221,7 +270,7 @@ export default class FriendsScreen extends React.Component {
                 />
               </View>
               <View style={{flex: 1, alignItems: 'center', justifyContent:'center', marginTop:"5%"}}>
-                <TouchableOpacity style={styles.addButton} onPress={() => this.sendRequest(this.state.friend)}>
+                <TouchableOpacity style={styles.addButton} onPress={() => this.sendRequestHelper(this.state.friend)}>
                   <Text style={styles.buttonLabel}>Send</Text>
                 </TouchableOpacity>
               </View>
@@ -237,10 +286,10 @@ export default class FriendsScreen extends React.Component {
                     <View style={styles.friendDisplay}>
                       <Text style={styles.friendName}>{friend.name}</Text>
                       <TouchableOpacity>
-                        <Icon name="person-add" onPress={() => this.acceptRequest(friend.id)} />
+                        <Icon name="person-add" onPress={() => this.acceptRequestHelper(friend.id)} />
                       </TouchableOpacity>
                       <TouchableOpacity style={{marginLeft:"3%"}}>
-                        <Icon name='delete' onPress={() => this.deleteRequest(friend.id)}/>
+                        <Icon name='delete' onPress={() => this.deleteRequestHelper(friend.id)}/>
                       </TouchableOpacity>
                     </View>
                   )}
