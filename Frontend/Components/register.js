@@ -20,15 +20,13 @@ import {  StyleSheet,
         username: "",
         password: "",
         name: "",
-        email: "",
-        phone_number: "",
         userid: '',
       }
     }
 
 
     onPress() {
-      if(!this.state.username || !this.state.password || !this.state.name || !this.state.email || !this.state.phone_number){
+      if(!this.state.username || !this.state.password || !this.state.name){
         console.log('in sheeeet')
         Alert.alert(
           'Oops!',
@@ -49,8 +47,6 @@ import {  StyleSheet,
             name: this.state.name,
             username: this.state.username,
             password: this.state.password,
-            email: this.state.email,
-            phoneNumber: this.state.phoneNumber,
           })
         })
         .then(response => response.json())
@@ -93,21 +89,11 @@ import {  StyleSheet,
           </View>
 
 
-          <View style={{alignItems: "center", flex: 7}}>
+          <View style={{alignItems: "center", flex: 5, marginTop: "10%"}}>
             <TextInput
               style={styles.textInp}
               placeholder=" Name"
               onChangeText={text => this.setState({ name: text })}
-            />
-            <TextInput
-              style={styles.textInp}
-              placeholder=" Email"
-              onChangeText={text => this.setState({ email: text })}
-            />
-            <TextInput
-              style={styles.textInp}
-              placeholder=" Phone Number"
-              onChangeText={text => this.setState({ phone_number: text })}
             />
             <TextInput
               style={styles.textInp}
