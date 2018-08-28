@@ -88,14 +88,19 @@ export default class FriendsScreen extends React.Component {
   }
 
   sendRequestHelper(username){
-    Alert.alert(
-      'Warning:',
-      'Remember that friends will be able to see your most recent logged mood in their friend list. Make sure to only send requests to people you trust!',
-      [
-        { text: 'Send', onPress: () => this.sendRequest(username) },
-        { text: 'Nevermind'},
-      ],
-    )
+    if(this.state.friendList.length === 0) {
+      Alert.alert(
+        'Warning!',
+        'Remember that friends will be able to see your most recent logged mood in their friend list. Make sure to only send requests to people you trust!',
+        [
+          { text: 'Send', onPress: () => this.sendRequest(username) },
+          { text: 'Nevermind'},
+        ],
+      )
+    }
+    else {
+      this.sendRequest(username)
+    }
   }
 
   sendRequest(username){
@@ -128,19 +133,23 @@ export default class FriendsScreen extends React.Component {
 
 
   acceptRequestHelper(id){
-    Alert.alert(
-      'Warning:',
-      'Remember that friends will be able to see your most recent logged mood in their friend list. Make sure to only accept requests from people you trust!',
-      [
-        { text: 'Accept', onPress: () => this.acceptRequest(id) },
-        { text: 'Nevermind'},
-      ],
-    )
+    if(this.state.friendList.length === 0) {
+      Alert.alert(
+        'Warning!',
+        'Remember that friends will be able to see your most recent logged mood in their friend list. Make sure to only accept requests from people you trust!',
+        [
+          { text: 'Accept', onPress: () => this.acceptRequest(id) },
+          { text: 'Nevermind'},
+        ],
+      )
+    }
+    else{
+      this.acceptRequest(id)
+    }
   }
 
 
   acceptRequest(id){
-
     let queryUrl = url + '/' + this.state.userid + '/friendRequestAccept';
     fetch(queryUrl, {
       method: "POST",
