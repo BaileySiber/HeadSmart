@@ -57,6 +57,28 @@ export default class Journal extends React.Component{
     this.props.navigation.navigate('HomePage', {userInfo: userInfo});
   }
 
+  colorStatus(number) {
+    console.log('friend number is ', number)
+    switch(number) {
+      case 1:
+      return styles.one
+      case 2:
+      return styles.two
+      case 3:
+      return styles.three
+      case 4:
+      return styles.four
+      case 5:
+      return styles.five
+      case 6:
+      return styles.six
+      case 7:
+      return styles.seven
+      default:
+      return styles.four
+    }
+  }
+
 
   render(){
 
@@ -71,12 +93,13 @@ export default class Journal extends React.Component{
 
         <View style={{flex:1}}>
           <Text style={{textAlign: 'center', color:"#79877c", fontFamily: "Georgia", margin:"5%", fontSize: 20}}>Overall mood: {this.state.emotionColor}</Text>
+          <View style={this.colorStatus(this.state.emotionColor)}></View>
         </View>
 
 
         {this.state.reasons ?
           <View style={{flex:1}}>
-            <Text style={{textAlign: 'center', color:"#79877c", fontFamily: "Georgia", margin:"5%", fontSize: 20}}>Reasons: {this.state.reasons} </Text>
+            <Text style={{textAlign: 'center', color:"#79877c", fontFamily: "Georgia", margin:"5%", fontSize: 20}}>What affected you: {this.state.reasons} </Text>
           </View>
           : null }
 
@@ -126,5 +149,54 @@ export default class Journal extends React.Component{
           borderRadius: 5,
           borderWidth: 3,
           width: 150
+        },
+        one: {
+          alignSelf: 'center',
+          height: 25,
+          width: 25,
+          backgroundColor: "#e60000",
+          borderRadius: 50
+        },
+        two: {
+          alignSelf: 'center',
+          height: 25,
+          width: 25,
+          backgroundColor: "#ff3333",
+          borderRadius: 50
+        },
+        three: {
+          alignSelf: 'center',
+          height: 25,
+          width: 25,
+          backgroundColor: "#ff8080",
+          borderRadius: 50
+        },
+        four: {
+          alignSelf: 'center',
+          height: 25,
+          width: 25,
+          backgroundColor: "#ffffff",
+          borderRadius: 50
+        },
+        five: {
+          alignSelf: 'center',
+          height: 25,
+          width: 25,
+          backgroundColor: "#80ff80",
+          borderRadius: 50
+        },
+        six: {
+          alignSelf: 'center',
+          height: 25,
+          width: 25,
+          backgroundColor: "#33ff33",
+          borderRadius: 50
+        },
+        seven: {
+          alignSelf: 'center',
+          height: 25,
+          width: 25,
+          backgroundColor: "#00e600",
+          borderRadius: 50
         }
       })

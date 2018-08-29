@@ -24,13 +24,47 @@ import {  StyleSheet,
       }
     }
 
+    lowercase() {
+      var regex = /^(?=.*[a-z]).+$/;
+      if(regex.test(this.state.password)){
+        console.log('lowercase true')
+        return true;
+      }
+      console.log('lowercase false')
+    }
+
+    uppercase() {
+      var regex = /^(?=.*[A-Z]).+$/;
+      if(regex.test(this.state.password)){
+        console.log('uppercase true')
+        return true;
+      }
+      console.log('uppercase false')
+    }
+
+    special() {
+      var regex = /^(?=.*[0-9_\W]).+$/;
+      if(regex.test(this.state.password)){
+        console.log('special true')
+        return true;
+      }
+      console.log('special false')
+    }
 
     onPress() {
       if(!this.state.username || !this.state.password || !this.state.name){
-        console.log('in sheeeet')
         Alert.alert(
           'Oops!',
           "Seems like you forgot to complete all fields!",
+          [
+            { text: 'OK'}
+          ]
+        )
+      }
+      else if (this.state.password.length < 6 || !this.lowercase() || !this.uppercase() || !this.special()) {
+        Alert.alert(
+          'Oops!',
+          "Please make sure your password meets requirements!",
           [
             { text: 'OK'}
           ]
@@ -113,59 +147,57 @@ import {  StyleSheet,
                 <Text style={styles.buttonLabel}>Register</Text>
               </TouchableOpacity>
 
-              {/* <TextInput
-                style={styles.textInp}
-                placeholder=" Confirmation Code"
-                onChangeText={text => this.setState({ confirmationCode: text })}
-              /> */}
+              <View style={{alignItems: 'center', marginTop: "5%"}}>
+                <Text style={styles.textSmall}>Password requirements:</Text>
+                <Text style={styles.textSmall}> - 6 or more characters</Text>
+                <Text style={styles.textSmall}> - at least one uppercase letter</Text>
+                <Text style={styles.textSmall}> - at least one number or symbol</Text>
+              </View>
 
-              {/* <View style={{alignItems: 'center', flex: 1}}>
-              <TouchableOpacity
-              style={styles.button}
-              onPress={this.confirmSignUp.bind(this)}
-              >
-              <Text style={styles.buttonLabel}>Confirm</Text>
-            </TouchableOpacity>
-          </View> */}
+            </View>
 
-        </View>
+          </LinearGradient>
 
+        );
+      }
+    }
 
-      </LinearGradient>
-
-    );
-  }
-}
-
-const styles = StyleSheet.create({
-  textBig: {
-    fontSize: 35,
-    textAlign: 'center',
-    margin: 10,
-    color: "#79877c",
-    fontFamily: 'Georgia'
-  },
-  button: {
-    paddingTop: 10,
-    paddingBottom: 10,
-    marginTop: 10,
-    borderRadius: 5,
-    borderColor: "white",
-    borderWidth: 3,
-    width: 200
-  },
-  buttonLabel: {
-    textAlign: 'center',
-    fontSize: 20,
-    fontFamily: 'Georgia',
-    color: "#79877c"
-  },
-  textInp: {
-    margin: 5,
-    width: 200,
-    height: 40,
-    backgroundColor: "white",
-    borderColor: "white",
-    borderWidth: 3,
-  }
-});
+    const styles = StyleSheet.create({
+      textSmall: {
+        fontSize: 15,
+        textAlign: 'center',
+        margin: 3,
+        color: "#79877c",
+        fontFamily: 'Georgia'
+      },
+      textBig: {
+        fontSize: 35,
+        textAlign: 'center',
+        margin: 10,
+        color: "#79877c",
+        fontFamily: 'Georgia'
+      },
+      button: {
+        paddingTop: 10,
+        paddingBottom: 10,
+        marginTop: 10,
+        borderRadius: 5,
+        borderColor: "white",
+        borderWidth: 3,
+        width: 200
+      },
+      buttonLabel: {
+        textAlign: 'center',
+        fontSize: 20,
+        fontFamily: 'Georgia',
+        color: "#79877c"
+      },
+      textInp: {
+        margin: 5,
+        width: 200,
+        height: 40,
+        backgroundColor: "white",
+        borderColor: "white",
+        borderWidth: 3,
+      }
+    });

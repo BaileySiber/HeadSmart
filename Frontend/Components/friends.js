@@ -3,6 +3,7 @@ import url from './url';
 import {
   StyleSheet,
   View,
+  Span,
   Text,
   TouchableOpacity,
   TextInput,
@@ -229,6 +230,29 @@ export default class FriendsScreen extends React.Component {
     .catch(err => console.log(err))
   }
 
+
+  colorStatus(number) {
+    console.log('friend number is ', number)
+    switch(number) {
+      case 1:
+      return styles.one
+      case 2:
+      return styles.two
+      case 3:
+      return styles.three
+      case 4:
+      return styles.four
+      case 5:
+      return styles.five
+      case 6:
+      return styles.six
+      case 7:
+      return styles.seven
+      default:
+      return styles.four
+    }
+  }
+
   render(){
     return (
       <View style={{display: 'flex', flex:1, backgroundColor:"#CAE2D0", height: '100%'}}>
@@ -237,13 +261,14 @@ export default class FriendsScreen extends React.Component {
           Friends:
         </Text>
 
-        <View style={{flex:1}}>
+        <View style={{flex:2}}>
           {this.state.friendList.length ?
             <ListView dataSource={ds.cloneWithRows(this.state.friendList)}
               renderRow={(friend, i) => (
                 <View style={styles.friendDisplay}>
                   <Text style={styles.friendName}>{friend.name}</Text>
-                  <Text style={styles.friendName}>{friend.emo}</Text>
+                  {/* <Text style={styles.friendName}>{friend.emo}</Text> */}
+                  <View style={this.colorStatus(friend.emo)}></View>
                   <TouchableOpacity>
                     <Icon name='delete' onPress={() => this.removeFriendHelper(friend.id)}/>
                   </TouchableOpacity>
@@ -322,6 +347,48 @@ export default class FriendsScreen extends React.Component {
     }
 
     const styles = StyleSheet.create({
+      one: {
+        height: 25,
+        width: 25,
+        backgroundColor: "#e60000",
+        borderRadius: 50
+      },
+      two: {
+        height: 25,
+        width: 25,
+        backgroundColor: "#ff3333",
+        borderRadius: 50
+      },
+      three: {
+        height: 25,
+        width: 25,
+        backgroundColor: "#ff8080",
+        borderRadius: 50
+      },
+      four: {
+        height: 25,
+        width: 25,
+        backgroundColor: "#ffffff",
+        borderRadius: 50
+      },
+      five: {
+        height: 25,
+        width: 25,
+        backgroundColor: "#80ff80",
+        borderRadius: 50
+      },
+      six: {
+        height: 25,
+        width: 25,
+        backgroundColor: "#33ff33",
+        borderRadius: 50
+      },
+      seven: {
+        height: 25,
+        width: 25,
+        backgroundColor: "#00e600",
+        borderRadius: 50
+      },
       addButton: {
         alignItems: 'center',
         padding: 10,
@@ -345,9 +412,10 @@ export default class FriendsScreen extends React.Component {
         fontSize: 20
       },
       friendDisplay: {
+        margin: '1%',
         display: 'flex',
         flexDirection: 'row',
-        justifyContent: 'space-around',
+        justifyContent: 'space-evenly',
         alignItems: 'center'
       },
       friendName: {
